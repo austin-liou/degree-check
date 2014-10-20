@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('darsUiApp')
+angular.module('degreeCheckApp')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
       'title': 'Home',

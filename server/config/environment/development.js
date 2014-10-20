@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/darsui-dev'
+    uri: 'mongodb://localhost/degreecheck-dev'
   },
 
   seedDB: true

@@ -7,7 +7,7 @@
 
 module.exports = {
   DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'darsui-secret',
+  SESSION_SECRET:   'degreecheck-secret',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
