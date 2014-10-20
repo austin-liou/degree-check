@@ -1,5 +1,5 @@
 {
-  "name": "dars-ui",
+  "name": "degree-check",
   "version": "0.0.0",
   "dependencies": {
     "angular": ">=1.2.*",
