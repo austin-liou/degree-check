@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('darsUiApp')
+angular.module('degreeCheckApp')
   .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal

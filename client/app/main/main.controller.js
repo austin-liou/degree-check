@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('darsUiApp')
+angular.module('degreeCheckApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
 

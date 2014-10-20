@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('darsUiApp', [
+angular.module('degreeCheckApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
