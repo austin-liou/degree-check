@@ -7,6 +7,17 @@
     .summary {
     }
 
+    .brand {
+        width: 150px;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+
+        h1 {
+            font-size: 22px;
+        }
+    }
+
     .hero-unit {
         position: relative;
         padding: 60px 15px;
