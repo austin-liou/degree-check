@@ -1,3 +1,17 @@
+Installation Instructions
+=====================
+- 'sudo npm install' on root project directory
+- 'bower install' on root project directory
+- 'mongod' on a separate tab
+- 'grunt serve' to run dev. version
+- 'grunt serve:dist' to run deployment version
+
+Deployment Instructions
+=====================
+- 'grunt build' on root project directory
+- 'grunt buildcontrol:heroku' on root project directory
+- 'cd dist && heroku open'
+
 Front-end Conventions
 =====================
 HTML/CSS
