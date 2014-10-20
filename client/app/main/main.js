@@ -6,6 +6,16 @@ angular.module('darsUiApp')
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        views: {
+        	'': {
+        		templateUrl: 'app/main/main.html',
+                controller: 'MainCtrl'
+        	},
+        	'footer@main': {
+        		templateUrl: 'components/footer/footer.html',
+        		controller: 'FooterCtrl'
+        	}
+        }
       });
   });

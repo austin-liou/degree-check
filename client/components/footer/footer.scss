@@ -1,0 +1,17 @@
+.footer-partial {
+	.footer {
+        text-align: center;
+        margin-top: 70px;
+        padding: 30px 0;
+        border-top: 1px solid #E5E5E5;
+    }
+
+	.links {
+		display: flex;
+	}
+	li {
+		list-style: none;
+		display: inline-block;
+		flex: 1;
+	}
+}
