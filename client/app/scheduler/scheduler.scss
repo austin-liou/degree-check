@@ -1,0 +1,86 @@
+.scheduler-partial {
+
+	ul, li, h1 {
+		margin: 0;
+		padding: 0;
+	}
+
+	ul, li {
+		display: inline-block;
+		list-style: none;
+	}
+
+
+	.scheduler-main {
+		display: flex;
+		flex-flow: row;
+	}
+
+	.schedule {
+		flex: 1;
+		padding: 15px;
+	}
+
+	.plan-header {
+		width: 100%;
+		position: relative;
+		font-size: 20px;
+
+		.schedules {
+			display: inline-block;
+
+			li {
+				cursor: pointer;
+			}
+		}
+
+		h1 {
+			display: block;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.schedule-actions {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			i {
+				margin-left: 15px;
+			}
+		}
+	}
+
+	.schedule-plan, .add-semester {
+		padding: 5px 15px;
+		margin: 10px 0;
+
+		header {
+			background-color: white;
+		}
+
+		h1 {
+			font-size: 18px;
+		}
+	}
+
+	.add-semester {
+		cursor: pointer;
+
+		h1 {
+			display: inline-block;
+		}
+
+		.fa-plus-circle {
+			float: right;
+		}
+	}
+
+	.classes li {
+		display: block;
+	}
+
+	.requirements {
+		flex: 0 0 350px;
+	}
+}
