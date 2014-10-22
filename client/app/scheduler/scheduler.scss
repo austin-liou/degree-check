@@ -116,6 +116,14 @@
 			.badge {
 				margin-right: 5px;
 			}
+
+			.badge.satisfied {
+				background-color: green;
+			}
+
+			.badge.not-satisfied {
+				background-color: red;
+			}
 		}
 	}
 

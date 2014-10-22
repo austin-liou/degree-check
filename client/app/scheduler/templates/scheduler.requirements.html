@@ -1,8 +1,25 @@
 <header class="requirements-header">
-	<h1>CS Major Requirements</h1>
+	<h1>{{ majorService.major }} Requirements</h1>
 </header>
 
-<div class="requirement-section">
+<div ng-repeat="requirement in requirements"
+	 class="requirement-section">
+	 <header>{{ requirement.type }} <i class="fa fa-caret-down"></i></header>
+	 <div ng-repeat="type in requirement.requirements"
+	 	  class="requirement-subsection">
+	 	  <header>{{ type.name }}</header>
+	 	<ul class="requirements-list">
+		 	 <li ng-repeat="course in type.courses">
+		 	 	<span class="badge"
+		 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
+		 	 		  {{ course.name }}
+		 	 	</span>
+		 	 </li>
+		 </ul>
+	 </div>
+</div>
+
+<!-- <div class="requirement-section">
 	<header>Lower Division <i class="fa fa-caret-down"></i></header>
 	<ul class="requirements-list">
 		<li><span class="badge">CS 61A</span></li>
@@ -19,4 +36,4 @@
 			<li><span class="badge">CS 169</span></li>
 		</ul>
 	</div>
-</div>
+</div> -->
