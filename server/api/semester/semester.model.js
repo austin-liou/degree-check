@@ -2,11 +2,12 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var CourseSchema = require('mongoose').model('Course').schema;
 
 var SemesterSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  season: String,
+  year: Number,
+  courses: [CourseSchema]
 });
 
 module.exports = mongoose.model('Semester', SemesterSchema);

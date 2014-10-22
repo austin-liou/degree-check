@@ -10,6 +10,17 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
+var fs = require('fs');
+var models = ['course', 'semester', 'requirement', 'major', 'schedule', 'user'];
+models.forEach(function (entry){
+    var model_path = __dirname + '/api/' + entry;
+    fs.readdirSync(model_path).forEach(function (file){
+        if (~file.indexOf('.spec.js')){}
+        else if (~file.indexOf('.js')){
+            require(model_path + '/' + file);
+        }
+    });
+});
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
