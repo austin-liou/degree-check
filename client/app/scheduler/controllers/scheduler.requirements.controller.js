@@ -48,4 +48,5 @@ angular.module('degreeCheckApp')
     function makeReqArr () {
 
     }
+
   });
