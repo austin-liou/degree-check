@@ -1,44 +1,35 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('SchedulerScheduleCtrl', function ($scope, requirementService) {
+  .controller('SchedulerScheduleCtrl', function ($scope, scheduleService, majorService) {
     console.log('SchedulerScheduleCtrl');
-    requirementService.schedule = {
-    	'name': 'My Cool Schedule',
-    	'major': ['Computer Science'],
-    	'semesters': [
-    		{
-    			'season': 'Fall',
-    			'year': 2014,
-    			'courses': [
-    				{
-    					'name': 'CS 61A'
-    				},
-    				{
-    					'name': 'CS 61B'
-    				},
-    				{
-    					'name': 'CS 61C'
-    				}
-    			]
-    		},
-    		{
-    			'season': 'Spring',
-    			'year': 2015,
-    			'courses': [
-    				{
-    					'name': 'CS 61A'
-    				},
-    				{
-    					'name': 'CS 61B'
-    				},
-    				{
-    					'name': 'CS 61C'
-    				}
-    			]
-    		}
-    	]
-    }
-    $scope.requirementService = requirementService;
+    $scope.scheduleService = scheduleService;
+    $scope.majorService = majorService;
+    $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
+
+    $scope.addCourse = function (semesterId) {
+    	scheduleService.addCourse(semesterId, { name: '' });
+    };
+
+    $scope.removeCourse = function (semesterId, courseId) {
+    	scheduleService.removeCourse(semesterId, courseId);
+    };
+
+    $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
+    };
+
+    $scope.addSemester = function () {
+    	scheduleService.addSemester('Summer', 2018);
+    };
+
+    $scope.checkInput = function (event, semesterId, inputCourse) {
+        // Check if enter
+        if (event.keyCode === 13) {
+            // Check if valid course
+            if ($scope.allCourses.indexOf(inputCourse) > -1) {
+                scheduleService.addCourse(semesterId, { name: inputCourse });
+            }
+        }
+    };
 
   });

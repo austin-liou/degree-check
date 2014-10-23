@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('SchedulerRequirementsCtrl', function ($scope, majorService, requirementService) {
+  .controller('SchedulerRequirementsCtrl', function ($scope, majorService, scheduleService) {
     console.log('SchedulerRequirementsCtrl');
 
     majorService.major = 'Computer Science';

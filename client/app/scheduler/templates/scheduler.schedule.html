@@ -2,7 +2,7 @@
 	<ul class="schedules">
 		<li>1</li>
 	</ul>
-	<h1>{{ requirementService.schedule.name }}</h1>
+	<h1>{{ scheduleService.schedule.name }}</h1>
 	<div class="schedule-actions">
 		<button class="fa fa-cog"></button>
 		<button class="fa fa-trash"></button>
@@ -11,24 +11,37 @@
 </div>
 
 <div class="schedule-plan"
-	 ng-repeat="semester in requirementService.schedule.semesters">
+	 ng-repeat="semester in scheduleService.schedule.semesters">
 	 <header>
 	 	<h1>{{ semester.season }} {{ semester.year }}</h1>
 	 </header>
 	 <ul class="classes">
 	 	<li ng-repeat="course in semester.courses">
-	 		{{ course.name }}
+	 		<input type="text"
+				   value="{{ course.name }}"
+				   placeholder="Add Class"
+				   auto-complete
+				   ui-items="majorService.allCourses">
+	 		<button class="remove-class fa fa-times"
+	 		        ng-click="removeCourse(semester._id, course._id)">
+	 		</button>
 	 	</li>
 	 </ul>
 	 <div class="add-class-container">
-		<button>
+	 	<input type="text"
+	 		   placeholder="Add Class"
+	 		   ng-model="newClass.semester"
+	 		   ng-keyup="checkInput($event, semester._id, newClass.semester)"
+	 		   auto-complete
+			   ui-items="allCourses">
+		<!-- <button ng-click="addCourse(semester._id)">
 			<i class="fa fa-plus-circle"></i>
 			<span>Add Course</span>
-		</button>
+		</button> -->
 	</div>
 </div>
 
-<div class="add-semester">
+<div class="add-semester" ng-click="addSemester()">
 	<header>
 		<h1>Add Semester</h1>
 		<button class="fa fa-plus-circle"></button>

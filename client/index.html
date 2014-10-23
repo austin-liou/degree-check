@@ -47,6 +47,7 @@
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/jquery-ui/jquery-ui.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -60,6 +61,7 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/directives/auto-complete/auto-complete.directive.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/scheduler/controllers/scheduler.controller.js"></script>
@@ -67,7 +69,7 @@
           <script src="app/scheduler/controllers/scheduler.schedule.controller.js"></script>
           <script src="app/scheduler/scheduler.js"></script>
           <script src="app/services/major-service/major-service.service.js"></script>
-          <script src="app/services/requirement-service/requirement-service.service.js"></script>
+          <script src="app/services/schedule-service/schedule-service.service.js"></script>
           <script src="components/footer/footer.controller.js"></script>
           <script src="components/header/header.controller.js"></script>
           <script src="components/modal/modal.service.js"></script>

@@ -77,9 +77,28 @@
 		}
 	}
 
-	.classes li {
+	.classes {
 		display: block;
+
+		.remove-class {
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+
+		li {
+			position: relative;
+			width: 100%;
+			display: block;
+			min-height: 25px;
+			margin-bottom: 5px;
+		}
+
+		input {
+			width: 100%;
+		}
 	}
+
 
 	.requirements {
 		flex: 0 0 350px;
