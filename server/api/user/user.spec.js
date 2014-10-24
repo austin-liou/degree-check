@@ -4,7 +4,6 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
-var controller = require('./user.controller');
 
 describe('Functional Tests for /api/users', function() {
   var userid;
@@ -92,8 +91,20 @@ describe('Functional Tests for /api/users', function() {
   });
   it('should not be able to GET deleted user by id', function(done) {
     request(app)
-      .get('/api/uesrs/' + userid)
+      .get('/api/users/' + userid)
       .expect(404)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Unit Tests for user controller', function() {
+  it('should handleError by sending statusCode: 500', function(done) {
+    request(app)
+      .get('/api/users/fake_id')
+      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();

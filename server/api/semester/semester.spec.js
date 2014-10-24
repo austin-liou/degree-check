@@ -4,7 +4,6 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
-var controller = require('./semester.controller');
 
 describe('Functional Tests for /api/semesters', function() {
   var semesterid;
@@ -79,6 +78,18 @@ describe('Functional Tests for /api/semesters', function() {
     request(app)
       .get('/api/semesters/' + semesterid)
       .expect(404)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Unit Tests for semester controller', function() {
+  it('should handleError by sending statusCode: 500', function(done) {
+    request(app)
+      .get('/api/semesters/fake_id')
+      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();
