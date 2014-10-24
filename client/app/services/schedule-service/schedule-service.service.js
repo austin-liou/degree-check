@@ -3,6 +3,8 @@
 angular.module('degreeCheckApp')
   .factory('scheduleService', function () {
     var service = {};
+    service.classesTaking = {};
+    service.classesRequired = {};
 
     service.schedule = {
     	'name': 'My Cool Schedule',
@@ -15,8 +17,24 @@ angular.module('degreeCheckApp')
                               'name': 'Pre-requisite',
                               'courses': [
                                 {
-                                    'name': 'CS 61A',
-                                    'satisfied': false
+                                    'name': 'CS 61A'
+                                },
+                                {
+                                    'name': 'CS 61B'
+                                },
+                                {
+                                    'name': 'CS 61C'
+                                }
+                              ]
+                            },
+                            { 'type': 'Upper Division',
+                              'name': 'Design',
+                              'courses': [
+                                {
+                                    'name': 'CS 160'
+                                },
+                                {
+                                    'name': 'CS 169'
                                 }
                               ]
                             }
@@ -76,6 +94,7 @@ angular.module('degreeCheckApp')
     		semester = service.schedule.semesters[i];
     		if (semester._id === semesterId) {
                 semester.courses.push(course);
+                updateSemester();
                 // service.updateSemester(semesterId, semester).then(function (updatedSemester) {
                 //     semester.courses.push(course);
                 // })
@@ -98,7 +117,9 @@ angular.module('degreeCheckApp')
                 for (var j = 0, jLen = course.length; j < jLen; j++) {
                     if (course[j]._id === courseId) {
                         semester.courses.splice(j, 1);
-                        break;
+                        resetRequirements();
+                        updateSemester();
+                        return;
                         // var coursesCopy = semester.courses.slice(),
                         //     newCourses = coursesCopy.splice(j, 1),
                         //     objCopy = angular.copy(semester);
@@ -108,7 +129,6 @@ angular.module('degreeCheckApp')
                         // })
                     }
                 }
-                break;
             }
         }
     };
@@ -134,6 +154,76 @@ angular.module('degreeCheckApp')
 
         return deferred.promise;
     };
+
+    /*
+        Makes a hash containing requirement objects
+        {
+            'Lower Division': {
+                'Pre requisite': {
+                    'CS 61A': {
+                        'satisfied': false
+                    }
+                }
+            }
+        }
+    */
+    function makeReqArr () {
+        service.classesRequired = {};
+        var semesters = service.schedule.semesters,
+            semClasses = [],
+            requirements = service.schedule.major[0].requirements;
+
+        for (var j = 0; j < requirements.length; j++) {
+            requirements[j].courses.map(function (elem) {
+                if (!service.classesRequired.hasOwnProperty([requirements[j].type])) {
+                    service.classesRequired[requirements[j].type] = {};
+                }
+
+                if (!service.classesRequired[requirements[j].type].hasOwnProperty([requirements[j].name])) {
+                    service.classesRequired[requirements[j].type][requirements[j].name] = {};
+                }
+
+                service.classesRequired[requirements[j].type][requirements[j].name][elem.name] = { satisfied: false };
+            });
+        }
+        updateSemester();
+    };
+    makeReqArr();
+
+    /*
+        Iterates through the users semester and updates requirements hash
+    */
+    function updateSemester () {
+        var semesters = service.schedule.semesters;
+        // Go through all semesters
+        for (var i = 0, len = semesters.length; i < len; i++) {
+            semesters[i].courses.map(function (elem) {
+                // Look in hash if it's a requirement
+                for (var type in service.classesRequired) {
+                    for (var req in service.classesRequired[type]) {
+                        if (service.classesRequired[type][req].hasOwnProperty(elem.name)) {
+                            service.classesRequired[type][req][elem.name].satisfied = true;
+                            return;
+                        }
+                    }
+                }
+            });
+        }
+    };
+
+    /*
+        Resets all requirements to unsatisfied
+    */
+    function resetRequirements () {
+        for (var type in service.classesRequired) {
+            for (var req in service.classesRequired[type]) {
+                for (var course in service.classesRequired[type][req]) {
+                    service.classesRequired[type][req][course].satisfied = false;
+                }
+            }
+        }
+    };
+
 
     return service;
   });

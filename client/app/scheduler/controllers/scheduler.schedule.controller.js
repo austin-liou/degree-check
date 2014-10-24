@@ -6,10 +6,7 @@ angular.module('degreeCheckApp')
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
     $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
-
-    $scope.addCourse = function (semesterId) {
-    	scheduleService.addCourse(semesterId, { name: '' });
-    };
+    $scope.newClass = {};
 
     $scope.removeCourse = function (semesterId, courseId) {
     	scheduleService.removeCourse(semesterId, courseId);
@@ -22,12 +19,13 @@ angular.module('degreeCheckApp')
     	scheduleService.addSemester('Summer', 2018);
     };
 
-    $scope.checkInput = function (event, semesterId, inputCourse) {
+    $scope.checkInput = function (event, semesterId) {
         // Check if enter
         if (event.keyCode === 13) {
             // Check if valid course
-            if ($scope.allCourses.indexOf(inputCourse) > -1) {
-                scheduleService.addCourse(semesterId, { name: inputCourse });
+            if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
+                scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId] });
+                $scope.newClass[semesterId] = '';
             }
         }
     };

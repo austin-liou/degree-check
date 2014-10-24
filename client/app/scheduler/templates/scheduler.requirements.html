@@ -1,39 +1,20 @@
 <header class="requirements-header">
-	<h1>{{ majorService.major }} Requirements</h1>
+	<h1>{{ scheduleService.schedule.name }} Requirements</h1>
 </header>
 
-<div ng-repeat="requirement in requirements"
+<div ng-repeat="(type, requirement) in scheduleService.classesRequired"
 	 class="requirement-section">
-	 <header>{{ requirement.type }} <i class="fa fa-caret-down"></i></header>
-	 <div ng-repeat="type in requirement.requirements"
+	 <header>{{ type }} <i class="fa fa-caret-down"></i></header>
+	 <div ng-repeat="(req, courses) in requirement"
 	 	  class="requirement-subsection">
-	 	  <header>{{ type.name }}</header>
+	 	  <header>{{ req }}</header>
 	 	<ul class="requirements-list">
-		 	 <li ng-repeat="course in type.courses">
+		 	 <li ng-repeat="(name, res) in courses">
 		 	 	<span class="badge"
-		 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
-		 	 		  {{ course.name }}
+		 	 		  ng-class="{ 'satisfied': res.satisfied, 'not-satisfied': !res.satisfied }">
+		 	 		  {{ name }}
 		 	 	</span>
 		 	 </li>
 		 </ul>
 	 </div>
 </div>
-
-<!-- <div class="requirement-section">
-	<header>Lower Division <i class="fa fa-caret-down"></i></header>
-	<ul class="requirements-list">
-		<li><span class="badge">CS 61A</span></li>
-		<li><span class="badge">CS 61B</span></li>
-	</ul>
-</div>
-
-<div class="requirement-section">
-	<header>Upper Division <i class="fa fa-caret-down"></i></header>
-	<div class="requirement-subsection">
-		<header>Design (0/20 Units)</header>
-		<ul class="requirements-list">
-			<li><span class="badge">CS 160</span></li>
-			<li><span class="badge">CS 169</span></li>
-		</ul>
-	</div>
-</div> -->
