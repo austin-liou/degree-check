@@ -8,6 +8,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
+var session = require('express-session');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var fs = require('fs');
@@ -31,8 +32,17 @@ if(config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
+var sess = {
+    name: 'degree-checker-cookie',
+    secret: 'vF24(#0ag_a54$zh{41;S#0vyM?{V4',
+    cookie: {
+        secure: true,
+        maxAge: 604800000
+    }
+};
 require('./config/express')(app);
 require('./routes')(app);
+app.use(session(sess));
 
 // Start server
 server.listen(config.port, config.ip, function () {

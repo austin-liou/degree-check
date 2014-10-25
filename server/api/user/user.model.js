@@ -6,6 +6,7 @@ var ScheduleSchema = require('mongoose').model('Schedule').schema;
 var SemesterSchema = require('mongoose').model('Semester').schema;
 
 var UserSchema = new Schema({
+  uid: String,
   name: String,
   email: String,
   schedules: [ScheduleSchema],
