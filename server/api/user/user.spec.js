@@ -42,7 +42,7 @@ describe('Functional Tests for /api/users', function() {
     request(app)
       .put('/api/users/' + userid)
       .type('json')
-      .send({schedules: [{name: "Schedule 1"}, {name: "Schedule 2"}, {name: "Schedule 3"}]})
+      .send({schedules: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -53,7 +53,7 @@ describe('Functional Tests for /api/users', function() {
     request(app)
       .put('/api/users/' + userid)
       .type('json')
-      .send({prev_coursework: [{season: "Fall", year: 1000}]})
+      .send({prev_coursework: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -74,9 +74,7 @@ describe('Functional Tests for /api/users', function() {
         res.body.prev_coursework.should.be.instanceof(Array);
         assert.equal(res.body.name, "Student A");
         assert.equal(res.body.email, "StudentA@berkeley.edu");
-        assert.equal(res.body.schedules.length, 3);
-        assert.equal(res.body.prev_coursework[0].season, "Fall");
-        assert.equal(res.body.prev_coursework[0].year, 1000);
+        assert.equal(res.body.schedules.length, 0);
         done();
       });
   });

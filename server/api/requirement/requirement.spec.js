@@ -40,7 +40,7 @@ describe('Functional Tests for /api/requirements', function() {
     request(app)
       .put('/api/requirements/' + requirementid)
       .type('json')
-      .send({courses: [{name: "Course A"}, {name: "Course B"}, {name: "Course C"}, {name: "Course D"}, {name: "Course E"}]})
+      .send({courses: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -60,7 +60,7 @@ describe('Functional Tests for /api/requirements', function() {
         res.body.courses.should.be.instanceof(Array);
         assert.equal(res.body.name, "Requirement A");
         assert.equal(res.body.type, "Upper Division");
-        assert.equal(res.body.courses.length, 5);
+        assert.equal(res.body.courses.length, 0);
         done();
       });
   });

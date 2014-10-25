@@ -41,7 +41,7 @@ describe('Functional Tests for /api/semesters', function() {
     request(app)
       .put('/api/semesters/' + semesterid)
       .type('json')
-      .send({courses: [{name: "Course 61A"}, {name: "Course 169B"}, {name: "Course 284C"}, {name: "Course 9D"}]})
+      .send({courses: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -61,7 +61,7 @@ describe('Functional Tests for /api/semesters', function() {
         res.body.courses.should.be.instanceof(Array);
         assert.equal(res.body.season, "Fall");
         assert.equal(res.body.year, 2018);
-        assert.equal(res.body.courses.length, 4);
+        assert.equal(res.body.courses.length, 0);
         done();
       });
   });

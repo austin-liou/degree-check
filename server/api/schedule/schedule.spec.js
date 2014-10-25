@@ -40,7 +40,7 @@ describe('Functional Tests for /api/schedules', function() {
     request(app)
       .put('/api/schedules/' + scheduleid)
       .type('json')
-      .send({major: [{name: "Major A"}, {name: "Major B"}]})
+      .send({major: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -51,7 +51,7 @@ describe('Functional Tests for /api/schedules', function() {
     request(app)
       .put('/api/schedules/' + scheduleid)
       .type('json')
-      .send({semesters: [{season: "Fall", year: 2018}, {name: "Spring", year: 2019}, {name: "Summer", year: 2019}]})
+      .send({semesters: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -70,8 +70,8 @@ describe('Functional Tests for /api/schedules', function() {
         res.body.major.should.be.instanceof(Array);
         res.body.semesters.should.be.instanceof(Array);
         assert.equal(res.body.name, "Schedule A");
-        assert.equal(res.body.major.length, 2);
-        assert.equal(res.body.semesters.length, 3);
+        assert.equal(res.body.major.length, 0);
+        assert.equal(res.body.semesters.length, 0);
         done();
       });
   });
