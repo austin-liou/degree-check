@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var http = require('request');
+var request = require('request');
 var User = require('../user/user.model');
 
 // CalNet Auth Logic
@@ -41,7 +41,7 @@ exports.index = function(req, res) {
                         res.redirect('../scheduler');
                     });
                 }
-            })
+            });
         }
     }
 };
