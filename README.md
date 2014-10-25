@@ -12,6 +12,11 @@ Deployment Instructions
 - 'grunt buildcontrol:heroku' on root project directory
 - 'cd dist && heroku open'
 
+Testing Instructions
+=====================
+- 'grunt mochaTest' on root project directory to run backened tests
+- open coverage.html to view code coverage information
+
 Front-end Conventions
 =====================
 HTML/CSS
