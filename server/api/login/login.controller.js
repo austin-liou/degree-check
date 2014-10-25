@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var http = require('request');
+var request = require('request');
 var User = require('../user/user.model');
 
 // CalNet Auth Logic
@@ -30,7 +30,7 @@ exports.index = function(req, res) {
         else {
             var ticket = url.substring(ticketPos);
             request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
-                if (error) {
+                if (error || response.statusCode != 200) {
                     return handleError(res, error);
                 }
                 else {
@@ -41,7 +41,7 @@ exports.index = function(req, res) {
                         res.redirect('../scheduler');
                     });
                 }
-            })
+            });
         }
     }
 };
