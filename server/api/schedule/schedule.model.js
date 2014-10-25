@@ -1,14 +1,14 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-var MajorSchema = require('mongoose').model('Major').schema;
-var SemesterSchema = require('mongoose').model('Semester').schema;
+    Schema = mongoose.Schema,
+    Major = require('../major/major.model'),
+    Semester = require('../semester/semester.model');
 
 var ScheduleSchema = new Schema({
   name: String,
-  major: [MajorSchema],
-  semesters: [SemesterSchema]
+  major: { type: Schema.Types.ObjectId, ref: 'Major' },
+  semesters: [{ type: Schema.Types.ObjectId, ref: 'Semester' }]
 });
 
 module.exports = mongoose.model('Schedule', ScheduleSchema);
