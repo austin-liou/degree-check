@@ -1,12 +1,12 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-var RequirementSchema = require('mongoose').model('Requirement').schema;
+    Schema = mongoose.Schema,
+    Requirement = require('../requirement/requirement.model');
 
 var MajorSchema = new Schema({
   name: String,
-  requirements: [RequirementSchema]
+  requirements: [{ type: Schema.Types.ObjectId, ref: 'Requirement' }]
 });
 
 module.exports = mongoose.model('Major', MajorSchema);
