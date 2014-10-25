@@ -14,7 +14,7 @@ exports.index = function(req, res) {
         else {
             User.find({uid: req.session.uid}, function (err, users) {
                 if (err) {
-                    return handleError(res, err);
+                    console.log(err);
                 }
                 res.redirect('../scheduler');
             });
@@ -31,13 +31,15 @@ exports.index = function(req, res) {
             var ticket = url.substring(ticketPos);
             request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
                 if (error || response.statusCode != 200) {
-                    return handleError(res, error);
+                    alert('CalNet is not validating the ticket for some reason. Looking into it.');
                 }
                 else {
                     var xmlDoc = response.responseXML;
                     var uid = xmlDoc.getElementsByTagName("cas:user");
                     User.create({ uid: uid}, function (err, user) {
-                        if (err) throw err;
+                        if (err) {
+                            console.log(err);
+                        }
                         res.redirect('../scheduler');
                     });
                 }
