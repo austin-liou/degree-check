@@ -30,7 +30,7 @@ exports.index = function(req, res) {
         else {
             var ticket = url.substring(ticketPos);
             request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
-                if (error) {
+                if (error || response.statusCode != 200) {
                     return handleError(res, error);
                 }
                 else {
