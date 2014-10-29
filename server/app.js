@@ -40,9 +40,9 @@ var sess = {
         maxAge: 604800000
     }
 };
+app.use(session(sess));
 require('./config/express')(app);
 require('./routes')(app);
-app.use(session(sess));
 
 // Start server
 server.listen(config.port, config.ip, function () {
