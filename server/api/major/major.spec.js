@@ -4,7 +4,8 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
-var controller = require('./major.controller');
+var mongoose = require('mongoose');
+var Requirement = require('../requirement/requirement.model');
 
 describe('Functional Tests for /api/majors', function() {
   var majorid;
@@ -39,7 +40,7 @@ describe('Functional Tests for /api/majors', function() {
     request(app)
       .put('/api/majors/' + majorid)
       .type('json')
-      .send({requirements: [{name: "Requirement A"}, {name: "Requriement B"}, {name: "Requriement C"}, {name: "Requriement D"}]})
+      .send({requirements: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -57,7 +58,7 @@ describe('Functional Tests for /api/majors', function() {
         res.body.name.should.be.instanceof(String);
         res.body.requirements.should.be.instanceof(Array);
         assert.equal(res.body.name, "Major A");
-        assert.equal(res.body.requirements.length, 4);
+        assert.equal(res.body.requirements.length, 0);
         done();
       });
   });
@@ -74,6 +75,18 @@ describe('Functional Tests for /api/majors', function() {
     request(app)
       .get('/api/majors/' + majorid)
       .expect(404)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Unit Tests for major controller', function() {
+  it('should handleError by sending statusCode: 500', function(done) {
+    request(app)
+      .get('/api/majors/fake_id')
+      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();
