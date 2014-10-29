@@ -36,12 +36,26 @@ exports.index = function(req, res) {
                 else {
                     var xmlDoc = response.responseXML;
                     var uid = xmlDoc.getElementsByTagName("cas:user");
-                    User.create({ uid: uid}, function (err, user) {
+                    User.find({uid: uid}, function (err, users) {
                         if (err) {
                             console.log(err);
                         }
+                        if (!users.length) {
+                            User.create({ uid: uid}, function (err, user) {
+                                if (err) {
+                                    console.log(err);
+                                }
+                                res.redirect('../scheduler');
+                                req.session.user = user;
+                            });
+                        }
+                        else {
+                            req.session.user = users[0];
+                        }
+                        req.session.uid = uid;
                         res.redirect('../scheduler');
                     });
+
                 }
             });
         }
