@@ -45,7 +45,6 @@ exports.index = function(req, res) {
                                 if (err) {
                                     console.log(err);
                                 }
-                                res.redirect('../scheduler');
                                 req.session.user = user;
                             });
                         }
