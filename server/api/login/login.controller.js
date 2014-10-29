@@ -52,10 +52,9 @@ exports.index = function(req, res) {
                         else {
                             req.session.user = users[0];
                         }
-                        req.session.uid = uid;
                         res.redirect('../scheduler');
                     });
-
+                    req.session.uid = uid;
                 }
             });
         }
