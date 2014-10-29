@@ -52,7 +52,6 @@ exports.index = function(req, res) {
                         res.redirect('../'); // TODO make a 500 error page
                     }
                 });
-
             });
         }
     }
