@@ -4,7 +4,6 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
-var controller = require('./semester.controller');
 
 describe('Functional Tests for /api/semesters', function() {
   var semesterid;
@@ -42,7 +41,7 @@ describe('Functional Tests for /api/semesters', function() {
     request(app)
       .put('/api/semesters/' + semesterid)
       .type('json')
-      .send({courses: [{name: "Course 61A"}, {name: "Course 169B"}, {name: "Course 284C"}, {name: "Course 9D"}]})
+      .send({courses: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -62,7 +61,7 @@ describe('Functional Tests for /api/semesters', function() {
         res.body.courses.should.be.instanceof(Array);
         assert.equal(res.body.season, "Fall");
         assert.equal(res.body.year, 2018);
-        assert.equal(res.body.courses.length, 4);
+        assert.equal(res.body.courses.length, 0);
         done();
       });
   });
@@ -79,6 +78,18 @@ describe('Functional Tests for /api/semesters', function() {
     request(app)
       .get('/api/semesters/' + semesterid)
       .expect(404)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Unit Tests for semester controller', function() {
+  it('should handleError by sending statusCode: 500', function(done) {
+    request(app)
+      .get('/api/semesters/fake_id')
+      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();

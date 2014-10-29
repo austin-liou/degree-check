@@ -23,8 +23,29 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+
+  grunt.loadNpmTasks('grunt-mocha-test');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          require: 'coverage/blanket'
+        },
+        src: ['server/**/*.spec.js']
+      },
+      coverage: {
+        options: {
+          reporter: 'html-cov',
+          quiet: true,
+          captureFile: 'coverage.html'
+        },
+        src: ['server/**/*.spec.js']
+      }
+    },
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
@@ -69,10 +90,7 @@ module.exports = function (grunt) {
         ],
         tasks: ['injector:css']
       },
-      mochaTest: {
-        files: ['server/**/*.spec.js'],
-        tasks: ['env:test', 'mochaTest']
-      },
+      
       jsTest: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/*.spec.js',
@@ -433,13 +451,6 @@ module.exports = function (grunt) {
       }
     },
 
-    mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['server/**/*.spec.js']
-    },
-
     protractor: {
       options: {
         configFile: 'protractor.conf.js'
@@ -664,4 +675,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
 };

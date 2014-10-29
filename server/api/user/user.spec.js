@@ -4,7 +4,6 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
-var controller = require('./user.controller');
 
 describe('Functional Tests for /api/users', function() {
   var userid;
@@ -43,7 +42,7 @@ describe('Functional Tests for /api/users', function() {
     request(app)
       .put('/api/users/' + userid)
       .type('json')
-      .send({schedules: [{name: "Schedule 1"}, {name: "Schedule 2"}, {name: "Schedule 3"}]})
+      .send({schedules: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -54,7 +53,7 @@ describe('Functional Tests for /api/users', function() {
     request(app)
       .put('/api/users/' + userid)
       .type('json')
-      .send({prev_coursework: [{season: "Fall", year: 1000}]})
+      .send({prev_coursework: []})
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -75,9 +74,7 @@ describe('Functional Tests for /api/users', function() {
         res.body.prev_coursework.should.be.instanceof(Array);
         assert.equal(res.body.name, "Student A");
         assert.equal(res.body.email, "StudentA@berkeley.edu");
-        assert.equal(res.body.schedules.length, 3);
-        assert.equal(res.body.prev_coursework[0].season, "Fall");
-        assert.equal(res.body.prev_coursework[0].year, 1000);
+        assert.equal(res.body.schedules.length, 0);
         done();
       });
   });
@@ -92,8 +89,20 @@ describe('Functional Tests for /api/users', function() {
   });
   it('should not be able to GET deleted user by id', function(done) {
     request(app)
-      .get('/api/uesrs/' + userid)
+      .get('/api/users/' + userid)
       .expect(404)
+      .end(function(err, res) {
+        if (err) return done(err);
+        done();
+      });
+  });
+});
+
+describe('Unit Tests for user controller', function() {
+  it('should handleError by sending statusCode: 500', function(done) {
+    request(app)
+      .get('/api/users/fake_id')
+      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();
