@@ -8,7 +8,8 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
-var session = require('express-session');
+var session = require('cookie-session');
+var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var fs = require('fs');
@@ -35,11 +36,10 @@ var server = require('http').createServer(app);
 var sess = {
     name: 'degree-checker-cookie',
     secret: 'vF24(#0ag_a54$zh{41;S#0vyM?{V4',
-    cookie: {
-        secure: true,
-        maxAge: 604800000
-    }
+    domain: '.degree-checker.herokuapp.com',
+    expires: new Date(Date.now() + 604800000)
 };
+app.use(cookieParser());
 app.use(session(sess));
 require('./config/express')(app);
 require('./routes')(app);
