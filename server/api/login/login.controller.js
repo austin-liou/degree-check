@@ -28,7 +28,7 @@ exports.index = function(req, res) {
             res.redirect('https://auth.berkeley.edu/cas/login?service=https://degree-checker.herokuapp.com/login');
         }
         else {
-            var ticket = url.substring(ticketPos);
+            var ticket = url.substring(ticketPos + 7);
             request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
                 if (error || response.statusCode != 200) {
                     alert('CalNet is not validating the ticket for some reason. Looking into it.');
