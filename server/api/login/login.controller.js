@@ -1,7 +1,9 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash');;
 var request = require('request');
+var parseString = require('xml2js').parseString;
+var util = require('util');
 var User = require('../user/user.model');
 
 // CalNet Auth Logic
@@ -30,31 +32,33 @@ exports.index = function(req, res) {
         else {
             var ticket = url.substring(ticketPos + 7);
             request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
-                if (error || response.statusCode != 200) {
-                    alert('CalNet is not validating the ticket for some reason. Looking into it.');
-                }
-                else {
-                    var xmlDoc = response.responseXML;
-                    var uid = xmlDoc.getElementsByTagName("cas:user");
-                    User.find({uid: uid}, function (err, users) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        if (!users.length) {
-                            User.create({ uid: uid}, function (err, user) {
-                                if (err) {
-                                    console.log(err);
-                                }
-                                req.session.user = user;
-                            });
-                        }
-                        else {
-                            req.session.user = users[0];
-                        }
-                        res.redirect('../scheduler');
-                    });
-                    req.session.uid = uid;
-                }
+                parseString(response.body, function (err, result) {
+                    if (result['cas:serviceResponse']['cas:authenticationSuccess']) {
+                        var uid = result['cas:serviceResponse']['cas:authenticationSuccess']['cas:user'];
+                        User.find({uid: uid}, function (err, users) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            if (!users.length) {
+                                User.create({ uid: uid}, function (err, user) {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                    req.session.user = user;
+                                });
+                            }
+                            else {
+                                req.session.user = users[0];
+                            }
+                            req.session.uid = uid;
+                            res.redirect('../scheduler');
+                        });
+                    }
+                    else {
+                        res.redirect('../'); // TODO make a 500 error page
+                    }
+                });
+
             });
         }
     }
