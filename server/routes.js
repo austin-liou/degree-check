@@ -18,7 +18,16 @@ module.exports = function(app) {
   app.use('/api/requirements', require('./api/requirement'));
   app.use('/api/things', require('./api/thing'));
   app.use('/login', require('./api/login'));
-  
+  app.use('/scheduler', function (req, res) {
+    console.log(JSON.stringify(req.session));
+    if (!(req.session && req.session.uid)) {
+      res.redirect('../login');
+    }
+    else {
+      res.sendfile(app.get('appPath') + '/index.html');
+    }
+  });
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
