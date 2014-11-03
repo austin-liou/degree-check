@@ -19,6 +19,7 @@ module.exports = function(app) {
   app.use('/api/requirements', require('./api/requirement'));
   app.use('/api/things', require('./api/thing'));
   app.use('/login', require('./api/login'));
+  app.use('/logout', require('./api/logout'));
   app.use('/scheduler', function (req, res) {
     if (!(req.session && req.session.uid)) {
       res.redirect('../login');

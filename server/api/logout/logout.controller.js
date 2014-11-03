@@ -1,12 +1,11 @@
 'use strict';
 
 var _ = require('lodash');
-var Logout = require('./logout.model');
 
-// Get list of logouts
+// Logout
 exports.index = function(req, res) {
   req.session = null;
-  res.redirect('../');
+  res.redirect('https://auth.berkeley.edu/cas/logout?url=https://degree-checker.herokuapp.com')
 };
 
 
