@@ -5,69 +5,70 @@ var request = require('request');
 var parseString = require('xml2js').parseString;
 var User = require('../user/user.model');
 
-// CalNet Auth Logic
+/*
+  CalNet Auth Logic
+  Note that we only set session UID because we're using cookie based sessions instead of session stores.
+  Cookie based sessions shouldn't get too big, so we can make a call to the API for the rest of the information.
+  Perhaps in the future if this scales up, we can work with session stores and store the entire user in the cookies.
+*/
 exports.index = function(req, res) {
-  if (req.session && req.session.uid) {
-    if (req.sessionOptions && Date.now() > req.sessionOptions.expires) {
-      req.session = null;
-      res.redirect('https://auth.berkeley.edu/cas/login?service=https://degree-checker.herokuapp.com/login')
+  if (req.session && req.session.uid) { // check if session cookie is set
+    if (req.sessionOptions && Date.now() > req.sessionOptions.expires) { // check for session cookie expiration
+      req.session = null; // clears the session cookie
+      // CAS login (CAS TGC might still be active, so user may not have to log in)
+      res.redirect('https://auth.berkeley.edu/cas/login?service=https://degree-checker.herokuapp.com/login');
     }
-    else {
-      User.find({uid: req.session._id}, function (err, users) {
-        if (err) {
-          console.log(err);
-        }
-        res.redirect('../scheduler');
-      });
+    else { // found user in session
+      res.redirect('../scheduler');
     }
   }
   else {
     var url = req.url;
-    var ticketPos = url.indexOf('ticket');
-    if (ticketPos == -1) {
+    var ticketPos = url.indexOf('ticket'); // looking for CAS ticket
+    if (ticketPos == -1) { // if no ticket, redirect to CAS
       res.redirect('https://auth.berkeley.edu/cas/login?service=https://degree-checker.herokuapp.com/login');
     }
     else {
-      var ticket = url.substring(ticketPos + 7);
+      var ticket = url.substring(ticketPos + 7); // get ticket
+      // request to CAS validation to get back UID
       request('https://auth.berkeley.edu/cas/serviceValidate?service=https://degree-checker.herokuapp.com/login&ticket=' + ticket, function (error, response, body) {
-        parseString(response.body, function (err, result) {
+        parseString(response.body, function (err, result) { // parse XML
           if (result['cas:serviceResponse']['cas:authenticationSuccess']) {
             var uid = result['cas:serviceResponse']['cas:authenticationSuccess'][0]['cas:user'][0];
-            User.find({ uid: uid }, function (err, users) {
+            User.find({ uid: uid }, function (err, users) { // find user with UID
               if (err) {
                 console.log(err);
               }
-              if (!users) {
-                var options = {
+              if (!users) { // no user found. make one
+                var options = { // options for Berkeley API call
                   url: 'https://apis.berkeley.edu/calnet/person?searchFilter=uid%3D' + uid + '&attributesToReturn=displayname%2Cmail',
                   headers: {
                     app_id: 'cd96bb2a',
                     app_key: '871888e890cbdf5308c1f8570d2b6427'
                   }
                 };
+                // request to Berkeley API to get name and email of user
                 request(options, function(error, response, body){
-                  parseString(response.body, function (err, result) {
+                  parseString(response.body, function (err, result) { // parse XML
                     var name = result['CalNetLDAPQuery-Results']['person'][0]['displayname'][0];
                     var email = result['CalNetLDAPQuery-Results']['person'][0]['mail'][0];
-                    User.create({ uid: uid, name: name, email: email }, function (err, user) {
+                    User.create({ uid: uid, name: name, email: email }, function (err, user) { // create user
                       if (err) {
                         console.log(err);
                       }
-                      req.session.user = user;
-                      req.session.uid = uid;
+                      req.session.uid = uid; // set session uid
                       res.redirect('../scheduler');
                     });
                   });
                 });
               }
-              else {
-                req.session.user = users[0];
-                req.session.uid = uid;
+              else { // user found
+                req.session.uid = uid; // set session uid
                 res.redirect('../scheduler');
               }
             });
           }
-          else {
+          else { // CAS validation failed. redirect to 500 page? or show failed auth, etc.
             res.redirect('../'); // TODO make a 500 error page
           }
         });

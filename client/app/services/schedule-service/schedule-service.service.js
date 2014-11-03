@@ -156,6 +156,15 @@ angular.module('degreeCheckApp')
     };
 
     /*
+       Replaces the embedded course and major objects in the
+       User object with the corresponding course and major IDs.
+       TODO austin-liou
+    */
+    service.saveSchedule = function () {
+
+    };
+
+    /*
         Makes a hash containing requirement objects
         {
             'Lower Division': {
