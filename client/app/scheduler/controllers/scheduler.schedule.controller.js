@@ -37,19 +37,25 @@ angular.module('degreeCheckApp')
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
 
-    $scope.addSemester = function () {
-    	scheduleService.addSemester('Summer', 2018);
+    $scope.addYear = function () {
+    	scheduleService.addSemester('Fall', 2018);
+      scheduleService.addSemester('Spring', 2019);
+      scheduleService.addSemester('Summer', 2019);
     };
 
     $scope.checkInput = function (event, semesterId) {
-        // Check if enter
-        if (event.keyCode === 13) {
-            // Check if valid course
-            if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
-                scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId] });
-                $scope.newClass[semesterId] = '';
-            }
-        }
+      // Check if enter
+      if (event.keyCode === 13) {
+          // Check if valid course
+          if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
+              scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId] });
+              $scope.newClass[semesterId] = '';
+          }
+      }
+    };
+
+    $scope.saveSchedule = function () {
+      scheduleService.saveSchedule();
     };
 
   });
