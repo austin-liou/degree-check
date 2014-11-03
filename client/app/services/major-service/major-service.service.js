@@ -10,6 +10,7 @@ angular.module('degreeCheckApp')
     							{ 'name': 'CS 160', '_id': '3' },
     							{ 'name': 'CS 169', '_id': '4' }
     						];
+    service.allMajors = [ { name: 'CS', id: 1}, { name: 'EECS', id: 2} ];
 
     // service.getAllClasses = (function () {
     // 	return $http.get('/api/courses/')

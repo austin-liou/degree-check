@@ -1,3 +1,28 @@
+<script type="text/ng-template" id="scheduler.add-schedule.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Create a Schedule</h3>
+    </div>
+    <div class="modal-body">
+    	<form class="create-schedule-form">
+    		<div class="question">
+	    		<label for="schedule-name">Name</label>
+	    		<input name="schedule-name" type="text" ng-model="newScheduleName">
+	    	</div>
+	    	<div class="question">
+	    		<label for="schedule-major">Major</label>
+	    		<select name="schedule-major"
+	    				ng-model="newScheduleMajor">
+	    				<option ng-repeat="major in majorService.allMajors" value="{{major.id}}">{{major.name}}</option>
+	    		</select>
+	    	</div>
+    	</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="createSchedule(newScheduleName, newScheduleMajor)">Create</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
 <div class="plan-header">
 	<ul class="schedules">
 		<li>1</li>
@@ -6,7 +31,7 @@
 	<div class="schedule-actions">
 		<button class="fa fa-cog"></button>
 		<button class="fa fa-trash"></button>
-		<button class="fa fa-plus"></button>
+		<button class="fa fa-plus" ng-click="addSchedule()"></button>
 	</div>
 </div>
 
@@ -43,3 +68,4 @@
 		<button class="fa fa-plus-circle"></button>
 	</header>
 </div>
+

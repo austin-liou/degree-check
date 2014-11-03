@@ -1,13 +1,35 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('SchedulerScheduleCtrl', function ($scope, scheduleService, majorService) {
+  .controller('SchedulerScheduleCtrl', function ($scope, scheduleService, majorService, $modal) {
     console.log('SchedulerScheduleCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
     $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
     $scope.newClass = {};
 
+    /*
+        Modal Logic
+    */
+    $scope.addSchedule = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'scheduler.add-schedule.html',
+            controller: 'SchedulerAddScheduleCtrl',
+            size: 'sm'
+        });
+
+        /*
+            schedule - an object containing the name and major of the new schedule
+            { name: String, major: majorId }
+        */
+        modalInstance.result.then(function (schedule) {
+            // Add scheduleService logic to create schedule here
+        });
+    };
+
+    /*
+        Schedule Logic
+    */
     $scope.removeCourse = function (semesterId, courseId) {
     	scheduleService.removeCourse(semesterId, courseId);
     };
