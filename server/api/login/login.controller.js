@@ -5,9 +5,14 @@ var request = require('request');
 var parseString = require('xml2js').parseString;
 var User = require('../user/user.model');
 
-// CalNet Auth Logic
+/*
+  CalNet Auth Logic
+  Note that we only set session UID because we're using cookie based sessions instead of session stores.
+  Cookie based sessions shouldn't get too big, so we can make a call to the API for the rest of the information.
+  Perhaps in the future if this scales up, we can work with session stores and store the entire user in the cookies.
+*/
 exports.index = function(req, res) {
-  if (req.session && req.session.user) { // check if session cookie is set
+  if (req.session && req.session.uid) { // check if session cookie is set
     if (req.sessionOptions && Date.now() > req.sessionOptions.expires) { // check for session cookie expiration
       req.session = null; // clears the session cookie
       // CAS login (CAS TGC might still be active, so user may not have to log in)
@@ -51,14 +56,14 @@ exports.index = function(req, res) {
                       if (err) {
                         console.log(err);
                       }
-                      req.session.user = user; // set session user
+                      req.session.uid = uid; // set session uid
                       res.redirect('../scheduler');
                     });
                   });
                 });
               }
               else { // user found
-                req.session.user = users[0]; // set session user
+                req.session.uid = uid; // set session uid
                 res.redirect('../scheduler');
               }
             });
