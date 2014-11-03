@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
     Course = require('../course/course.model');
 
 var UserSchema = new Schema({
+  uid: String,
   name: String,
   email: String,
   schedules: [{ type: Schema.Types.ObjectId, ref: 'Schedule' }],
