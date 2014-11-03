@@ -146,4 +146,40 @@
 		}
 	}
 
+	.semester-labels {
+
+		.semester {
+			padding: 10px 0;
+			border-bottom: 1px solid black;
+		}
+		.semester h1 {
+			display: inline-block;
+			width: 25px;
+		}
+	}
+
+	.schedule-grid {
+		display: flex;
+		flex-flow: row;
+	}
+
+	.grid-main {
+		flex: 1;
+		overflow-x: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.year-col {
+		min-width: 200px;
+		display: inline-block;
+		margin: 0 60px;
+
+		.semester {
+			margin-bottom: 50px;
+			min-height: 175px;
+		}
+	}
+
 }

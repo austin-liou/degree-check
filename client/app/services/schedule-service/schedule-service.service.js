@@ -79,7 +79,26 @@ angular.module('degreeCheckApp')
     					'name': 'CS 61C'
     				}
     			]
-    		}
+    		},
+            {
+                'season': 'Summer',
+                'year': 2015,
+                '_id': '3',
+                'courses': [
+                    {
+                        '_id': '0',
+                        'name': 'CS 61A'
+                    },
+                    {
+                        '_id': '1',
+                        'name': 'CS 61B'
+                    },
+                    {
+                        '_id': '2',
+                        'name': 'CS 61C'
+                    }
+                ]
+            }
     	]
     };
 
