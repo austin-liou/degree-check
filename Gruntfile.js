@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         options: {
           reporter: 'html-cov',
           quiet: true,
-          captureFile: 'coverage.html'
+          captureFile: 'coverage/code_coverage.html'
         },
         src: ['server/**/*.spec.js']
       }

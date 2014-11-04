@@ -15,7 +15,7 @@ Deployment Instructions
 Testing Instructions
 =====================
 - 'grunt mochaTest' on root project directory to run backend tests
-- open coverage.html to view code coverage information
+- open coverage.html in the coverage directory to view code coverage information
 
 Front-end Conventions
 =====================
