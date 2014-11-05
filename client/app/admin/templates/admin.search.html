@@ -3,13 +3,13 @@
 	Name:
 	<input type="search" placeholder="Student Name" ng-model="input" />
 	<br /><br />
-	<table class="example-animate-container" align="center" width="85%">
+	<table class="animate-container" align="center" width="85%">
 		<tr>
 			<th width="30%">Name:</th>
 			<th width="40%">Email:</th>
 			<th width="30%">Schedules:</th>
 		</tr>
-		<tr class="animate-repeat" ng-repeat="student in students | filter:input">
+		<tr class="animate" ng-repeat="student in students | filter:input">
 			<td>{{student.name}}</td>
 			<td>{{student.email}}</td>
 			<td ng-repeat="schedule in student.schedules">{{schedule.name}}</td>
