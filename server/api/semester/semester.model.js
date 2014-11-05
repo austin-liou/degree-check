@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var SemesterSchema = new Schema({
   season: String,
-  year: Number,
+  year: String,
   courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
 });
 
