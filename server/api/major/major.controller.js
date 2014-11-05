@@ -5,7 +5,7 @@ var Major = require('./major.model');
 
 // Get list of majors
 exports.index = function(req, res) {
-  Major.find(function (err, majors) {
+  Major.find({}, 'name', function (err, majors) {
     if(err) { return handleError(res, err); }
     return res.json(200, majors);
   });
