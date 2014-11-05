@@ -21,12 +21,12 @@ module.exports = function(app) {
   app.use('/login', require('./api/login'));
   app.use('/logout', require('./api/logout'));
   app.use('/scheduler', function (req, res) {
-    if (!(req.session && req.session.uid)) {
-      res.redirect('../login');
-    }
-    else {
+    // if (!(req.session && req.session.uid)) {
+    //   res.redirect('../login');
+    // }
+    // else {
       res.sendfile(app.get('appPath') + '/index.html');
-    }
+    // }
   });
 
   // All undefined asset or api routes should return a 404
