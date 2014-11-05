@@ -1,7 +1,7 @@
 <div>
 	<h1>Search for Student Schedules</h1>
 	Name:
-	<input type="search" placeholder="Student Name" ng-model="input" />
+	<input type="search" placeholder="Student Name" ng-model="name" />
 	<br /><br />
 	<table class="animate-container" align="center" width="85%">
 		<tr>
@@ -9,7 +9,7 @@
 			<th width="40%">Email:</th>
 			<th width="30%">Schedules:</th>
 		</tr>
-		<tr class="animate" ng-repeat="student in students | filter:input">
+		<tr class="animate" ng-repeat="student in students | filter:{name: name}">
 			<td>{{student.name}}</td>
 			<td>{{student.email}}</td>
 			<td ng-repeat="schedule in student.schedules">{{schedule.name}}</td>
