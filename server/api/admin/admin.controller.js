@@ -13,11 +13,13 @@ exports.index = function(req, res) {
 
 // Get a single admin
 exports.show = function(req, res) {
-  Admin.findById(req.params.id, function (err, admin) {
-    if(err) { return handleError(res, err); }
-    if(!admin) { return res.send(404); }
-    return res.json(admin);
-  });
+  Admin.findById(req.params.id)
+      .populate('majors')
+      .exec(function (err, admin) {
+          if(err) { return handleError(res, err); }
+          if(!admin) { return res.send(404); }
+          return res.json(admin);
+      });
 };
 
 // Creates a new admin in the DB.
