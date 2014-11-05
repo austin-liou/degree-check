@@ -4,4 +4,8 @@ angular.module('degreeCheckApp')
   .controller('AdminCtrl', function ($scope, adminScheduleService) {
   	console.log('AdminCtrl');
     $scope.adminScheduleService = adminScheduleService;
+    $scope.adminScheduleService.getStudents()
+      .success(function (res) {
+    	$scope.students = $scope.adminScheduleService.students;
+      });
   });
