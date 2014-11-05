@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#requirement_type").html($("input[type='radio'][name='requirement_type']:checked").val());
+            $("input[type='radio']").change(function(){
+                $("#requirement_type").html($("input[type='radio'][name='requirement_type']:checked").val());
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="edit-requirements-screen">
+    <form>
+        <div id="name-div">
+            <span class="requirement_field">Requirement Name</span>
+            <input ng-model="requirement.name" id="requirement_name" type="text">
+        </div>
+        <div id="division-div">
+            <span class="division_field">Division</span>
+            <select id="requirement_division" ng-model="requirement.division">
+                <option value="Lower Division">Lower Division</option>
+                <option value="Upper Division">Upper Division</option>
+            </select>
+        </div>
+        <div id="type-div">
+            <span class="requirement_field">Type</span>
+            <input type="radio" ng-model="requirement.type" name="requirement_type" value="units" checked>units
+            <input type="radio" ng-model="requirement.type" name="requirement_type" value="courses">courses
+        </div>
+        <div id="quantity-div">
+            <span class="requirement_field">Number of <span id="requirement_type"></span></span>
+            <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
+        </div>
+        <div id="courses-div">
+            <span class="requirement_field">Courses that fulfill this requirement</span><br>
+            <!-- How to add courses here? -->
+        </div>
+    </form>
+    <button ng-click="saveRequirement()" type="button">Save</button>
+</div>
+</body>
+</html>

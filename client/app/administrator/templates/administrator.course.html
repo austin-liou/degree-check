@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="edit-requirements-screen">
+    <form>
+        <div id="name-div">
+            <span class="course_field">Requirement Name</span>
+            <input ng-model="course.name" id="course_name" type="text">
+        </div>
+        <div id="units-div">
+            <span class="course_field">Number of units</span>
+            <input ng-model="course.units" id="course_units" type="number">
+        </div>
+    </form>
+    <button ng-click="saveCourse()" type="button">Save</button>
+</div>
+</body>
+</html>
