@@ -9,7 +9,7 @@ angular.module('degreeCheckApp')
         controller: 'AdminCtrl',
         views: {
         	'': {
-        		templateUrl: 'app/admin/templates/admin.html',
+        		templateUrl: 'app/admin/templates/admin.search.html',
             controller: 'AdminCtrl'
         	}
         }
