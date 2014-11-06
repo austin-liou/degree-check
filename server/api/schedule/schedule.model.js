@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 var ScheduleSchema = new Schema({
   name: String,
   major: [{ type: Schema.Types.ObjectId, ref: 'Major' }],
-  semesters: [{ type: Schema.Types.ObjectId, ref: 'Semester' }]
+  semesters: [Semester]
 });
 
 module.exports = mongoose.model('Schedule', ScheduleSchema);
