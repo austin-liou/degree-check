@@ -10,8 +10,8 @@ angular.module('degreeCheckApp')
         'name': 'Mari Batilando',
         'uid': '12345',
         'email': 'mari.batilando@gmail.com',
-        'prevCourse': [ { 'name': 'Calculus 1', 'numUnits': 12 } ],
-        'schedule': [
+        'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
+        'schedules': [
             {
                 'name': 'My Schedule',
                 'major': [
@@ -23,13 +23,13 @@ angular.module('degreeCheckApp')
                           'quantity': '3',
                           'courses': [
                             { 'name': 'CS 61A',
-                              'numUnits': 4
+                              'units': 4
                             },
                             { 'name': 'CS 61B',
-                              'numUnits': 4
+                              'units': 4
                             },
                             { 'name': 'CS 61C',
-                              'numUnits': 4
+                              'units': 4
                             }
                           ]
                         },
@@ -39,7 +39,7 @@ angular.module('degreeCheckApp')
                           'quantity': '2',
                           'courses': [
                             { 'name': 'CS 160',
-                              'numUnits': 4
+                              'units': 4
                             }
                           ]
                         }
@@ -51,13 +51,13 @@ angular.module('degreeCheckApp')
                       'year': 2015,
                       'courses': [
                         { 'name': 'CS 61A',
-                          'numUnits': 4
+                          'units': 4
                         },
                         { 'name': 'CS 61B',
-                          'numUnits': 4
+                          'units': 4
                         },
                         { 'name': 'CS 61C',
-                          'numUnits': 4
+                          'units': 4
                         }
                       ]
                     }
@@ -75,13 +75,13 @@ angular.module('degreeCheckApp')
                   'year': 2011,
                   'courses': [
                     { 'name': 'CS 61A',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61B',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61C',
-                      'numUnits': 4
+                      'units': 4
                     }
                   ]
                 },
@@ -89,13 +89,13 @@ angular.module('degreeCheckApp')
                   'year': 2012,
                   'courses': [
                     { 'name': 'CS 61A',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61B',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61C',
-                      'numUnits': 4
+                      'units': 4
                     }
                   ]
                 },
@@ -103,13 +103,13 @@ angular.module('degreeCheckApp')
                   'year': 2012,
                   'courses': [
                     { 'name': 'CS 61A',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61B',
-                      'numUnits': 4
+                      'units': 4
                     },
                     { 'name': 'CS 61C',
-                      'numUnits': 4
+                      'units': 4
                     }
                   ]
                 }
@@ -209,7 +209,7 @@ angular.module('degreeCheckApp')
 
     function createLocalSchedule () {
         if (!service.schedule) { return; }
-        
+
     };
 
     /*
