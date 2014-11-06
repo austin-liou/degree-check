@@ -11,10 +11,6 @@ angular.module('degreeCheckApp')
         	'': {
         		templateUrl: 'app/admin/templates/admin.html',
                 controller: 'AdminCtrl'
-        	},
-        	'/search': {
-        		templateUrl: 'app.admin/templates/search.html',
-        		controller: 'AdminCtrl'
         	}
         }
       });
