@@ -12,21 +12,17 @@ html, body, .root-view {
 	width: 100%;
 }
 
-body {
-	min-width: 1000px;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
 }
 
+.container {
+  width: 970px !important;
+}
 
 .rounded {
 	border-radius: 100px;
 }
-
-* { background-color: rgba(255,0,0,.2); }
-* * { background-color: rgba(0,255,0,.2); }
-* * * { background-color: rgba(0,0,255,.2); }
-* * * * { background-color: rgba(255,0,255,.2); }
-* * * * * { background-color: rgba(0,255,255,.2); }
-* * * * * * { background-color: rgba(255,255,0,.2); }
 
 // Component styles are injected through grunt
 // injector
