@@ -8,4 +8,7 @@ angular.module('degreeCheckApp')
       .success(function (res) {
     	$scope.students = $scope.adminScheduleService.students;
       });
+    $scope.studentName = function(student) {
+    	return student.name;
+    };
   });

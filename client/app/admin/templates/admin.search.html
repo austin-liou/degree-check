@@ -17,14 +17,14 @@
 	<br /><br />
 	<table class="animate-container" align="center" width="85%">
 		<tr>
-			<th width="30%">Name:</th>
-			<th width="30%">Email:</th>
-			<th width="40%">Schedules:</th>
+			<td width="30%"><h4>Name:</h4></th>
+			<td width="30%"><h4>Email:</h4></th>
+			<td width="40%"><h4>Schedules:</h4></th>
 		</tr>
-		<tr class="animate" ng-repeat="student in students | filter:{name: name, email: email, uid: uid}">
-			<td>{{student.name}}</td>
+		<tr class="animate" ng-repeat="student in students | filter:{name: name, email: email, uid: uid} | orderBy:studentName">
+			<td><a href="#">{{student.name}}</a></td>
 			<td>{{student.email}}</td>
-			<td ng-repeat="schedule in student.schedules">{{schedule.name}}</td>
+			<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
 		</tr>
 	</table>
 </div>
