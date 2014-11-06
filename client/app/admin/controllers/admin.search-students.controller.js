@@ -17,9 +17,10 @@ angular.module('degreeCheckApp')
     	uid = uid === undefined ? "" : uid.toLowerCase();
     	return function(student) {
     		try {
-    			if (name === student.name.substring(0, name.length).toLowerCase() && email === student.name.substring(0, email.length).toLowerCase()) {
-    				return true;
-    			}
+    			if (name === student.name.substring(0, name.length).toLowerCase())
+    				if (email === student.email.substring(0, email.length).toLowerCase())
+    					//if (uid === student.uid.substring(0, uid.length).toLowerCase())
+    						return true;
     		} catch(err) {}
     		return false;
     	};
