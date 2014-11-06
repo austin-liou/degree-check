@@ -17,6 +17,22 @@ angular.module('degreeCheckApp')
                 'major': [
                     { 'name': 'Computer Science',
                       'requirements': [
+                        { 'name': 'Pre-requisite',
+                          'division': 'Lower Division',
+                          'type': 'Class',
+                          'quantity': '3',
+                          'courses': [
+                            { 'name': 'CS 61A',
+                              'numUnits': 4
+                            },
+                            { 'name': 'CS 61B',
+                              'numUnits': 4
+                            },
+                            { 'name': 'CS 61C',
+                              'numUnits': 4
+                            }
+                          ]
+                        },
                         { 'name': 'Design Requirement',
                           'division': 'Upper Division',
                           'type': 'Class',

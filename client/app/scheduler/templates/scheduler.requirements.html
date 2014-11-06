@@ -2,17 +2,16 @@
 	<h1>{{ scheduleService.currSchedule.major[0].name }} Requirements</h1>
 </header>
 
-<div ng-repeat="(type, requirement) in scheduleService.classesRequired"
+<div ng-repeat="requirement in scheduleService.currSchedule.major[0].requirements"
 	 class="requirement-section">
-	 <header>{{ type }} <i class="fa fa-caret-down"></i></header>
-	 <div ng-repeat="(req, courses) in requirement"
-	 	  class="requirement-subsection">
-	 	  <header>{{ req }}</header>
+	 <header>{{ requirement.division }} <i class="fa fa-caret-down"></i></header>
+	 <div class="requirement-subsection">
+	 	  <header>{{ requirement.name }}</header>
 	 	<ul class="requirements-list">
-		 	 <li ng-repeat="(name, res) in courses">
+		 	 <li ng-repeat="course in requirement.courses">
 		 	 	<span class="badge"
 		 	 		  ng-class="{ 'satisfied': res.satisfied, 'not-satisfied': !res.satisfied }">
-		 	 		  {{ name }}
+		 	 		  {{ course.name }}
 		 	 	</span>
 		 	 </li>
 		 </ul>
