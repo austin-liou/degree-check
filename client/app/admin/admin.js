@@ -10,7 +10,7 @@ angular.module('degreeCheckApp')
         views: {
         	'': {
         		templateUrl: 'app/admin/templates/admin.html',
-                controller: 'AdminCtrl'
+            controller: 'AdminCtrl'
         	}
         }
       });
