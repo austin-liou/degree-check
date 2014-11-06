@@ -1,26 +1,26 @@
 <script type="text/ng-template" id="scheduler.add-schedule.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Create a Schedule</h3>
-    </div>
-    <div class="modal-body">
-    	<form class="create-schedule-form">
-    		<div class="question">
-	    		<label for="schedule-name">Name</label>
-	    		<input name="schedule-name" type="text" ng-model="newScheduleName">
-	    	</div>
-	    	<div class="question">
-	    		<label for="schedule-major">Major</label>
-	    		<select name="schedule-major"
-	    				ng-model="newScheduleMajor">
-	    				<option ng-repeat="major in majorService.allMajors" value="{{major.id}}">{{major.name}}</option>
-	    		</select>
-	    	</div>
-    	</form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="createSchedule(newScheduleName, newScheduleMajor)">Create</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
+	<div class="modal-header">
+		<h3 class="modal-title">Create a Schedule</h3>
+	</div>
+	<div class="modal-body">
+		<form class="create-schedule-form">
+			<div class="question">
+				<label for="schedule-name">Name</label>
+				<input name="schedule-name" type="text" ng-model="newScheduleName">
+			</div>
+			<div class="question">
+				<label for="schedule-major">Major</label>
+				<select name="schedule-major"
+				ng-model="newScheduleMajor">
+				<option ng-repeat="major in majorService.allMajors" value="{{major.id}}">{{major.name}}</option>
+			</select>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="createSchedule(newScheduleName, newScheduleMajor)">Create</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
 </script>
 
 <div class="plan-header">
@@ -41,418 +41,55 @@
 	<div class="semester-labels">
 		<div class="semester">
 			<h1>
-			F
-			A
-			L
-			L
+				F
+				A
+				L
+				L
 			</h1>
 		</div>
 		<div class="semester">
 			<h1>
-			S
-			P
-			R
-			I
-			N
-			G
+				S
+				P
+				R
+				I
+				N
+				G
 			</h1>
 		</div>
 		<div class="semester">
 			<h1>
-			S
-			U
-			M
-			M
-			E
-			R
+				S
+				U
+				M
+				M
+				E
+				R
 			</h1>
 		</div>
 	</div>
 	<div class="grid-main">
-		<div class="year-col">
-			<div class="year">
-				<h1>2011 - 2012</h1>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
+		<div class="year-col"
+		ng-repeat="year in scheduleService.semestersProcessed">
+				<div class="year">
+					<h1>{{year.startYear}} - {{year.endYear}}</h1>
 				</div>
-			</div>
 
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-		</div>
-
-		<div class="year-col">
-			<div class="year">
-				<h1>2011 - 2012</h1>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-		</div>
-
-		<div class="year-col">
-			<div class="year">
-				<h1>2011 - 2012</h1>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-		</div>
-
-		<div class="year-col">
-			<div class="year">
-				<h1>2011 - 2012</h1>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
-				</div>
-			</div>
-
-			<div class="semester">
-				<ul class="classes">
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 	<li>
-				 		<span type="text">CS 61A</span>
-				 		<button class="remove-class fa fa-times"
-				 		        ng-click="removeCourse(semester._id, course._id)">
-				 		</button>
-				 	</li>
-				 </ul>
-
-				 <div class="add-class-container">
-				 	<input type="text"
-				 		   placeholder="Add Class"
-				 		   ng-model="newClass[semester._id]"
-				 		   ng-keyup="checkInput($event, semester._id)"
-				 		   auto-complete>
+				<div class="semester"
+				ng-repeat="semester in year.semesters">
+					<ul class="classes">
+						<li ng-repeat="class in semester.courses">
+							<span type="text">{{ class.name }}</span>
+							<button class="remove-class fa fa-times"
+							ng-click="removeCourse(semester._id, course._id)">
+						</button>
+					</li>
+				</ul>
+				<div class="add-class-container">
+					<input type="text"
+					placeholder="Add Class"
+					ng-model="newClass[semester._id]"
+					ng-keyup="checkInput($event, semester._id)">
 				</div>
 			</div>
 		</div>

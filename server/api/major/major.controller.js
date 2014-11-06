@@ -5,7 +5,7 @@ var Major = require('./major.model');
 
 // Get list of majors
 exports.index = function(req, res) {
-  Major.find(function (err, majors) {
+  Major.find({}, 'name', function (err, majors) {
     if(err) { return handleError(res, err); }
     return res.json(200, majors);
   });
@@ -34,7 +34,9 @@ exports.update = function(req, res) {
   Major.findById(req.params.id, function (err, major) {
     if (err) { return handleError(res, err); }
     if(!major) { return res.send(404); }
-    var updated = _.merge(major, req.body);
+      var updated = _.merge(major, req.body, function(a,b){
+          return b;
+      });
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, major);

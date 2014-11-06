@@ -7,100 +7,117 @@ angular.module('degreeCheckApp')
     service.classesRequired = {};
 
     service.schedule = {
-    	'name': 'My Cool Schedule',
-    	'major':[
-                    {
-                        'name': 'Computer Science',
-                        '_id': '1',
-                        'requirements': [
-                            { 'type': 'Lower Division',
-                              'name': 'Pre-requisite',
-                              'courses': [
-                                {
-                                    'name': 'CS 61A'
-                                },
-                                {
-                                    'name': 'CS 61B'
-                                },
-                                {
-                                    'name': 'CS 61C'
-                                }
-                              ]
-                            },
-                            { 'type': 'Upper Division',
-                              'name': 'Design',
-                              'courses': [
-                                {
-                                    'name': 'CS 160'
-                                },
-                                {
-                                    'name': 'CS 169'
-                                }
-                              ]
-                            }
-                        ]
-                    }
-                 ],
-    	'semesters': [
-    		{
-    			'season': 'Fall',
-    			'year': 2014,
-    			'_id': '1',
-    			'courses': [
-    				{
-                        '_id': '0',
-    					'name': 'CS 61A'
-    				},
-    				{
-                        '_id': '1',
-    					'name': 'CS 61B'
-    				},
-    				{
-                        '_id': '2',
-    					'name': 'CS 61C'
-    				}
-    			]
-    		},
-    		{
-    			'season': 'Spring',
-    			'year': 2015,
-    			'_id': '2',
-    			'courses': [
-    				{
-                        '_id': '0',
-    					'name': 'CS 61A'
-    				},
-    				{
-                        '_id': '1',
-    					'name': 'CS 61B'
-    				},
-    				{
-                        '_id': '2',
-    					'name': 'CS 61C'
-    				}
-    			]
-    		},
+        'name': 'Mari Batilando',
+        'uid': '12345',
+        'email': 'mari.batilando@gmail.com',
+        'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
+        'schedules': [
             {
-                'season': 'Summer',
-                'year': 2015,
-                '_id': '3',
-                'courses': [
-                    {
-                        '_id': '0',
-                        'name': 'CS 61A'
-                    },
-                    {
-                        '_id': '1',
-                        'name': 'CS 61B'
-                    },
-                    {
-                        '_id': '2',
-                        'name': 'CS 61C'
+                'name': 'My Schedule',
+                'major': [
+                    { 'name': 'Computer Science',
+                      'requirements': [
+                        { 'name': 'Pre-requisite',
+                          'division': 'Lower Division',
+                          'type': 'Class',
+                          'quantity': '3',
+                          'courses': [
+                            { 'name': 'CS 61A',
+                              'units': 4
+                            },
+                            { 'name': 'CS 61B',
+                              'units': 4
+                            },
+                            { 'name': 'CS 61C',
+                              'units': 4
+                            }
+                          ]
+                        },
+                        { 'name': 'Design Requirement',
+                          'division': 'Upper Division',
+                          'type': 'Class',
+                          'quantity': '2',
+                          'courses': [
+                            { 'name': 'CS 160',
+                              'units': 4
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                ],
+                'semesters': [
+                    { 'season': 'Fall',
+                      'year': 2015,
+                      'courses': [
+                        { 'name': 'CS 61A',
+                          'units': 4
+                        },
+                        { 'name': 'CS 61B',
+                          'units': 4
+                        },
+                        { 'name': 'CS 61C',
+                          'units': 4
+                        }
+                      ]
                     }
                 ]
             }
-    	]
+        ]
     };
+
+    service.semestersProcessed = [
+        {
+            'startYear': 2011,
+            'endYear': 2012,
+            'semesters': [
+                { 'season': 'Fall',
+                  'year': 2011,
+                  'courses': [
+                    { 'name': 'CS 61A',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61B',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61C',
+                      'units': 4
+                    }
+                  ]
+                },
+                { 'season': 'Spring',
+                  'year': 2012,
+                  'courses': [
+                    { 'name': 'CS 61A',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61B',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61C',
+                      'units': 4
+                    }
+                  ]
+                },
+                { 'season': 'Summer',
+                  'year': 2012,
+                  'courses': [
+                    { 'name': 'CS 61A',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61B',
+                      'units': 4
+                    },
+                    { 'name': 'CS 61C',
+                      'units': 4
+                    }
+                  ]
+                }
+            ]
+        }
+    ];
+
+    service.currSchedule = service.schedule.schedule[0];
 
     /*
     	Adds a course to a semester
@@ -175,12 +192,60 @@ angular.module('degreeCheckApp')
     };
 
     /*
+        Adds a new schedule
+        scheduleObj: { name : String,
+                       major: [ Major._id ],
+                       semesters: [ { season: String,
+                                      year: Number,
+                                      courses: [] } ]
+                      }
+    */
+    service.addSchedule = function (scheduleObj) {
+        $http.put('/api/users/' + service.schedule.uid)
+            .success(function () {
+                createLocalSchedule(scheduleObj);
+            });
+    };
+
+    function createLocalSchedule () {
+        if (!service.schedule) { return; }
+
+    };
+
+    /*
        Replaces the embedded course and major objects in the
        User object with the corresponding course and major IDs.
-       TODO austin-liou
+       Puts new User object.
     */
     service.saveSchedule = function () {
+        var serviceSchedule = jQuery.extend(true, {}, service.schedule); // deep copy of service.schedule
+        /*
+            Replaces all course and major objects in the User object with the object IDs.
+            This is in the deep copy, not the original
+        */
+        for (var i = 0; i < serviceSchedule.prev_coursework.length; i++) {
+            serviceSchedule.prev_coursework[i] = serviceSchedule.prev_coursework[i]._id;
+        }
+        for (var j = 0; j < serviceSchedule.schedules.length; j++) {
+            var currentSchedule = serviceSchedule.schedules[j];
+            for (var k = 0; k < currentSchedule.major.length; k++) {
+                currentSchedule.major[k] = currentSchedule.major[k]._id;
+            }
+            for (var l = 0; l < currentSchedule.semesters.length; l++) {
+                var currentSemester = currentSchedule.semesters[l];
+                for (var m = 0; m < currentSemester.courses.length; m++) {
+                    currentSemester.courses[m] = currentSemester.courses[m]._id;
+                }
+                currentSchedule.semesters[l] = currentSemester;
+            }
+            serviceSchedule.semesters[j] = currentSchedule;
+        }
 
+        // Put user
+        $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
+          .success( function() {
+            // something in here after putting? don't know yet
+          });
     };
 
     /*
@@ -195,28 +260,28 @@ angular.module('degreeCheckApp')
             }
         }
     */
-    function makeReqArr () {
-        service.classesRequired = {};
-        var semesters = service.schedule.semesters,
-            semClasses = [],
-            requirements = service.schedule.major[0].requirements;
+    // function makeReqArr () {
+    //     service.classesRequired = {};
+    //     var semesters = service.schedule.semesters,
+    //         semClasses = [],
+    //         requirements = service.schedule.major[0].requirements;
 
-        for (var j = 0; j < requirements.length; j++) {
-            requirements[j].courses.map(function (elem) {
-                if (!service.classesRequired.hasOwnProperty([requirements[j].type])) {
-                    service.classesRequired[requirements[j].type] = {};
-                }
+    //     for (var j = 0; j < requirements.length; j++) {
+    //         requirements[j].courses.map(function (elem) {
+    //             if (!service.classesRequired.hasOwnProperty([requirements[j].type])) {
+    //                 service.classesRequired[requirements[j].type] = {};
+    //             }
 
-                if (!service.classesRequired[requirements[j].type].hasOwnProperty([requirements[j].name])) {
-                    service.classesRequired[requirements[j].type][requirements[j].name] = {};
-                }
+    //             if (!service.classesRequired[requirements[j].type].hasOwnProperty([requirements[j].name])) {
+    //                 service.classesRequired[requirements[j].type][requirements[j].name] = {};
+    //             }
 
-                service.classesRequired[requirements[j].type][requirements[j].name][elem.name] = { satisfied: false };
-            });
-        }
-        updateSemester();
-    };
-    makeReqArr();
+    //             service.classesRequired[requirements[j].type][requirements[j].name][elem.name] = { satisfied: false };
+    //         });
+    //     }
+    //     updateSemester();
+    // };
+    // makeReqArr();
 
     /*
         Iterates through the users semester and updates requirements hash

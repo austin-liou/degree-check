@@ -6,14 +6,13 @@ var request = require('supertest');
 
 describe('GET /api/logout', function() {
 
-  it('should respond with JSON array', function(done) {
+  it('should respond with plain text', function(done) {
     request(app)
       .get('/api/logout')
-      .expect(200)
-      .expect('Content-Type', /json/)
+      .expect(302)
+      .expect('Content-Type', "text/plain; charset=utf-8")
       .end(function(err, res) {
         if (err) return done(err);
-        res.body.should.be.instanceof(Array);
         done();
       });
   });

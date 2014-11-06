@@ -6,7 +6,9 @@ var mongoose = require('mongoose'),
 
 var RequirementSchema = new Schema({
   name: String,
-  type: String,
+  type: String, // unit requirement or course requirement
+  quantity: Number,
+  division: String, // upper division or lower division
   courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
 });
 
