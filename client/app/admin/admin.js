@@ -9,9 +9,28 @@ angular.module('degreeCheckApp')
         controller: 'AdminCtrl',
         views: {
         	'': {
-        		templateUrl: 'app/admin/templates/admin.search.html',
+        		templateUrl: 'app/admin/templates/admin.html',
             controller: 'AdminCtrl'
         	}
+        }
+      })
+      .state('admin.search', {
+        url: '/search',
+        controller: 'AdminSearchStudentsCtrl',
+        views: {
+          'content@admin': {
+            templateUrl: 'app/admin/templates/admin.search.html'
+          }
+        }
+      })
+      .state('admin.view', {
+        url: '/view',
+        controller: 'AdminViewStudentsCtrl',
+        views: {
+          'content@admin': {
+            templateUrl: 'app/admin/templates/admin.view.html',
+            controller: 'AdminViewStudentsCtrl'
+          }
         }
       });
   });
