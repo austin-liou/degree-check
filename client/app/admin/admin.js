@@ -5,12 +5,12 @@ angular.module('degreeCheckApp')
     $stateProvider
       .state('admin', {
         url: '/admin',
-        templateUrl: 'app/admin/templates/admin.search.html',
-        controller: 'AdminSearchStudentsCtrl',
+        templateUrl: 'app/admin/templates/admin.html',
+        controller: 'AdminCtrl',
         views: {
         	'': {
-        		templateUrl: 'app/admin/templates/admin.search.html',
-                controller: 'AdminSearchStudentsCtrl'
+        		templateUrl: 'app/admin/templates/admin.html',
+            controller: 'AdminCtrl'
           }
         }
       });
