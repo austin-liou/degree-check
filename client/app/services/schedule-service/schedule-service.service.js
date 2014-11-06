@@ -7,7 +7,14 @@ angular.module('degreeCheckApp')
     service.classesRequired = {};
 
     var initSchedule = (function () {
-        // HTTP GET request here then process input
+        // $http.get('/api/users/'+id)
+        //     .success(function (bigJson) {
+        //         service.schedule = bigJson;
+        //         // service.yearsProcessed = processYears(service.schedule)
+        //         // TODO: Year logic
+        //         service.currSchedule = service.schedule.schedules[0];
+        //         setupSchedule(service.schedule.schedules[0]);
+        //     });
         service.schedule = {
             'name': 'Mari Batilando',
             'uid': '12345',
