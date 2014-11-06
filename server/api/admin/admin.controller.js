@@ -19,7 +19,10 @@ exports.show = function(req, res) {
           if(err) { return handleError(res, err); }
           if(!admin) { return res.send(404); }
           //admin.majors.requirements.courses still needs to be populated
-          return res.json(admin);
+          var opts = [{path: 'majors.requirements.courses', model: 'Course'}];
+          Admin.populate(admin, opts, function (err, admin) {
+              return res.json(admin);
+          });
       });
 };
 
