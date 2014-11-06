@@ -21,7 +21,7 @@
 			<td width="30%"><h4>Email:</h4></th>
 			<td width="40%"><h4>Schedules:</h4></th>
 		</tr>
-		<tr class="animate" ng-repeat="student in students | filter:{name: name, email: email, uid: uid} | orderBy:studentName">
+		<tr class="animate" ng-repeat="student in students | filter:filterSearch(name,email,uid) | orderBy:studentName">
 			<td><a href="#">{{student.name}}</a></td>
 			<td>{{student.email}}</td>
 			<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
