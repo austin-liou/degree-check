@@ -215,10 +215,37 @@ angular.module('degreeCheckApp')
     /*
        Replaces the embedded course and major objects in the
        User object with the corresponding course and major IDs.
-       TODO austin-liou
+       Puts new User object.
     */
     service.saveSchedule = function () {
+        var serviceSchedule = jQuery.extend(true, {}, service.schedule); // deep copy of service.schedule
+        /*
+            Replaces all course and major objects in the User object with the object IDs.
+            This is in the deep copy, not the original
+        */
+        for (var i = 0; i < serviceSchedule.prev_coursework.length; i++) {
+            serviceSchedule.prev_coursework[i] = serviceSchedule.prev_coursework[i]._id;
+        }
+        for (var j = 0; j < serviceSchedule.schedules.length; j++) {
+            var currentSchedule = serviceSchedule.schedules[j];
+            for (var k = 0; k < currentSchedule.major.length; k++) {
+                currentSchedule.major[k] = currentSchedule.major[k]._id;
+            }
+            for (var l = 0; l < currentSchedule.semesters.length; l++) {
+                var currentSemester = currentSchedule.semesters[l];
+                for (var m = 0; m < currentSemester.courses.length; m++) {
+                    currentSemester.courses[m] = currentSemester.courses[m]._id;
+                }
+                currentSchedule.semesters[l] = currentSemester;
+            }
+            serviceSchedule.semesters[j] = currentSchedule;
+        }
 
+        // Put user
+        $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
+          .success( function() {
+            // something in here after putting? don't know yet
+          });
     };
 
     /*
