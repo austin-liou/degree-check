@@ -18,6 +18,22 @@ angular.module('degreeCheckApp')
     //       service.allCourses = allCourses;
     //     })
     // })();
+    service.saveRequirement = function(requirement, cb){
+        //look up major id
+        var url = '/api/majors/'; // + major id
+        //var major = get major object
+        var i = 0;
+        for( i; i < major.requirements.length; i++) {
+            if (major.requirements[i]._id == requirement._id) {
+                major.requirements[i] == requirement;
+                break;
+            }
+        }
+        if( i == major.requirements.length){
+            major.requirements.push(requirement);
+        }
+        return $http.put(url, major);
+    }
 
     return service;
   });

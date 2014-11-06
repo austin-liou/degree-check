@@ -18,6 +18,7 @@ exports.show = function(req, res) {
       .exec(function (err, admin) {
           if(err) { return handleError(res, err); }
           if(!admin) { return res.send(404); }
+          //admin.majors.requirements.courses still needs to be populated
           return res.json(admin);
       });
 };
