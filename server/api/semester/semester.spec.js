@@ -22,14 +22,14 @@ describe('Functional Tests for /api/semesters', function() {
     request(app)
       .post('/api/semesters')
       .type('json')
-      .send({season: "Fall", year: 2018})
+      .send({season: "Fall", year: "2018"})
       .expect(201)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
         res.body.should.be.instanceof(Object);
         res.body.season.should.be.instanceof(String);
-        res.body.year.should.be.instanceof(Number);
+        res.body.year.should.be.instanceof(String);
         res.body.courses.should.be.instanceof(Array);
         assert.equal(res.body.season, "Fall");
         assert.equal(res.body.year, 2018)
@@ -57,7 +57,7 @@ describe('Functional Tests for /api/semesters', function() {
         if (err) return done(err);
         res.body.should.be.instanceof(Object);
         res.body.season.should.be.instanceof(String);
-        res.body.year.should.be.instanceof(Number);
+        res.body.year.should.be.instanceof(String);
         res.body.courses.should.be.instanceof(Array);
         assert.equal(res.body.season, "Fall");
         assert.equal(res.body.year, 2018);
