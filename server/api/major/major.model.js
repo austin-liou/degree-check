@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var MajorSchema = new Schema({
   name: String,
-  requirements: [Requirement]
+  requirements: [Requirement.schema]
 });
 
 module.exports = mongoose.model('Major', MajorSchema);

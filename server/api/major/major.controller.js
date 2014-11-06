@@ -34,7 +34,9 @@ exports.update = function(req, res) {
   Major.findById(req.params.id, function (err, major) {
     if (err) { return handleError(res, err); }
     if(!major) { return res.send(404); }
-    var updated = _.merge(major, req.body);
+      var updated = _.merge(major, req.body, function(a,b){
+          return b;
+      });
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, major);
