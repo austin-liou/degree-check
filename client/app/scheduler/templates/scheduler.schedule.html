@@ -70,18 +70,18 @@
 	</div>
 	<div class="grid-main">
 		<div class="year-col"
-		ng-repeat="year in scheduleService.semestersProcessed">
+		ng-repeat="year in scheduleService.yearsProcessed">
 				<div class="year">
 					<h1>{{year.startYear}} - {{year.endYear}}</h1>
 				</div>
 
-				<div class="semester"
-				ng-repeat="semester in year.semesters">
+			<div class="semester"
+			   	ng-repeat="semester in year.semesters">
 					<ul class="classes">
 						<li ng-repeat="class in semester.courses">
 							<span type="text">{{ class.name }}</span>
 							<button class="remove-class fa fa-times"
-							ng-click="removeCourse(semester._id, course._id)">
+									ng-click="removeCourse(semester._id, class.name)">
 						</button>
 					</li>
 				</ul>

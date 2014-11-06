@@ -30,8 +30,9 @@ angular.module('degreeCheckApp')
     /*
         Schedule Logic
     */
-    $scope.removeCourse = function (semesterId, courseId) {
-    	scheduleService.removeCourse(semesterId, courseId);
+    $scope.removeCourse = function (semesterId, courseName) {
+      debugger
+    	scheduleService.removeCourse(semesterId, courseName);
     };
 
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
@@ -48,7 +49,8 @@ angular.module('degreeCheckApp')
       if (event.keyCode === 13) {
           // Check if valid course
           if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
-              scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId] });
+              scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId],
+                                                      units: majorService.allCoursesHash[$scope.newClass[semesterId]]});
               $scope.newClass[semesterId] = '';
           }
       }

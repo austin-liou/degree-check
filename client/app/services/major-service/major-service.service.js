@@ -10,6 +10,15 @@ angular.module('degreeCheckApp')
     							{ 'name': 'CS 160', '_id': '3' },
     							{ 'name': 'CS 169', '_id': '4' }
     						];
+
+    service.allCoursesHash = {
+        'CS 61A': '1',
+        'CS 61B': '2',
+        'CS 61C': '3',
+        'CS 160': '3',
+        'CS 169': '3'
+    };
+
     service.allMajors = [ { name: 'CS', id: 1}, { name: 'EECS', id: 2} ];
 
     // service.getAllClasses = (function () {

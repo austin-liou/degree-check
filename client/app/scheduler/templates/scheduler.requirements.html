@@ -10,7 +10,7 @@
 	 	<ul class="requirements-list">
 		 	 <li ng-repeat="course in requirement.courses">
 		 	 	<span class="badge"
-		 	 		  ng-class="{ 'satisfied': res.satisfied, 'not-satisfied': !res.satisfied }">
+		 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
 		 	 		  {{ course.name }}
 		 	 	</span>
 		 	 </li>

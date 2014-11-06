@@ -6,21 +6,52 @@ angular.module('degreeCheckApp')
     service.classesTaking = {};
     service.classesRequired = {};
 
-    service.schedule = {
-        'name': 'Mari Batilando',
-        'uid': '12345',
-        'email': 'mari.batilando@gmail.com',
-        'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
-        'schedules': [
-            {
-                'name': 'My Schedule',
-                'major': [
-                    { 'name': 'Computer Science',
-                      'requirements': [
-                        { 'name': 'Pre-requisite',
-                          'division': 'Lower Division',
-                          'type': 'Class',
-                          'quantity': '3',
+    var initSchedule = (function () {
+        // HTTP GET request here then process input
+        service.schedule = {
+            'name': 'Mari Batilando',
+            'uid': '12345',
+            'email': 'mari.batilando@gmail.com',
+            'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
+            'schedules': [
+                {
+                    'name': 'My Schedule',
+                    'major': [
+                        { 'name': 'Computer Science',
+                          'requirements': [
+                            { 'name': 'Pre-requisite',
+                              'division': 'Lower Division',
+                              'type': 'Class',
+                              'quantity': '3',
+                              'courses': [
+                                { 'name': 'CS 61A',
+                                  'units': 4
+                                },
+                                { 'name': 'CS 61B',
+                                  'units': 4
+                                },
+                                { 'name': 'CS 61C',
+                                  'units': 4
+                                }
+                              ]
+                            },
+                            { 'name': 'Design Requirement',
+                              'division': 'Upper Division',
+                              'type': 'Class',
+                              'quantity': '2',
+                              'courses': [
+                                { 'name': 'CS 160',
+                                  'units': 4
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                    ],
+                    'semesters': [
+                        { '_id': '1',
+                          'season': 'Fall',
+                          'year': 2015,
                           'courses': [
                             { 'name': 'CS 61A',
                               'units': 4
@@ -32,23 +63,51 @@ angular.module('degreeCheckApp')
                               'units': 4
                             }
                           ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Process years
+        service.yearsProcessed = [
+            {
+                'startYear': 2011,
+                'endYear': 2012,
+                'semesters': [
+                    { '_id': '1',
+                      'season': 'Fall',
+                      'year': 2011,
+                      'courses': [
+                        { 'name': 'CS 61A',
+                          'units': 4
                         },
-                        { 'name': 'Design Requirement',
-                          'division': 'Upper Division',
-                          'type': 'Class',
-                          'quantity': '2',
-                          'courses': [
-                            { 'name': 'CS 160',
-                              'units': 4
-                            }
-                          ]
+                        { 'name': 'CS 61B',
+                          'units': 4
+                        },
+                        { 'name': 'CS 61C',
+                          'units': 4
                         }
                       ]
-                    }
-                ],
-                'semesters': [
-                    { 'season': 'Fall',
-                      'year': 2015,
+                    },
+                    { '_id': '2',
+                      'season': 'Spring',
+                      'year': 2012,
+                      'courses': [
+                        { 'name': 'CS 61A',
+                          'units': 4
+                        },
+                        { 'name': 'CS 61B',
+                          'units': 4
+                        },
+                        { 'name': 'CS 61C',
+                          'units': 4
+                        }
+                      ]
+                    },
+                    { '_id': '3',
+                      'season': 'Summer',
+                      'year': 2012,
                       'courses': [
                         { 'name': 'CS 61A',
                           'units': 4
@@ -63,107 +122,80 @@ angular.module('degreeCheckApp')
                     }
                 ]
             }
-        ]
-    };
+        ];
 
-    service.semestersProcessed = [
-        {
-            'startYear': 2011,
-            'endYear': 2012,
-            'semesters': [
-                { 'season': 'Fall',
-                  'year': 2011,
-                  'courses': [
-                    { 'name': 'CS 61A',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61B',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61C',
-                      'units': 4
-                    }
-                  ]
-                },
-                { 'season': 'Spring',
-                  'year': 2012,
-                  'courses': [
-                    { 'name': 'CS 61A',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61B',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61C',
-                      'units': 4
-                    }
-                  ]
-                },
-                { 'season': 'Summer',
-                  'year': 2012,
-                  'courses': [
-                    { 'name': 'CS 61A',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61B',
-                      'units': 4
-                    },
-                    { 'name': 'CS 61C',
-                      'units': 4
-                    }
-                  ]
-                }
-            ]
+        service.currSchedule = service.schedule.schedules[0];
+        setupSchedule(service.schedule.schedules[0]);
+    })();
+
+    /*
+        Sets up schedule obj for left sidebar by updating all requirements
+        Used for initially loading a schedule
+        Use updateUserReq for updating a single requirement
+    */
+    function setupSchedule (scheduleObj) {
+        for (var i = 0, len = scheduleObj.semesters.length; i < len; i++) {
+            for (var j = 0, jLen = scheduleObj.semesters[i].courses.length; j < jLen; j++) {
+                updateUserReq(scheduleObj.semesters[i].courses[j].name, true);
+            }
         }
-    ];
-
-    service.currSchedule = service.schedule.schedule[0];
+    };
 
     /*
     	Adds a course to a semester
     	semesterId - semester._id
-    	course - { name: String }
+    	course - { name: String, units: Number }
     */
     service.addCourse = function (semesterId, course) {
-    	var semester;
-    	for (var i = 0, len = service.schedule.semesters.length; i < len; i++) {
-    		semester = service.schedule.semesters[i];
-    		if (semester._id === semesterId) {
-                semester.courses.push(course);
-                updateSemester();
-                // service.updateSemester(semesterId, semester).then(function (updatedSemester) {
-                //     semester.courses.push(course);
-                // })
-    			break;
-    		}
+    	var semester, year;
+    	for (var i = 0, len = service.yearsProcessed.length; i < len; i++) {
+    		year = service.yearsProcessed[i];
+            for(var j = 0, jLen = year.semesters.length; j < jLen; j++) {
+                semester = year.semesters[j];
+                if (semester._id === semesterId) {
+                    semester.courses.push(course);
+                    updateUserReq(course.name, true);
+                    return;
+                }
+            }
     	}
+    };
+
+    /*
+        Sets satisfied attribute to a boolean course in service.currSchedule.major[0].requirements[i].courses
+        Used for left sidebar to change color
+        courseName: String
+        satisfied: boolean
+    */
+    function updateUserReq (courseName, satisfied) {
+        var requirement;
+        for (var i = 0, len = service.currSchedule.major[0].requirements.length; i < len; i++) {
+             requirement = service.currSchedule.major[0].requirements[i];
+             for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
+                if (requirement.courses[j].name === courseName) {
+                    requirement.courses[j].satisfied = satisfied;
+                    return;
+                }
+             }
+        }
     };
 
     /*
         Removes a course from a semester
         semesterId - semester._id
-        courseId - course._id
+        courseName - String
     */
-    service.removeCourse = function (semesterId, courseId) {
-        var semester, course;
-        for (var i = 0, len = service.schedule.semesters.length; i < len; i++) {
-            semester = service.schedule.semesters[i];
-            if (semester._id === semesterId) {
-                course = semester.courses;
-                for (var j = 0, jLen = course.length; j < jLen; j++) {
-                    if (course[j]._id === courseId) {
-                        semester.courses.splice(j, 1);
-                        resetRequirements();
-                        updateSemester();
-                        return;
-                        // var coursesCopy = semester.courses.slice(),
-                        //     newCourses = coursesCopy.splice(j, 1),
-                        //     objCopy = angular.copy(semester);
-                        // objCopy.courses = newCourses;
-                        // service.updateSemester(semesterId, semester).then(function (updatedSemester) {
-                        //     semester = updatedSemester;
-                        // })
-                    }
+    service.removeCourse = function (semesterId, courseName) {
+        var semester, year;
+        for (var i = 0, len = service.yearsProcessed.length; i < len; i++) {
+            year = service.yearsProcessed[i];
+            for(var j = 0, jLen = year.semesters.length; j < jLen; j++) {
+                semester = year.semesters[j];
+                if (semester._id === semesterId) {
+                    var index = semester.courses.map(function (elem) { return elem.name; }).indexOf(courseName);
+                    semester.courses.splice(index, 1);
+                    updateUserReq(courseName, false);
+                    return;
                 }
             }
         }
@@ -207,10 +239,17 @@ angular.module('degreeCheckApp')
             });
     };
 
-    function createLocalSchedule () {
-        if (!service.schedule) { return; }
-
-    };
+    /*
+        Adds newly added/removed courses from years processed to the original service.schedule object
+    */
+    function unprocessYears () {
+        service.currSchedule.semesters = [];
+        var year;
+        for (var i = 0, len = service.yearsProcessed.length; i < len; i++) {
+            year = service.yearsProcessed[i];
+            service.currSchedule.semesters = service.currSchedule.semesters.concat(year.semesters);
+        }
+    }
 
     /*
        Replaces the embedded course and major objects in the
@@ -218,6 +257,7 @@ angular.module('degreeCheckApp')
        Puts new User object.
     */
     service.saveSchedule = function () {
+        unprocessYears();
         var serviceSchedule = jQuery.extend(true, {}, service.schedule); // deep copy of service.schedule
         /*
             Replaces all course and major objects in the User object with the object IDs.
@@ -247,76 +287,6 @@ angular.module('degreeCheckApp')
             // something in here after putting? don't know yet
           });
     };
-
-    /*
-        Makes a hash containing requirement objects
-        {
-            'Lower Division': {
-                'Pre requisite': {
-                    'CS 61A': {
-                        'satisfied': false
-                    }
-                }
-            }
-        }
-    */
-    // function makeReqArr () {
-    //     service.classesRequired = {};
-    //     var semesters = service.schedule.semesters,
-    //         semClasses = [],
-    //         requirements = service.schedule.major[0].requirements;
-
-    //     for (var j = 0; j < requirements.length; j++) {
-    //         requirements[j].courses.map(function (elem) {
-    //             if (!service.classesRequired.hasOwnProperty([requirements[j].type])) {
-    //                 service.classesRequired[requirements[j].type] = {};
-    //             }
-
-    //             if (!service.classesRequired[requirements[j].type].hasOwnProperty([requirements[j].name])) {
-    //                 service.classesRequired[requirements[j].type][requirements[j].name] = {};
-    //             }
-
-    //             service.classesRequired[requirements[j].type][requirements[j].name][elem.name] = { satisfied: false };
-    //         });
-    //     }
-    //     updateSemester();
-    // };
-    // makeReqArr();
-
-    /*
-        Iterates through the users semester and updates requirements hash
-    */
-    function updateSemester () {
-        var semesters = service.schedule.semesters;
-        // Go through all semesters
-        for (var i = 0, len = semesters.length; i < len; i++) {
-            semesters[i].courses.map(function (elem) {
-                // Look in hash if it's a requirement
-                for (var type in service.classesRequired) {
-                    for (var req in service.classesRequired[type]) {
-                        if (service.classesRequired[type][req].hasOwnProperty(elem.name)) {
-                            service.classesRequired[type][req][elem.name].satisfied = true;
-                            return;
-                        }
-                    }
-                }
-            });
-        }
-    };
-
-    /*
-        Resets all requirements to unsatisfied
-    */
-    function resetRequirements () {
-        for (var type in service.classesRequired) {
-            for (var req in service.classesRequired[type]) {
-                for (var course in service.classesRequired[type][req]) {
-                    service.classesRequired[type][req][course].satisfied = false;
-                }
-            }
-        }
-    };
-
 
     return service;
   });
