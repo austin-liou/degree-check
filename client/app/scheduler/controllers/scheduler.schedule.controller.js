@@ -11,7 +11,7 @@ angular.module('degreeCheckApp')
     /*
         Modal Logic
     */
-    $scope.addSchedule = function() {
+    $scope.addSchedule = function () {
         var modalInstance = $modal.open({
             templateUrl: 'scheduler.add-schedule.html',
             controller: 'SchedulerAddScheduleCtrl',
@@ -26,6 +26,18 @@ angular.module('degreeCheckApp')
             // Add scheduleService logic to create schedule here
         });
     };
+
+    $scope.deleteSchedule = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'scheduler.delete-schedule.html',
+            controller: 'SchedulerDeleteScheduleCtrl',
+            size: 'sm'
+        });
+    };
+
+    $scope.changeSchedule = function (scheduleId) {
+      scheduleService.changeSchedule(scheduleId);
+    }
 
     /*
         Schedule Logic

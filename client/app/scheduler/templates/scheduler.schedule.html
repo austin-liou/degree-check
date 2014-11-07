@@ -23,14 +23,30 @@
 	</div>
 </script>
 
+<script type="text/ng-template" id="scheduler.delete-schedule.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Delete a Schedule</h3>
+	</div>
+	<div class="modal-body">
+		<span>Are you sure you want to delete <strong>{{scheduleService.currSchedule.name}}</strong> ?</span>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="deleteSchedule()">Delete</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+
 <div class="plan-header">
 	<ul class="schedules">
-		<li>1</li>
+		<li ng-repeat="schedule in scheduleService.schedule.schedules"
+			ng-click="changeSchedule(schedule._id)">
+			{{ $index + 1 }}
+		</li>
 	</ul>
 	<h1>{{ scheduleService.currSchedule.name }}</h1>
 	<div class="schedule-actions">
 		<button class="fa fa-cog"></button>
-		<button class="fa fa-trash"></button>
+		<button class="fa fa-trash" ng-click="deleteSchedule()"></button>
 		<button class="fa fa-plus" ng-click="addSchedule()"></button>
 	</div>
 </div>
