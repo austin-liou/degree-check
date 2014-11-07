@@ -4,4 +4,14 @@
 		flex-flow: row;
 		min-height: 450px;
 	}
+	.admin-section {
+		margin-bottom: 20px;
+		padding: 0 35px;
+	}
+
+	.admin-section textarea {
+		margin: 0;
+		width: 1000px;
+		height: 118px;
+	}
 }
