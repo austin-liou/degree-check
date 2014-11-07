@@ -31,7 +31,6 @@ angular.module('degreeCheckApp')
         Schedule Logic
     */
     $scope.removeCourse = function (semesterId, courseName) {
-      debugger
     	scheduleService.removeCourse(semesterId, courseName);
     };
 
