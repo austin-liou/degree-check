@@ -27,7 +27,8 @@ angular.module('degreeCheckApp')
         controller: 'AdminSearchStudentsCtrl',
         views: {
           'content@admin': {
-            templateUrl: 'app/admin/templates/admin.search.html'
+            templateUrl: 'app/admin/templates/admin.search.html',
+            controller: 'AdminSearchStudentsCtrl'
           }
         }
       })

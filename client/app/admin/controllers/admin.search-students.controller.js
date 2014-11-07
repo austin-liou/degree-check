@@ -24,5 +24,5 @@ angular.module('degreeCheckApp')
     		} catch(err) {}
     		return false;
     	};
-    }
+    };
   });
