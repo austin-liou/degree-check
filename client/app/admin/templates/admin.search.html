@@ -1,5 +1,5 @@
 <div>
-	<table class="animate-container" align="center" width="85%">
+	<table align="center" width="85%">
 		<tr>
 			<td colspan="5">
 				<h1>Search for Student Schedules</h1>
@@ -23,8 +23,8 @@
 			<td width="18%"><h4>uid:</h4></th>
 			<td width="30%"><h4>Schedules:</h4></th>
 		</tr>
-		<tr class="animate" ng-repeat="student in students | filter:filterSearch(name,email,uid) | orderBy:studentName">
-			<td colspan="2"><a href="#">{{student.name}}</a></td>
+		<tr ng-repeat="student in students | filter:filterSearch(name,email,uid) | orderBy:studentName">
+			<td colspan="2"><a href="/admin/view">{{student.name}}</a></td>
 			<td>{{student.email}}</td>
 			<td>{{student.uid}}</td>
 			<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
