@@ -6,14 +6,14 @@ angular.module('degreeCheckApp')
     service.classesTaking = {};
     service.classesRequired = {};
 
-    var initSchedule = (function () {
-        // $http.get('/api/users/'+id)
-        //     .success(function (bigJson) {
-        //         service.schedule = bigJson;
-        //         service.currSchedule = service.schedule.schedules[0];
-        //         service.yearsProcessed = processYears(service.currSchedule);
-        //         setupSchedule(service.schedule.schedules[0]);
-        //     });
+    var initSchedule = (function (uid) {
+        $http.get('/api/users/' + uid)
+             .success(function (bigJson) {
+                 service.schedule = bigJson;
+                 service.currSchedule = service.schedule.schedules[0];
+                 service.yearsProcessed = processYears(service.currSchedule);
+                 setupSchedule(service.schedule.schedules[0]);
+             });
         service.schedule = {
             'name': 'Mari Batilando',
             'uid': '12345',
