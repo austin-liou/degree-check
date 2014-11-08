@@ -6,14 +6,14 @@ angular.module('degreeCheckApp')
     service.classesTaking = {};
     service.classesRequired = {};
 
-    var initSchedule = (function () {
-        // $http.get('/api/users/'+id)
-        //     .success(function (bigJson) {
-        //         service.schedule = bigJson;
-        //         service.currSchedule = service.schedule.schedules[0];
-        //         service.yearsProcessed = processYears(service.currSchedule);
-        //         setupSchedule(service.schedule.schedules[0]);
-        //     });
+    var initSchedule = (function (uid) {
+        $http.get('/api/users/' + uid)
+             .success(function (bigJson) {
+                 service.schedule = bigJson;
+                 service.currSchedule = service.schedule.schedules[0];
+                 service.yearsProcessed = processYears(service.currSchedule);
+                 setupSchedule(service.schedule.schedules[0]);
+             });
         service.schedule = {
             'name': 'Mari Batilando',
             'uid': '12345',
@@ -292,63 +292,74 @@ angular.module('degreeCheckApp')
 
     /*
       Turns schedule obj into an object similar to service.processedYears
+      aliou - assuming semesters are in correct order (first to last)
     */
     function processYears (scheduleObj) {
-      // TODO logic
-
+      var id = 1; // TODO assign IDs corectly
+      var semesters = scheduleObj.semesters;
+      var startYear = semesters[0].year;
+      var endYear = semesters[semesters.length - 1].year;
       return [
-            {   '_id': 1,
-                'startYear': 2011,
-                'endYear': 2012,
-                'semesters': [
-                    { '_id': '1',
-                      'season': 'Fall',
-                      'year': 2011,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    },
-                    { '_id': '2',
-                      'season': 'Spring',
-                      'year': 2012,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    },
-                    { '_id': '3',
-                      'season': 'Summer',
-                      'year': 2012,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    }
-                ]
-            }
-        ]
+        {
+          '_id': id,
+          'startYear': startYear,
+          'endYear': endYear,
+          'semesters': semesters
+        }
+      ]
+      //return [
+      //      {   '_id': 1,
+      //          'startYear': 2011,
+      //          'endYear': 2012,
+      //          'semesters': [
+      //              { '_id': '1',
+      //                'season': 'Fall',
+      //                'year': 2011,
+      //                'courses': [
+      //                  { 'name': 'CS 61A',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61B',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61C',
+      //                    'units': 4
+      //                  }
+      //                ]
+      //              },
+      //              { '_id': '2',
+      //                'season': 'Spring',
+      //                'year': 2012,
+      //                'courses': [
+      //                  { 'name': 'CS 61A',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61B',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61C',
+      //                    'units': 4
+      //                  }
+      //                ]
+      //              },
+      //              { '_id': '3',
+      //                'season': 'Summer',
+      //                'year': 2012,
+      //                'courses': [
+      //                  { 'name': 'CS 61A',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61B',
+      //                    'units': 4
+      //                  },
+      //                  { 'name': 'CS 61C',
+      //                    'units': 4
+      //                  }
+      //                ]
+      //              }
+      //          ]
+      //      }
+      //  ]
     };
 
     /*
