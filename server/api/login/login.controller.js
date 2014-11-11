@@ -4,6 +4,7 @@ var _ = require('lodash');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 var User = require('../user/user.model');
+var Major = require('../major/major.model');
 
 /*
   CalNet Auth Logic
@@ -35,11 +36,11 @@ exports.index = function(req, res) {
         parseString(response.body, function (err, result) { // parse XML
           if (result['cas:serviceResponse']['cas:authenticationSuccess']) {
             var uid = result['cas:serviceResponse']['cas:authenticationSuccess'][0]['cas:user'][0];
-            User.find({ uid: uid }, function (err, users) { // find user with UID
+            User.findOne({ uid: uid }, function (err, user) { // find user with UID
               if (err) {
                 console.log(err);
               }
-              if (!users) { // no user found. make one
+              if (!user) { // no user found. make one
                 var options = { // options for Berkeley API call
                   url: 'https://apis.berkeley.edu/calnet/person?searchFilter=uid%3D' + uid + '&attributesToReturn=displayname%2Cmail',
                   headers: {
@@ -52,12 +53,36 @@ exports.index = function(req, res) {
                   parseString(response.body, function (err, result) { // parse XML
                     var name = result['CalNetLDAPQuery-Results']['person'][0]['displayname'][0];
                     var email = result['CalNetLDAPQuery-Results']['person'][0]['mail'][0];
-                    User.create({ uid: uid, name: name, email: email }, function (err, user) { // create user
-                      if (err) {
-                        console.log(err);
-                      }
-                      req.session.uid = uid; // set session uid
-                      res.redirect('../scheduler');
+                    Major.find({}, function(err, majors) {
+                      var schedules = [{
+                        'name': 'My First Schedule',
+                        'major': majors[0],
+                        'semesters': [
+                          {
+                            'season': 'Fall',
+                            'year': 2014,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Spring',
+                            'year': 2015,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Summer',
+                            'year': 2015,
+                            'courses': []
+                          }
+                        ]
+                      }];
+                      // create user
+                      User.create({ uid: uid, name: name, email: email, schedules: schedules }, function (err, user) {
+                        if (err) {
+                          console.log(err);
+                        }
+                        req.session.uid = uid; // set session uid
+                        res.redirect('../scheduler');
+                      });
                     });
                   });
                 });

@@ -1,14 +1,18 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('SchedulerScheduleCtrl', function ($scope, scheduleService, majorService, $modal, $cookies) {
+  .controller('SchedulerScheduleCtrl', function ($scope, scheduleService, majorService, $modal, $http) {
     console.log('SchedulerScheduleCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
     $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
     $scope.newClass = {};
 
-    var uid = $cookies.uid;
+
+    $http.get('/api/uid')
+      .success(function (uidObj){
+        scheduleService.initSchedule(uidObj.uid);
+      });
 
     /*
         Modal Logic

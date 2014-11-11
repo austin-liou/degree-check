@@ -1,226 +1,227 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .factory('scheduleService', function () {
+  .factory('scheduleService', ['$http', function ($http) {
     var service = {};
     service.classesTaking = {};
     service.classesRequired = {};
 
-    var initSchedule = (function (uid) {
-        $http.get('/api/users/' + uid)
-             .success(function (bigJson) {
-                 service.schedule = bigJson;
-                 service.currSchedule = service.schedule.schedules[0];
-                 service.yearsProcessed = processYears(service.currSchedule);
-                 setupSchedule(service.schedule.schedules[0]);
-             });
-        service.schedule = {
-            'name': 'Mari Batilando',
-            'uid': '12345',
-            'email': 'mari.batilando@gmail.com',
-            'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
-            'schedules': [
-                {   '_id': 1,
-                    'name': 'My Schedule',
-                    'major': [
-                        { 'name': 'Computer Science',
-                          'requirements': [
-                            { 'name': 'Pre-requisite',
-                              'division': 'Lower Division',
-                              'type': 'Class',
-                              'quantity': '3',
-                              'courses': [
-                                { 'name': 'CS 61A',
-                                  'units': 4
-                                },
-                                { 'name': 'CS 61B',
-                                  'units': 4
-                                },
-                                { 'name': 'CS 61C',
-                                  'units': 4
-                                }
-                              ]
-                            },
-                            { 'name': 'Design Requirement',
-                              'division': 'Upper Division',
-                              'type': 'Class',
-                              'quantity': '2',
-                              'courses': [
-                                { 'name': 'CS 160',
-                                  'units': 4
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                    ],
-                    'semesters': [
-                        { '_id': '1',
-                          'season': 'Fall',
-                          'year': 2015,
-                          'courses': [
-                            { 'name': 'CS 61A',
-                              'units': 4
-                            },
-                            { 'name': 'CS 61B',
-                              'units': 4
-                            },
-                            { 'name': 'CS 61C',
-                              'units': 4
-                            }
-                          ]
-                        }
-                    ]
-                },
-                {   '_id': 2,
-                    'name': 'My Schedule 2',
-                    'major': [
-                        { 'name': 'Computer Science',
-                          'requirements': [
-                            { 'name': 'Pre-requisite',
-                              'division': 'Lower Division',
-                              'type': 'Class',
-                              'quantity': '3',
-                              'courses': [
-                                { 'name': 'CS 61A',
-                                  'units': 4
-                                },
-                                { 'name': 'CS 61B',
-                                  'units': 4
-                                },
-                                { 'name': 'CS 61C',
-                                  'units': 4
-                                }
-                              ]
-                            },
-                            { 'name': 'Design Requirement',
-                              'division': 'Upper Division',
-                              'type': 'Class',
-                              'quantity': '2',
-                              'courses': [
-                                { 'name': 'CS 160',
-                                  'units': 4
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                    ],
-                    'semesters': [
-                        { '_id': '1',
-                          'season': 'Fall',
-                          'year': 2015,
-                          'courses': [
-                            { 'name': 'EE 42',
-                              'units': 4
-                            },
-                            { 'name': 'CS 70',
-                              'units': 4
-                            },
-                            { 'name': 'CS 61C',
-                              'units': 4
-                            }
-                          ]
-                        }
-                    ]
-                }
-            ]
-        };
+    service.initSchedule = function (uid) {
+      $http.get('/api/users/' + uid)
+        .success(function (bigJson) {
+          service.schedule = bigJson;
+          $('#username').html(service.schedule.name);
+          service.currSchedule = service.schedule.schedules[0];
+          service.yearsProcessed = processYears(service.currSchedule);
+          setupSchedule(service.schedule.schedules[0]);
+        });
+      //service.schedule = {
+      //  'name': 'Mari Batilando',
+      //  'uid': '12345',
+      //  'email': 'mari.batilando@gmail.com',
+      //  'prev_coursework': [ { 'name': 'Calculus 1', 'units': 12 } ],
+      //  'schedules': [
+      //    {   '_id': 1,
+      //      'name': 'My Schedule',
+      //      'major': [
+      //        { 'name': 'Computer Science',
+      //          'requirements': [
+      //            { 'name': 'Pre-requisite',
+      //              'division': 'Lower Division',
+      //              'type': 'Class',
+      //              'quantity': '3',
+      //              'courses': [
+      //                { 'name': 'CS 61A',
+      //                  'units': 4
+      //                },
+      //                { 'name': 'CS 61B',
+      //                  'units': 4
+      //                },
+      //                { 'name': 'CS 61C',
+      //                  'units': 4
+      //                }
+      //              ]
+      //            },
+      //            { 'name': 'Design Requirement',
+      //              'division': 'Upper Division',
+      //              'type': 'Class',
+      //              'quantity': '2',
+      //              'courses': [
+      //                { 'name': 'CS 160',
+      //                  'units': 4
+      //                }
+      //              ]
+      //            }
+      //          ]
+      //        }
+      //      ],
+      //      'semesters': [
+      //        { '_id': '1',
+      //          'season': 'Fall',
+      //          'year': 2015,
+      //          'courses': [
+      //            { 'name': 'CS 61A',
+      //              'units': 4
+      //            },
+      //            { 'name': 'CS 61B',
+      //              'units': 4
+      //            },
+      //            { 'name': 'CS 61C',
+      //              'units': 4
+      //            }
+      //          ]
+      //        }
+      //      ]
+      //    },
+      //    {   '_id': 2,
+      //      'name': 'My Schedule 2',
+      //      'major': [
+      //        { 'name': 'Computer Science',
+      //          'requirements': [
+      //            { 'name': 'Pre-requisite',
+      //              'division': 'Lower Division',
+      //              'type': 'Class',
+      //              'quantity': '3',
+      //              'courses': [
+      //                { 'name': 'CS 61A',
+      //                  'units': 4
+      //                },
+      //                { 'name': 'CS 61B',
+      //                  'units': 4
+      //                },
+      //                { 'name': 'CS 61C',
+      //                  'units': 4
+      //                }
+      //              ]
+      //            },
+      //            { 'name': 'Design Requirement',
+      //              'division': 'Upper Division',
+      //              'type': 'Class',
+      //              'quantity': '2',
+      //              'courses': [
+      //                { 'name': 'CS 160',
+      //                  'units': 4
+      //                }
+      //              ]
+      //            }
+      //          ]
+      //        }
+      //      ],
+      //      'semesters': [
+      //        { '_id': '1',
+      //          'season': 'Fall',
+      //          'year': 2015,
+      //          'courses': [
+      //            { 'name': 'EE 42',
+      //              'units': 4
+      //            },
+      //            { 'name': 'CS 70',
+      //              'units': 4
+      //            },
+      //            { 'name': 'CS 61C',
+      //              'units': 4
+      //            }
+      //          ]
+      //        }
+      //      ]
+      //    }
+      //  ]
+      //};
+      //
+      //// Process years
+      //service.yearsProcessed = [
+      //  {
+      //    'startYear': 2011,
+      //    'endYear': 2012,
+      //    'semesters': [
+      //      { '_id': '1',
+      //        'season': 'Fall',
+      //        'year': 2011,
+      //        'courses': [
+      //          { 'name': 'CS 61A',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61B',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61C',
+      //            'units': 4
+      //          }
+      //        ]
+      //      },
+      //      { '_id': '2',
+      //        'season': 'Spring',
+      //        'year': 2012,
+      //        'courses': [
+      //          { 'name': 'CS 61A',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61B',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61C',
+      //            'units': 4
+      //          }
+      //        ]
+      //      },
+      //      { '_id': '3',
+      //        'season': 'Summer',
+      //        'year': 2012,
+      //        'courses': [
+      //          { 'name': 'CS 61A',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61B',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61C',
+      //            'units': 4
+      //          }
+      //        ]
+      //      }
+      //    ]
+      //  }
+      //];
+      //
+      //service.yearsProcessed2 = [
+      //  {
+      //    'startYear': 2014,
+      //    'endYear': 2015,
+      //    'semesters': [
+      //      { '_id': '1',
+      //        'season': 'Spring',
+      //        'year': 2015,
+      //        'courses': [
+      //          { 'name': 'EE 42',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 70',
+      //            'units': 4
+      //          },
+      //          { 'name': 'CS 61C',
+      //            'units': 4
+      //          }
+      //        ]
+      //      },
+      //      { '_id': '2',
+      //        'season': 'Spring',
+      //        'year': 2012,
+      //        'courses': [
+      //        ]
+      //      },
+      //      { '_id': '3',
+      //        'season': 'Summer',
+      //        'year': 2012,
+      //        'courses': [
+      //        ]
+      //      }
+      //    ]
+      //  }
+      //];
 
-        // Process years
-        service.yearsProcessed = [
-            {
-                'startYear': 2011,
-                'endYear': 2012,
-                'semesters': [
-                    { '_id': '1',
-                      'season': 'Fall',
-                      'year': 2011,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    },
-                    { '_id': '2',
-                      'season': 'Spring',
-                      'year': 2012,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    },
-                    { '_id': '3',
-                      'season': 'Summer',
-                      'year': 2012,
-                      'courses': [
-                        { 'name': 'CS 61A',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61B',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    }
-                ]
-            }
-        ];
-
-        service.yearsProcessed2 = [
-            {
-                'startYear': 2014,
-                'endYear': 2015,
-                'semesters': [
-                    { '_id': '1',
-                      'season': 'Spring',
-                      'year': 2015,
-                      'courses': [
-                        { 'name': 'EE 42',
-                          'units': 4
-                        },
-                        { 'name': 'CS 70',
-                          'units': 4
-                        },
-                        { 'name': 'CS 61C',
-                          'units': 4
-                        }
-                      ]
-                    },
-                    { '_id': '2',
-                      'season': 'Spring',
-                      'year': 2012,
-                      'courses': [
-                      ]
-                    },
-                    { '_id': '3',
-                      'season': 'Summer',
-                      'year': 2012,
-                      'courses': [
-                      ]
-                    }
-                ]
-            }
-        ];
-
-        service.currSchedule = service.schedule.schedules[0];
-        setupSchedule(service.schedule.schedules[0]);
-    })();
+      //service.currSchedule = service.schedule.schedules[0];
+      //setupSchedule(service.schedule.schedules[0]);
+    };
 
     /*
         Sets up schedule obj for left sidebar by updating all requirements
@@ -306,7 +307,7 @@ angular.module('degreeCheckApp')
           'endYear': endYear,
           'semesters': semesters
         }
-      ]
+      ];
       //return [
       //      {   '_id': 1,
       //          'startYear': 2011,
@@ -503,4 +504,4 @@ angular.module('degreeCheckApp')
     };
 
     return service;
-  });
+  }]);
