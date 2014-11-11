@@ -9,7 +9,6 @@ angular.module('degreeCheckApp')
     service.requirementsProcessed = [];
 
     service.initSchedule = function (uid) {
-      var testUrl = "/api/users/996198";
       $http.get('/api/users/' + uid)
         .success(function (bigJson) {
           service.schedule = bigJson;
