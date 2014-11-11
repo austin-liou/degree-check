@@ -65,10 +65,11 @@ angular.module('degreeCheckApp')
       // Check if enter
       if (event.keyCode === 13) {
           // Check if valid course
-          if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
-              scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId],
-                                                      units: majorService.allCoursesHash[$scope.newClass[semesterId]]});
-              $scope.newClass[semesterId] = '';
+          var index = $scope.allCourses.indexOf($scope.newClass[semesterId]);
+          if (index > -1) {
+            var courseObj = majorService.allCourses[index];
+            scheduleService.addCourse(semesterId, courseObj);
+            $scope.newClass[semesterId] = '';
           }
       }
     };
