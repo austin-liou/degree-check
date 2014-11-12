@@ -7,10 +7,11 @@ angular.module('degreeCheckApp')
         service.allCoursesHash = {},
         service.allMajors = [];
 
-    var initMajorService = (function () {
+    service.initMajorService = function (callback) {
         $http.get('/api/courses/')
             .success(function (courses) {
               processCourses(courses);
+              callback(courses);
             });
         $http.get('/api/majors/')
             .success(function (majors) {
@@ -227,7 +228,7 @@ angular.module('degreeCheckApp')
         //     ];
         // processCourses(stubCourses);
         // processMajors(stubMajors);
-    })();
+    };
 
     function processCourses (courses) {
         service.allCourses = courses;

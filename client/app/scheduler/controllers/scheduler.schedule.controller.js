@@ -5,7 +5,10 @@ angular.module('degreeCheckApp')
     console.log('SchedulerScheduleCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
-    $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
+    function allCoursesCallback (courses) {
+      $scope.allCourses = courses.map(function (elem) { return elem.name; });
+    };
+    $scope.majorService.initMajorService(allCoursesCallback);
     $scope.newClass = {};
 
 
