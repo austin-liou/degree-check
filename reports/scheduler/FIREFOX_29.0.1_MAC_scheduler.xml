@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="scheduler"
+             errors="0"
+             failures="0"
+             tests="15">
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Add Modal" package="scheduler" skipped="0"
+    tests="4" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 242 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Delete Modal" package="scheduler" skipped="0"
+    tests="4" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 176 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Add Course" package="scheduler" skipped="0"
+    tests="0" time="" timestamp="">
+    
+    
+    
+    </testsuite>
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Remove Course" package="scheduler" skipped="0"
+    tests="2" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 170 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Element &lt;.remove-class&gt; was not present after 263 milliseconds.">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Requirements Sidebar" package="scheduler" skipped="0"
+    tests="5" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;.requirements&gt; was visible after 150 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.requirements&gt; contains text: &quot;CS 160&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.requirements&gt; contains text: &quot;CS 61A&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.requirements&gt; contains text: &quot;CS 61B&quot;.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;.requirements&gt; contains text: &quot;CS 61C&quot;.">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+</testsuites>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="login"
+             errors="0"
+             failures="0"
+             tests="4">
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Login Button" package="login" skipped="0"
+    tests="2" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;.hero .container a&gt; was visible after 59 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Assertion passed: undefined">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="CalNet Login" package="login" skipped="0"
+    tests="2" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 124 milliseconds.">
+        
+        
+      </testcase>
+    
+      <testcase name="Testing if element &lt;#loginForm&gt; is present.">
+        
+        
+      </testcase>
+    
+    
+    </testsuite>
+  
+</testsuites>
