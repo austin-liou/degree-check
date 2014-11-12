@@ -1,0 +1,11 @@
+<div class="admin-section">
+	<textarea class="comments" ng-model="scheduleService.currSchedule.comments">
+	</textarea>
+	<label for="blessed">Bless?</label>
+	<input name="blessed" type="checkbox" ng-model="scheduleService.currSchedule.blessed">
+	<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
+</div>
+<div class="scheduler-main">
+	<div ui-view="schedule" class="schedule"></div>
+	<div ui-view="requirements" class="requirements"></div>
+</div>

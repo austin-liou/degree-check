@@ -40,6 +40,20 @@
         <div id="courses-div">
             <span class="requirement_field">Courses that fulfill this requirement</span><br>
             <!-- How to add courses here? -->
+            <ul class="classes">
+                <li ng-repeat="class in requirement.courses">
+                    <span type="text">{{ class.name }}</span>
+                    <button class="remove-class fa fa-times"
+                            ng-click="removeCourse(requirement._id, class.name)">
+                    </button>
+                </li>
+            </ul>
+            <div class="add-class-container">
+                <input type="text"
+                       placeholder="Add Class"
+                       ng-model="newClass[requirement._id]"
+                       ng-keyup="checkInput($event, requirement._id)">
+            </div>
         </div>
     </form>
     <button ng-click="saveRequirement()" type="button">Save</button>

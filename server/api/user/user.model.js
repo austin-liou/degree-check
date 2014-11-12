@@ -9,7 +9,7 @@ var UserSchema = new Schema({
   uid: String,
   name: String,
   email: String,
-  schedules: [Schedule],
+  schedules: [Schedule.schema],
   prev_coursework: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
 });
 

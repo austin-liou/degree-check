@@ -10,6 +10,7 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/admins', require('./api/admin'));
+  app.use('/api/uid', require('./api/uid'));
   app.use('/api/logout', require('./api/logout'));
   app.use('/api/login', require('./api/login'));
   app.use('/api/users', require('./api/user'));
@@ -21,6 +22,7 @@ module.exports = function(app) {
   app.use('/api/things', require('./api/thing'));
   app.use('/login', require('./api/login'));
   app.use('/logout', require('./api/logout'));
+  app.use('/uid', require('./api/uid'));
   app.use('/scheduler', function (req, res) {
     if (!(req.session && req.session.uid)) {
       res.redirect('../login');

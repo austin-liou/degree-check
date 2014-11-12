@@ -4,15 +4,16 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 
-describe('GET /api/logout', function() {
+describe('GET /api/uid', function() {
 
-  it('should respond with plain text', function(done) {
+  it('should respond with JSON array', function(done) {
     request(app)
-      .get('/api/logout')
-      .expect(302)
-      .expect('Content-Type', "text/plain; charset=utf-8")
+      .get('/api/uid')
+      .expect(200)
+      .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
+        res.body.should.be.instanceof(Array);
         done();
       });
   });

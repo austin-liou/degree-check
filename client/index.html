@@ -10,7 +10,6 @@
     <base href="/">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -61,11 +60,16 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/admin/admin.js"></script>
+          <script src="app/admin/controllers/admin.controller.js"></script>
+          <script src="app/admin/controllers/admin.search-students.controller.js"></script>
+          <script src="app/admin/controllers/admin.view-students.controller.js"></script>
           <script src="app/directives/auto-complete/auto-complete.directive.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/scheduler/controllers/scheduler.add-schedule.controller.js"></script>
           <script src="app/scheduler/controllers/scheduler.controller.js"></script>
+          <script src="app/scheduler/controllers/scheduler.delete-schedule.controller.js"></script>
           <script src="app/scheduler/controllers/scheduler.requirements.controller.js"></script>
           <script src="app/scheduler/controllers/scheduler.schedule.controller.js"></script>
           <script src="app/scheduler/scheduler.js"></script>

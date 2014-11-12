@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/ng-template" id="administrator.major.edit-requirement.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Create a Requirement</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div id="name-div">
+                    <span class="requirement_field">Requirement Name</span>
+                    <input ng-model="requirement.name" id="requirement_name" type="text">
+                </div>
+                <div id="division-div">
+                    <span class="division_field">Division</span>
+                    <select id="requirement_division" ng-model="requirement.division">
+                        <option value="Lower Division">Lower Division</option>
+                        <option value="Upper Division">Upper Division</option>
+                    </select>
+                </div>
+                <div id="type-div">
+                    <span class="requirement_field">Type</span>
+                    <input type="radio" ng-model="requirement.type" name="requirement_type" value="units" checked>units
+                    <input type="radio" ng-model="requirement.type" name="requirement_type" value="courses">courses
+                </div>
+                <div id="quantity-div">
+                    <span class="requirement_field">Number of <span id="requirement_type">{{requirement.type}}</span></span>
+                    <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
+                </div>
+                <div id="courses-div">
+                    <span class="requirement_field">Courses that fulfill this requirement</span><br>
+                    <ul class="classes">
+                        <li ng-repeat="class in requirement.courses">
+                            <span type="text">{{ class.name }}</span>
+                            <button class="remove-class fa fa-times"
+                                    ng-click="rmCourse(class)">
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="add-class-container">
+                        <input type="text"
+                               placeholder="Add Class"
+                               ng-model="newClass"
+                               ng-keyup="check($event)">
+                    </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="addRequirement()">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</head>
+<body>
+<div class="major-div" ng-repeat="major in majorService.fullAllMajors">
+    <span type="text">{{ major.name }}</span><br>
+    <div class="requirement-div" ng-repeat="req in major.requirements">
+        <span type="text">{{ req.name }}</span>
+        <button class="edit-requirement" ng-click="editRequirement(major,req)">
+            Edit
+        </button>
+        <button class="remove-requirement fa fa-times" ng-click="deleteRequirement(major,req._id)">
+        </button>
+    </div>
+    <button class="add-requirement" ng-click="addRequirement(major)">
+        Add Requirement
+    </button>
+</div>
+</body>
+</html>

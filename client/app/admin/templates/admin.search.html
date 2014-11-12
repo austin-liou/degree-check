@@ -1,0 +1,33 @@
+<div>
+	<table align="center" width="85%">
+		<tr>
+			<td colspan="5">
+				<h1>Search for Student Schedules</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="search" placeholder="Student Name" ng-model="name" /></td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><input type="search" placeholder="Student Email" ng-model="email" /></td>
+		</tr>
+		<tr>
+			<td>uid:</td>
+			<td><input type="search" placeholder="Student uid" ng-model="uid" /></td>
+		</tr>
+		<tr>
+			<td width="22%" colspan="2"><h4>Name:</h4></th>
+			<td width="30%"><h4>Email:</h4></th>
+			<td width="18%"><h4>uid:</h4></th>
+			<td width="30%"><h4>Schedules:</h4></th>
+		</tr>
+		<tr ng-repeat="student in students | filter:filterSearch(name,email,uid) | orderBy:studentName">
+			<td colspan="2"><a href="/admin/view">{{student.name}}</a></td>
+			<td>{{student.email}}</td>
+			<td>{{student.uid}}</td>
+			<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
+		</tr>
+	</table>
+</div>
