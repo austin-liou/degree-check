@@ -29,7 +29,7 @@ angular.module('degreeCheckApp')
             { name: String, major: majorId }
         */
         modalInstance.result.then(function (schedule) {
-            // Add scheduleService logic to create schedule here
+            scheduleService.addSchedule(schedule);
         });
     };
 

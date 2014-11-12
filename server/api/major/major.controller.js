@@ -13,11 +13,14 @@ exports.index = function(req, res) {
 
 // Get a single major
 exports.show = function(req, res) {
-  Major.findById(req.params.id, function (err, major) {
-    if(err) { return handleError(res, err); }
-    if(!major) { return res.send(404); }
-    return res.json(major);
-  });
+    Major.findById(req.params.id).exec(function (err, major) {
+        if(err) { return handleError(res, err); }
+        if(!major) { return res.send(404); }
+        var opts = [{path: 'requirements.courses', model: 'Course'}];
+        Major.populate(major, opts, function (err, major) {
+                return res.json(major);
+        });
+    });
 };
 
 // Creates a new major in the DB.
