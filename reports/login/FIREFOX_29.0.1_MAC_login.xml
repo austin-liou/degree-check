@@ -9,7 +9,7 @@
     tests="2" time="" timestamp="">
     
     
-      <testcase name="Element &lt;.hero .container a&gt; was visible after 59 milliseconds.">
+      <testcase name="Element &lt;.hero .container a&gt; was visible after 63 milliseconds.">
         
         
       </testcase>
@@ -27,7 +27,7 @@
     tests="2" time="" timestamp="">
     
     
-      <testcase name="Element &lt;body&gt; was visible after 124 milliseconds.">
+      <testcase name="Element &lt;body&gt; was visible after 57 milliseconds.">
         
         
       </testcase>

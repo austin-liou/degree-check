@@ -507,6 +507,7 @@ angular.module('degreeCheckApp')
     service.addSchedule = function (schedule) {
         $http.get('/api/majors/' + schedule.major)
             .success(function (majorObj) {
+                debugger
                 var newSchedule = {};
                 newSchedule.name = schedule.name;
                 newSchedule.semesters = createSemesters();
