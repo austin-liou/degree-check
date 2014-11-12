@@ -505,6 +505,7 @@ angular.module('degreeCheckApp')
         Adds a new schedule
     */
     service.addSchedule = function (schedule) {
+        debugger
         $http.get('/api/majors/' + schedule.major)
             .success(function (majorObj) {
                 debugger
