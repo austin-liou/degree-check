@@ -13,14 +13,14 @@ exports.index = function(req, res) {
 
 // Get a single user
 exports.show = function(req, res) {
-  User.findOne({uid: req.params.id}).populate('prev_coursework').exec(function (err, user) {
+  User.findOne({uid: req.params.uid}).populate('prev_coursework').exec(function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     var opts = [{path: 'schedules.major', model: 'Major'},
                 {path: 'schedules.semesters.courses', model: 'Course'}];
     User.populate(user, opts, function (err, user) {
         var opts = [{path: 'schedules.major.requirements.courses', model: 'Course'}];
-        User.populate(user, opts, function(err, user){
+        User.populate(user, opts, function(err, user) {
             return res.json(user);
         });
     });
@@ -38,11 +38,11 @@ exports.create = function(req, res) {
 // Updates an existing user in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  User.findOne({uid: req.params.id}, function (err, user) {
+  User.findOne({uid: req.params.uid}, function (err, user) {
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     // User is completely overridden with each call
-    var updated = _.merge(user, req.body, function(a,b){
+    var updated = _.merge(user, req.body, function(a,b) {
         return b;
     });
     updated.save(function (err) {
@@ -54,7 +54,7 @@ exports.update = function(req, res) {
 
 // Deletes a user from the DB.
 exports.destroy = function(req, res) {
-  User.findOne({uid: req.params.id}, function (err, user) {
+  User.findOne({uid: req.params.uid}, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     user.remove(function(err) {
