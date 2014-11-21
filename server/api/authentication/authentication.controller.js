@@ -1,18 +1,20 @@
 'use strict';
 
-var _ = require('lodash');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 var User = require('../user/user.model');
 var Major = require('../major/major.model');
 
-/*
-  CalNet Auth Logic
-  Note that we only set session UID because we're using cookie based sessions instead of session stores.
-  Cookie based sessions shouldn't get too big, so we can make a call to the API for the rest of the information.
-  Perhaps in the future if this scales up, we can work with session stores and store the entire user in the cookies.
-*/
-exports.index = function(req, res) {
+// Login
+exports.login = function(req, res) {
+
+  /*
+    CalNet Auth Logic
+    Note that we only set session UID because we're using cookie based sessions instead of session stores.
+    Cookie based sessions shouldn't get too big, so we can make a call to the API for the rest of the information.
+    Perhaps in the future if this scales up, we can work with session stores and store the entire user in the cookies.
+  */
+
   if (req.session && req.session.uid) { // check if session cookie is set
     if (req.sessionOptions && Date.now() > req.sessionOptions.expires) { // check for session cookie expiration
       req.session = null; // clears the session cookie
@@ -100,6 +102,17 @@ exports.index = function(req, res) {
       });
     }
   }
+};
+
+// Logout
+exports.logout = function(req, res) {
+  req.session = null; // Clear the session cookie
+  res.redirect('https://auth.berkeley.edu/cas/logout?url=https://degree-checker.herokuapp.com') // CAS logout
+};
+
+// Get list of UIDs
+exports.uid = function(req, res) {
+  return res.json(200, {uid: req.session.uid});
 };
 
 function handleError(res, err) {
