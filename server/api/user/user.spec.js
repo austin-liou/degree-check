@@ -6,7 +6,8 @@ var request = require('supertest');
 var assert = require('assert');
 
 describe('Functional Tests for /api/users', function() {
-  var userid;
+  var userUid;
+
   it('should GET all existing users', function(done) {
     request(app)
       .get('/api/users')
@@ -18,11 +19,12 @@ describe('Functional Tests for /api/users', function() {
         done();
       });
   });
+
   it('should POST new user', function(done) {
     request(app)
       .post('/api/users')
       .type('json')
-      .send({name: "Student A", email: "StudentA@berkeley.edu"})
+      .send({uid: "953545", name: "Michael Lannin", email: "mlannin23@berkeley.edu"})
       .expect(201)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -32,15 +34,15 @@ describe('Functional Tests for /api/users', function() {
         res.body.email.should.be.instanceof(String);
         res.body.schedules.should.be.instanceof(Array);
         res.body.prev_coursework.should.be.instanceof(Array);
-        assert.equal(res.body.name, "Student A");
-        assert.equal(res.body.email, "StudentA@berkeley.edu");
-        userid = res.body._id;
+        assert.equal(res.body.name, "Michael Lannin");
+        assert.equal(res.body.email, "mlannin23@berkeley.edu");
+        userUid = res.body.uid;
         done();
       });
   });
   it('should PUT new Schedules to user', function(done) {
     request(app)
-      .put('/api/users/' + userid)
+      .put('/api/users/' + userUid)
       .type('json')
       .send({schedules: []})
       .expect(200)
@@ -49,9 +51,10 @@ describe('Functional Tests for /api/users', function() {
         done();
       });
   });
+
   it('should PUT new Semester to user\'s prev_coursework', function(done) {
     request(app)
-      .put('/api/users/' + userid)
+      .put('/api/users/' + userUid)
       .type('json')
       .send({prev_coursework: []})
       .expect(200)
@@ -60,9 +63,10 @@ describe('Functional Tests for /api/users', function() {
         done();
       });
   });
+
   it('should GET user by id', function(done) {
     request(app)
-      .get('/api/users/' + userid)
+      .get('/api/users/' + userUid)
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -72,37 +76,27 @@ describe('Functional Tests for /api/users', function() {
         res.body.email.should.be.instanceof(String);
         res.body.schedules.should.be.instanceof(Array);
         res.body.prev_coursework.should.be.instanceof(Array);
-        assert.equal(res.body.name, "Student A");
-        assert.equal(res.body.email, "StudentA@berkeley.edu");
+        assert.equal(res.body.name, "Michael Lannin");
+        assert.equal(res.body.email, "mlannin23@berkeley.edu");
         assert.equal(res.body.schedules.length, 0);
         done();
       });
   });
+
   it('should DELETE user from database', function(done) {
     request(app)
-      .delete('/api/users/' + userid)
+      .delete('/api/users/' + userUid)
       .expect(204)
       .end(function(err, res) {
         if (err) return done(err);
         done();
       });
   });
+
   it('should not be able to GET deleted user by id', function(done) {
     request(app)
-      .get('/api/users/' + userid)
+      .get('/api/users/' + userUid)
       .expect(404)
-      .end(function(err, res) {
-        if (err) return done(err);
-        done();
-      });
-  });
-});
-
-describe('Unit Tests for user controller', function() {
-  it('should handleError by sending statusCode: 500', function(done) {
-    request(app)
-      .get('/api/users/fake_id')
-      .expect(500)
       .end(function(err, res) {
         if (err) return done(err);
         done();
