@@ -60,7 +60,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb985",
       //                             "courses": [
       //                                 {
-      //                                     "name": "MATH1A",
+      //                                     "name": "MATH 1A",
       //                                     "units": 4,
       //                                     "_id": "5461a572665fee02008eb970",
       //                                     "__v": 0
@@ -74,7 +74,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb984",
       //                             "courses": [
       //                                 {
-      //                                     "name": "MATH1B",
+      //                                     "name": "MATH 1B",
       //                                     "units": 4,
       //                                     "_id": "5461a577665fee02008eb971",
       //                                     "__v": 0
@@ -88,7 +88,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb983",
       //                             "courses": [
       //                                 {
-      //                                     "name": "MATH53",
+      //                                     "name": "MATH 53",
       //                                     "units": 4,
       //                                     "_id": "5461a57c665fee02008eb972",
       //                                     "__v": 0
@@ -102,7 +102,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb982",
       //                             "courses": [
       //                                 {
-      //                                     "name": "MATH54",
+      //                                     "name": "MATH 54",
       //                                     "units": 4,
       //                                     "_id": "5461a57f665fee02008eb973",
       //                                     "__v": 0
@@ -116,7 +116,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb981",
       //                             "courses": [
       //                                 {
-      //                                     "name": "CS70",
+      //                                     "name": "CS 70",
       //                                     "units": 4,
       //                                     "_id": "5461a1b5665fee02008eb958",
       //                                     "__v": 0
@@ -151,7 +151,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb97e",
       //                             "courses": [
       //                                 {
-      //                                     "name": "EE20",
+      //                                     "name": "EE 20",
       //                                     "units": 4,
       //                                     "_id": "5461a2c8665fee02008eb966",
       //                                     "__v": 0
@@ -172,7 +172,7 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb97c",
       //                             "courses": [
       //                                 {
-      //                                     "name": "CS61A",
+      //                                     "name": "CS 61A",
       //                                     "units": 4,
       //                                     "_id": "5461a194665fee02008eb955",
       //                                     "__v": 0
@@ -200,25 +200,25 @@ angular.module('degreeCheckApp')
       //                             "_id": "5461ab37665fee02008eb979",
       //                             "courses": [
       //                                 {
-      //                                     "name": "CS160",
+      //                                     "name": "CS 160",
       //                                     "units": 4,
       //                                     "_id": "5461a1bc665fee02008eb959",
       //                                     "__v": 0
       //                                 },
       //                                 {
-      //                                     "name": "CS161",
+      //                                     "name": "CS 161",
       //                                     "units": 4,
       //                                     "_id": "5461a1c0665fee02008eb95a",
       //                                     "__v": 0
       //                                 },
       //                                 {
-      //                                     "name": "CS174",
+      //                                     "name": "CS 174",
       //                                     "units": 4,
       //                                     "_id": "5461a1db665fee02008eb960",
       //                                     "__v": 0
       //                                 },
       //                                 {
-      //                                     "name": "EE105",
+      //                                     "name": "EE 105",
       //                                     "units": 4,
       //                                     "_id": "5461a2d6665fee02008eb968",
       //                                     "__v": 0
@@ -387,7 +387,6 @@ angular.module('degreeCheckApp')
     */
     function clearUserReq () {
       var requirement;
-      debugger
       for (var i = 0, len = service.currSchedule.major[0].requirements.length; i < len; i++) {
            requirement = service.currSchedule.major[0].requirements[i];
            for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
@@ -505,10 +504,8 @@ angular.module('degreeCheckApp')
         Adds a new schedule
     */
     service.addSchedule = function (schedule) {
-        debugger
         $http.get('/api/majors/' + schedule.major)
             .success(function (majorObj) {
-                debugger
                 var newSchedule = {};
                 newSchedule.name = schedule.name;
                 newSchedule.semesters = createSemesters();
