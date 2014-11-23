@@ -9,7 +9,17 @@ angular.module('degreeCheckApp')
         $scope.majorService.initMajorService(allCoursesCallback);
         $scope.majorService.fullGetMajor();
 
+        $scope.createMajor = function(major){
+            var modalInstance = $modal.open({
+                templateUrl: 'administrator.major.create.html',
+                controller: 'AdminCreateMajorCtrl',
+                size: 'sm'
+            })
+        };
 
+        $scope.deleteMajor = function(major){
+            $scope.majorService.deleteMajor(major);
+        }
 
 
         $scope.deleteRequirement = function(major,req_id){
@@ -36,20 +46,4 @@ angular.module('degreeCheckApp')
             });
         };
 
-        $scope.addCourse = function(){
-            var modalInstance = $modal.open({
-                templateUrl: 'administrator.major.edit-course.html',
-                controller: 'AdminAddCourseCtrl',
-                size: 'sm'
-            });
-        };
-
-        $scope.editCourse = function(course){
-            $scope.majorService.course = angular.copy(course);
-            var modalInstance = $modal.open({
-                templateUrl: 'administrator.major.edit-course.html',
-                controller: 'AdminEditCourseCtrl',
-                size: 'sm'
-            });
-        }
     });

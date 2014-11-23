@@ -33,6 +33,7 @@ angular.module('degreeCheckApp')
     service.fullGetMajor = function(){
         $http.get('/api/majors/')
             .success(function (majors) {
+                service.fullAllMajors = [];
                 for (var i = 0; i < service.allMajors.length; i++) {
                     (function (cntr) {
                         var major_id = service.allMajors[cntr]._id;
@@ -95,6 +96,29 @@ angular.module('degreeCheckApp')
             }
         });
     };
+
+    service.createMajor = function(major){
+        $http.post('api/majors', major).success(function(response){
+            service.fullAllMajors.push(response);
+            service.allMajors.push({"name": response.name, "_id": response._id});
+        });
+    }
+
+    service.deleteMajor = function(major) {
+        $http.delete('api/majors/' + major._id).success(function(){
+            for(var i = 0; i<service.fullAllMajors.length; i++){
+                if(service.fullAllMajors[i]._id == major._id){
+                    service.fullAllMajors.splice(i,1);
+                }
+            }
+            for(var i = 0; i<service.AllMajors.length; i++){
+                if(service.AllMajors[i]._id == major._id){
+                    service.AllMajors.splice(i,1);
+                }
+            }
+        })
+    };
+
 
     service.addCourse = function(course){
         console.log(course);
