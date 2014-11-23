@@ -12,7 +12,7 @@
 					<label for="schedule-major">Major</label>
 					<select name="schedule-major"
 					ng-model="newScheduleMajor">
-					<option ng-repeat="major in majorService.allMajors" value="{{major.id}}">{{major.name}}</option>
+					<option ng-repeat="major in majorService.allMajors" value="{{major._id}}">{{major.name}}</option>
 				</select>
 			</div>
 		</form>
@@ -35,6 +35,12 @@
 		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 	</div>
 </script>
+<span ng-show="{{scheduleService.currSchedule.blessed}}" class="verified">Blessed</span>
+<span ng-show="!{{scheduleService.currSchedule.blessed}}" class="not-verified">Not Blessed</span>
+<p class="comments">
+	{{scheduleService.currSchedule.comments}}
+</p>
+
 
 <div class="plan-header">
 	<ul class="schedules">

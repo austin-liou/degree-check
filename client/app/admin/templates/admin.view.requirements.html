@@ -9,10 +9,12 @@
 	 	  <header>{{ requirement.name }}</header>
 	 	<ul class="requirements-list">
 		 	 <li ng-repeat="course in requirement.courses">
-		 	 	<span class="badge"
-		 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
-		 	 		  {{ course.name }}
-		 	 	</span>
+		 	 	<a target="blank" custom-link="{{course.name}}">
+			 	 	<span class="badge"
+			 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
+			 	 		  {{ course.name }}
+			 	 	</span>
+		 	 	</a>
 		 	 </li>
 		 </ul>
 	 </div>

@@ -5,18 +5,17 @@ angular.module('degreeCheckApp')
     console.log('SchedulerScheduleCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
-    function allCoursesCallback (courses) {
+    $scope.majorService.initMajorService(function (courses) {
       $scope.allCourses = courses.map(function (elem) { return elem.name; });
-    };
-    $scope.majorService.initMajorService(allCoursesCallback);
+    });
     $scope.newClass = {};
 
 
-    $http.get('/api/uid')
-      .success(function (uidObj){
-        scheduleService.initSchedule(uidObj.uid);
-      });
-
+    // $http.get('/api/uid')
+    //   .success(function (uidObj){
+    //     scheduleService.initSchedule(uidObj.uid);
+    //   });
+    scheduleService.initSchedule('hi');
     /*
         Modal Logic
     */

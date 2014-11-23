@@ -11,7 +11,7 @@ module.exports = {
   'CalNet Login' : function (browser) {
     browser
       .url('http://degree-checker.herokuapp.com')
-      .url('http://degree-checker.herokuapp.com/login')
+      .url('http://degree-checker.herokuapp.com/api/authentication/login')
       .waitForElementVisible('body', 1000)
       .assert.elementPresent('#loginForm')
       .end();
