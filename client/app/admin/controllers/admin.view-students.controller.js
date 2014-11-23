@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('AdminViewStudentsCtrl', function ($scope, scheduleService, majorService, $modal, $http) {
+  .controller('AdminViewStudentsCtrl', function ($scope, scheduleService, majorService, $modal, $http, $stateParams) {
     console.log('In AdminViewStudentsCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
@@ -10,11 +10,9 @@ angular.module('degreeCheckApp')
     });
     $scope.newClass = {};
 
-
-    // $http.get('/api/uid')
-    //   .success(function (uidObj){
-    //     scheduleService.initSchedule(uidObj.uid);
-    //   });
+    // var init = (function () {
+    //   scheduleService.initSchedule($stateParams.uid);
+    // })();
 
   scheduleService.initSchedule('hi');
     /*

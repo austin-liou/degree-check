@@ -24,7 +24,7 @@
 			<td width="30%"><h4>Schedules:</h4></th>
 		</tr>
 		<tr ng-repeat="student in students | filter:filterSearch(name,email,uid) | orderBy:studentName">
-			<td colspan="2"><a href="/admin/view">{{student.name}}</a></td>
+			<td colspan="2"><a ng-href="/admin/view/{{student.uid}}">{{student.name}}</a></td>
 			<td>{{student.email}}</td>
 			<td>{{student.uid}}</td>
 			<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
