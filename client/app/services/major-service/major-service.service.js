@@ -102,7 +102,6 @@ angular.module('degreeCheckApp')
             $http.get('/api/courses/')
                 .success(function (courses) {
                     processCourses(courses);
-                    callback(courses);
                 });
         });
     };

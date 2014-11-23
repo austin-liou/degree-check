@@ -24,11 +24,18 @@ angular.module('degreeCheckApp')
       })
       .state('admin.edit', {
           url: '/edit',
-          controller: 'AdminRequirementsCtrl',
           views: {
-              'content@admin': {
+              'content': {
+                  templateUrl: 'app/administrator/templates/administrator.edit.html',
+                  controller: 'AdminEditCtrl'
+              },
+              'requirements@admin.edit': {
                   templateUrl: 'app/administrator/templates/administrator.major.html',
                   controller: 'AdminRequirementsCtrl'
+              },
+              'courses@admin.edit': {
+                  templateUrl: 'app/administrator/templates/administrator.course.html',
+                  controller: 'AdminCoursesCtrl'
               }
           }
       })

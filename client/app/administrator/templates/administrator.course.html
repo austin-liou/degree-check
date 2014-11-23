@@ -3,21 +3,39 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/ng-template" id="administrator.major.edit-course.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Create a Course</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div id="coursename-div">
+                    <span class="requirement_field">Course Name</span>
+                    <input ng-model="course.name" id="course_name" type="text">
+                </div>
+                <div id="units-div">
+                    <span class="requirement_field">Units</span>
+                    <input ng-model="course.units" id="course_units" type="number">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="addCourse()">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 </head>
 <body>
-<div id="edit-requirements-screen">
-    <form>
-        <div id="name-div">
-            <span class="course_field">Requirement Name</span>
-            <input ng-model="course.name" id="course_name" type="text">
-        </div>
-        <div id="units-div">
-            <span class="course_field">Number of units</span>
-            <input ng-model="course.units" id="course_units" type="number">
-        </div>
-    </form>
-    <button ng-click="saveCourse()" type="button">Save</button>
+Course
+<div>
+    <button class="add-course" ng-click="addCourse()">
+        Add Course
+    </button>
 </div>
+<div class="course-div" ng-repeat="course in majorService.allCourses">
+    <span type="text">{{course.name}}</span>
+    <button class="edit-course" ng-click="editCourse(course)">Edit</button>
+</div>
+
 </body>
 </html>
