@@ -35,6 +35,12 @@
 		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 	</div>
 </script>
+<span ng-show="{{scheduleService.currSchedule.blessed}}" class="verified">Blessed</span>
+<span ng-show="!{{scheduleService.currSchedule.blessed}}" class="not-verified">Not Blessed</span>
+<p class="comments">
+	{{scheduleService.currSchedule.comments}}
+</p>
+
 
 <div class="plan-header">
 	<ul class="schedules">

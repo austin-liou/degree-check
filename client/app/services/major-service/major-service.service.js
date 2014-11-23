@@ -19,19 +19,19 @@ angular.module('degreeCheckApp')
         //     });
         var stubCourses = [
             {
-                "name": "CS61A",
+                "name": "CS 61A",
                 "units": 4,
                 "_id": "5461a194665fee02008eb955",
                 "__v": 0
             },
             {
-                "name": "CS61B",
+                "name": "CS 61B",
                 "units": 4,
                 "_id": "5461a19b665fee02008eb956",
                 "__v": 0
             },
             {
-                "name": "CS61C",
+                "name": "CS 61C",
                 "units": 4,
                 "_id": "5461a19e665fee02008eb957",
                 "__v": 0

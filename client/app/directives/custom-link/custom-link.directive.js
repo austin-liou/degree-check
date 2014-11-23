@@ -5,7 +5,6 @@ angular.module('degreeCheckApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-      	debugger
       	var courseName = attrs.customLink,
       		courseArr = courseName.split(' '),
       		berkeleyTime = 'http://www.berkeleytime.com/catalog/';

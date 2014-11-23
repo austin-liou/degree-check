@@ -15,7 +15,7 @@ angular.module('degreeCheckApp')
     //   .success(function (uidObj){
     //     scheduleService.initSchedule(uidObj.uid);
     //   });
-
+    scheduleService.initSchedule('hi');
     /*
         Modal Logic
     */

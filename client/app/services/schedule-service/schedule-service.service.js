@@ -27,6 +27,8 @@ angular.module('degreeCheckApp')
               {
                   "name": "My First Schedule",
                   "_id": "5461ec02daf60a0b007b691e",
+                  "blessed": false,
+                  "comments": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sem velit, dapibus in elit rhoncus, fringilla suscipit nibh. Donec quis ligula semper nulla ornare auctor. Sed ullamcorper in risus a mollis. Phasellus volutpat odio sed nulla auctor, et sagittis lectus iaculis.',
                   "semesters": [
                       {
                           "season": "Fall",
