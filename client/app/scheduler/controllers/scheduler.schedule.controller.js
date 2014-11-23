@@ -77,10 +77,9 @@ angular.module('degreeCheckApp')
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
 
-    $scope.addYear = function () {
-    	scheduleService.addSemester('Fall', 2018);
-      scheduleService.addSemester('Spring', 2019);
-      scheduleService.addSemester('Summer', 2019);
+    $scope.addYear = function (years) {
+      var year = years[years.length-1];
+      scheduleService.addYear(year);
     };
 
     $scope.checkInput = function (event, semesterId) {
