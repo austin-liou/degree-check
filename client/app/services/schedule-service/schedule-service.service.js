@@ -197,7 +197,7 @@ angular.module('degreeCheckApp')
     /*
         Adds a new schedule
     */
-    service.addSchedule = function (schedule) {
+    service.addSchedule = function (schedule, callback) {
         $http.get('/api/majors/' + schedule.major)
             .success(function (majorObj) {
                 var newSchedule = {};
@@ -205,7 +205,8 @@ angular.module('degreeCheckApp')
                 newSchedule.semesters = createSemesters();
                 newSchedule.major = [majorObj];
                 service.schedule.schedules.push(newSchedule);
-                service.saveSchedule();
+                service.saveSchedule()
+                callback();
             });
     };
 

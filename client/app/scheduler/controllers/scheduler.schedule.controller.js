@@ -31,7 +31,10 @@ angular.module('degreeCheckApp')
             { name: String, major: majorId }
         */
         modalInstance.result.then(function (schedule) {
-            scheduleService.addSchedule(schedule);
+            scheduleService.addSchedule(schedule, function() {
+                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
+                $scope.changeSchedule(schedule._id);
+            });
         });
     };
 
