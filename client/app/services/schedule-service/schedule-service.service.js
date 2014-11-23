@@ -205,8 +205,8 @@ angular.module('degreeCheckApp')
                 newSchedule.semesters = createSemesters();
                 newSchedule.major = [majorObj];
                 service.schedule.schedules.push(newSchedule);
+                service.saveSchedule();
             });
-         service.saveSchedule();
     };
 
     function createSemesters () {
@@ -259,7 +259,8 @@ angular.module('degreeCheckApp')
         for (var j = 0; j < serviceSchedule.schedules.length; j++) {
             var currentSchedule = serviceSchedule.schedules[j];
             for (var k = 0; k < currentSchedule.major.length; k++) {
-                currentSchedule.major[k] = currentSchedule.major[k]._id;
+                if (currentSchedule.major[k] !== null)
+                      currentSchedule.major[k] = currentSchedule.major[k]._id;
             }
             for (var l = 0; l < currentSchedule.semesters.length; l++) {
                 var currentSemester = currentSchedule.semesters[l];
@@ -270,6 +271,8 @@ angular.module('degreeCheckApp')
             }
             serviceSchedule.schedules[j] = currentSchedule;
         }
+
+        delete service.schedule['__v'];
 
         // Put user
         $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
