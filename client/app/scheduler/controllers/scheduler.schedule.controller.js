@@ -11,11 +11,11 @@ angular.module('degreeCheckApp')
     $scope.newClass = {};
 
 
-    // $http.get('/api/uid')
-    //   .success(function (uidObj){
-    //     scheduleService.initSchedule(uidObj.uid);
-    //   });
-    scheduleService.initSchedule('hi');
+    $http.get('/api/authentication/uid')
+       .success(function (uidObj){
+         scheduleService.initSchedule(uidObj.uid);
+       });
+    //scheduleService.initSchedule('hi');
     /*
         Modal Logic
     */

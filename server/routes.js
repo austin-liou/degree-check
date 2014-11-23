@@ -9,7 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/authentication', require('./api/authentication'));
+  app.use('/authentication', require('./api/authentication'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/schedules', require('./api/schedule'));
   app.use('/api/semesters', require('./api/semester'));
@@ -17,10 +17,10 @@ module.exports = function(app) {
   app.use('/api/majors', require('./api/major'));
   app.use('/api/requirements', require('./api/requirement'));
   app.use('/api/things', require('./api/thing'));
-  
+
   app.use('/scheduler', function (req, res) {
     if (!(req.session && req.session.uid)) {
-      res.redirect('../api/authentication/login');
+      res.redirect('../authentication/login');
     }
     else {
       res.sendfile(app.get('appPath') + '/index.html');
