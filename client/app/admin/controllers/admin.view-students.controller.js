@@ -1,18 +1,26 @@
 'use strict';
 
 angular.module('degreeCheckApp')
-  .controller('AdminViewStudentsCtrl', function ($scope, scheduleService, majorService, $modal) {
+  .controller('AdminViewStudentsCtrl', function ($scope, scheduleService, majorService, $modal, $http) {
     console.log('In AdminViewStudentsCtrl');
-
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
-    $scope.allCourses = majorService.allCourses.map(function (elem) { return elem.name; });
+    $scope.majorService.initMajorService(function (courses) {
+      $scope.allCourses = courses.map(function (elem) { return elem.name; });
+    });
     $scope.newClass = {};
 
+
+    // $http.get('/api/uid')
+    //   .success(function (uidObj){
+    //     scheduleService.initSchedule(uidObj.uid);
+    //   });
+
+  scheduleService.initSchedule('hi');
     /*
         Modal Logic
     */
-    $scope.addSchedule = function() {
+    $scope.addSchedule = function () {
         var modalInstance = $modal.open({
             templateUrl: 'scheduler.add-schedule.html',
             controller: 'SchedulerAddScheduleCtrl',
@@ -24,22 +32,34 @@ angular.module('degreeCheckApp')
             { name: String, major: majorId }
         */
         modalInstance.result.then(function (schedule) {
-            // Add scheduleService logic to create schedule here
+            scheduleService.addSchedule(schedule);
         });
     };
+
+    $scope.deleteSchedule = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'scheduler.delete-schedule.html',
+            controller: 'SchedulerDeleteScheduleCtrl',
+            size: 'sm'
+        });
+    };
+
+    $scope.changeSchedule = function (scheduleId) {
+      scheduleService.changeSchedule(scheduleId);
+    }
 
     /*
         Schedule Logic
     */
     $scope.removeCourse = function (semesterId, courseName) {
-    	scheduleService.removeCourse(semesterId, courseName);
+      scheduleService.removeCourse(semesterId, courseName);
     };
 
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
 
     $scope.addYear = function () {
-    	scheduleService.addSemester('Fall', 2018);
+      scheduleService.addSemester('Fall', 2018);
       scheduleService.addSemester('Spring', 2019);
       scheduleService.addSemester('Summer', 2019);
     };
@@ -48,10 +68,11 @@ angular.module('degreeCheckApp')
       // Check if enter
       if (event.keyCode === 13) {
           // Check if valid course
-          if ($scope.allCourses.indexOf($scope.newClass[semesterId]) > -1) {
-              scheduleService.addCourse(semesterId, { name: $scope.newClass[semesterId],
-                                                      units: majorService.allCoursesHash[$scope.newClass[semesterId]]});
-              $scope.newClass[semesterId] = '';
+          var index = $scope.allCourses.indexOf($scope.newClass[semesterId]);
+          if (index > -1) {
+            var courseObj = majorService.allCourses[index];
+            scheduleService.addCourse(semesterId, courseObj);
+            $scope.newClass[semesterId] = '';
           }
       }
     };
@@ -59,4 +80,5 @@ angular.module('degreeCheckApp')
     $scope.saveSchedule = function () {
       scheduleService.saveSchedule();
     };
+
   });

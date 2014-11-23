@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
 
 var ScheduleSchema = new Schema({
   name: String,
+  comments: { type: String, default: '' },
+  blessed: { type: Boolean, default: false },
   major: [{ type: Schema.Types.ObjectId, ref: 'Major' }],
   semesters: [Semester.schema]
 });
