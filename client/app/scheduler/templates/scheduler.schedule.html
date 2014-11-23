@@ -75,7 +75,8 @@
 	</ul>
 	<h1>{{ scheduleService.currSchedule.name }}</h1>
 	<div align="right">
-		<button class="fa fa-plus" ng-click=""> Add Year</button>
+		<button class="fa fa-plus" ng-click="addYear(scheduleService.yearsProcessed)"> Add Year</button>
+		<button class="fa fa-minus" ng-click="deleteYear(scheduleService.yearsProcessed)"> Delete Year</button>
 	</div>
 	<div class="schedule-actions">
 		<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>

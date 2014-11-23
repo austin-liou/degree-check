@@ -149,41 +149,17 @@ angular.module('degreeCheckApp')
         var springSemester = { season: "Spring", year: (parseInt(year.endYear)+1).toString(), courses: [] };
         var summerSemester = { season: "Summer", year: (parseInt(year.endYear)+1).toString(), courses: [] };
 
-        unprocessYears();
-
-        var serviceSchedule = jQuery.extend(true, {}, service.schedule); // deep copy of service.schedule
-        /*
-            Replaces all course and major objects in the User object with the object IDs.
-            This is in the deep copy, not the original
-        */
-        for (var i = 0; i < serviceSchedule.prev_coursework.length; i++) {
-            serviceSchedule.prev_coursework[i] = serviceSchedule.prev_coursework[i]._id;
-        }
-        for (var j = 0; j < serviceSchedule.schedules.length; j++) {
-            var currentSchedule = serviceSchedule.schedules[j];
-            for (var k = 0; k < currentSchedule.major.length; k++) {
-                if (currentSchedule.major[k] !== null)
-                      currentSchedule.major[k] = currentSchedule.major[k]._id;
-            }
-            for (var l = 0; l < currentSchedule.semesters.length; l++) {
-                var currentSemester = currentSchedule.semesters[l];
-                for (var m = 0; m < currentSemester.courses.length; m++) {
-                    currentSemester.courses[m] = currentSemester.courses[m]._id;
-                }
-                currentSchedule.semesters[l] = currentSemester;
-            }
-            serviceSchedule.schedules[j] = currentSchedule;
-        }
-
         service.currSchedule.semesters.push(fallSemester);
         service.currSchedule.semesters.push(springSemester);
         service.currSchedule.semesters.push(summerSemester);
         processYears(service.currSchedule);
-        delete service.schedule['__v'];
+    };
 
-        $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
-          .success(function(data) {
-          });
+    service.deleteYear = function () {
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        processYears(service.currSchedule);
     };
 
     /*

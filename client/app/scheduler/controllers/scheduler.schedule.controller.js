@@ -82,6 +82,10 @@ angular.module('degreeCheckApp')
       scheduleService.addYear(year);
     };
 
+    $scope.deleteYear = function () {
+      scheduleService.deleteYear();
+    };
+
     $scope.checkInput = function (event, semesterId) {
       // Check if enter
       if (event.keyCode === 13) {
