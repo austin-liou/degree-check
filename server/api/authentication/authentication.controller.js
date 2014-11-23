@@ -74,6 +74,51 @@ exports.login = function(req, res) {
                             'season': 'Summer',
                             'year': 2015,
                             'courses': []
+                          },
+                          {
+                            'season': 'Fall',
+                            'year': 2015,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Spring',
+                            'year': 2016,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Summer',
+                            'year': 2016,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Fall',
+                            'year': 2016,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Spring',
+                            'year': 2017,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Summer',
+                            'year': 2017,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Fall',
+                            'year': 2017,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Spring',
+                            'year': 2018,
+                            'courses': []
+                          },
+                          {
+                            'season': 'Summer',
+                            'year': 2018,
+                            'courses': []
                           }
                         ]
                       }];
