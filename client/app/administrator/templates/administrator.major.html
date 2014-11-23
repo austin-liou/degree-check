@@ -26,26 +26,29 @@
                     <input type="radio" ng-model="requirement.type" name="requirement_type" value="courses">courses
                 </div>
                 <div id="quantity-div">
-                    <span class="requirement_field">Number of <span id="requirement_type">{{requirement.type}}</span></span>
+                    <span class="requirement_field">Number of <span
+                            id="requirement_type">{{requirement.type}}</span></span>
                     <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
                 </div>
+
                 <div id="courses-div">
                     <span class="requirement_field">Courses that fulfill this requirement</span><br>
                     <ul class="classes">
-                        <li ng-repeat="class in requirement.courses">
-                            <span type="text">{{ class.name }}</span>
-                            <button class="remove-class fa fa-times"
-                                    ng-click="rmCourse(class)">
+                        <li ng-repeat="course in requirement.courses">
+                            <span type="text">{{ course.name }}</span>
+
+                            <button type="button" class="remove-class fa fa-times"
+                                    ng-click="rmCourse(course)">
                             </button>
                         </li>
                     </ul>
                 </div>
-                    <div class="add-class-container">
-                        <input type="text"
-                               placeholder="Add Class"
-                               ng-model="newClass"
-                               ng-keyup="check($event)">
-                    </div>
+                <div class="add-class-container">
+                    <input type="text"
+                           placeholder="Add Class"
+                           ng-model="newClass"
+                           ng-keyup="check($event)">
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -53,10 +56,32 @@
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+    <script type="text/ng-template" id="administrator.major.edit-course.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Create a Course</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div id="coursename-div">
+                    <span class="requirement_field">Course Name</span>
+                    <input ng-model="course.name" id="course_name" type="text">
+                </div>
+                <div id="units-div">
+                    <span class="requirement_field">Units</span>
+                    <input ng-model="course.units" id="course_units" type="number">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="addCourse()">Save</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 </head>
 <body>
 <div class="major-div" ng-repeat="major in majorService.fullAllMajors">
     <span type="text">{{ major.name }}</span><br>
+
     <div class="requirement-div" ng-repeat="req in major.requirements">
         <span type="text">{{ req.name }}</span>
         <button class="edit-requirement" ng-click="editRequirement(major,req)">
@@ -67,6 +92,15 @@
     </div>
     <button class="add-requirement" ng-click="addRequirement(major)">
         Add Requirement
+    </button>
+</div>
+<div class="course-div" ng-repeat="course in majorService.allCourses">
+    <span type="text">{{course.name}}</span>
+    <button class="edit-course" ng-click="editCourse(course)">Edit</button>
+</div>
+<div>
+    <button class="add-course" ng-click="addCourse()">
+        Add Course
     </button>
 </div>
 </body>

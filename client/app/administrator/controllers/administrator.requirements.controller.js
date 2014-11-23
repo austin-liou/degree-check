@@ -14,7 +14,7 @@ angular.module('degreeCheckApp')
 
         $scope.deleteRequirement = function(major,req_id){
             majorService.deleteRequirement(major,req_id);
-        }
+        };
 
         $scope.addRequirement = function(major){
             $scope.majorService.asdf = major;
@@ -24,14 +24,31 @@ angular.module('degreeCheckApp')
                 controller: 'AdminAddRequirementsCtrl',
                 size: 'sm'
             });
-        },
+        };
         $scope.editRequirement = function(major, requirement){
             $scope.majorService.asdf = major;
-            $scope.majorService.req = angular.copy(requirement);
+            $scope.majorService.requirement = angular.copy(requirement);
             console.log($scope.majorService.fullAllMajors);
             var modalInstance = $modal.open({
                 templateUrl: 'administrator.major.edit-requirement.html',
                 controller: 'AdminEditRequirementsCtrl',
+                size: 'sm'
+            });
+        };
+
+        $scope.addCourse = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'administrator.major.edit-course.html',
+                controller: 'AdminAddCourseCtrl',
+                size: 'sm'
+            });
+        };
+
+        $scope.editCourse = function(course){
+            $scope.majorService.course = angular.copy(course);
+            var modalInstance = $modal.open({
+                templateUrl: 'administrator.major.edit-course.html',
+                controller: 'AdminEditCourseCtrl',
                 size: 'sm'
             });
         }

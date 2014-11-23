@@ -6,7 +6,7 @@ angular.module('degreeCheckApp')
         function allCoursesCallback (courses) {
             $scope.allCourses = courses.map(function (elem) { return elem.name; });
             $scope.allCourseIds = courses.map(function (elem) { return elem._id; });
-            $scope.requirement = majorService.req;
+            $scope.requirement = majorService.requirement;
         };
         $scope.majorService.initMajorService(allCoursesCallback);
         $scope.newClass = '';
@@ -19,23 +19,19 @@ angular.module('degreeCheckApp')
             console.log("enter checkinput");
             if (event.keyCode === 13) {
                 // Check if valid course
-                console.log("Before");
-                //console.log($scope.courses);
                 console.log($scope.requirement.courses);
                 var index = $scope.allCourses.indexOf($scope.newClass);
                 if (index > -1) {
                     var course = majorService.allCourses[index];
-                    //$scope.courses.push(course);
                     $scope.requirement.courses.push(course);
-                    console.log("After");
-                    //console.log($scope.courses);
-                    console.log($scope.requirement.courses);
                     $scope.newClass = '';
                 }
             }
         };
         $scope.rmCourse = function (course) {
             console.log(course);
+            console.log(event);
+
             var course_id = course._id;
             console.log("Why are you here?");
             for( var i = 0; i<$scope.requirement.courses.length; i++){
