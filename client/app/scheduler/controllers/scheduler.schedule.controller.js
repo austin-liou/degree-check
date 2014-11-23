@@ -16,6 +16,23 @@ angular.module('degreeCheckApp')
     //     scheduleService.initSchedule(uidObj.uid);
     //   });
     scheduleService.initSchedule('hi');
+
+
+    $scope.editPrevCoursework = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'scheduler.edit-prev-coursework.html',
+            controller: 'SchedulerEditPrevCourseworkCtrl',
+            size: 'sm'
+        });
+
+        modalInstance.result.then(function (schedule) {
+            scheduleService.addSchedule(schedule, function() {
+                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
+                $scope.changeSchedule(schedule._id);
+            });
+        });
+    };
+
     /*
         Modal Logic
     */
