@@ -22,7 +22,7 @@ exports.login = function(req, res) {
       res.redirect('https://auth.berkeley.edu/cas/login?service=https://degree-checker.herokuapp.com/authentication/login');
     }
     else { // found user in session
-      res.redirect('../../scheduler');
+      res.redirect('../../admin');
     }
   }
   else {
@@ -128,7 +128,7 @@ exports.login = function(req, res) {
                           console.log(err);
                         }
                         req.session.uid = uid; // set session uid
-                        res.redirect('../../scheduler');
+                        res.redirect('../../admin');
                       });
                     });
                   });
@@ -136,7 +136,7 @@ exports.login = function(req, res) {
               }
               else { // user found
                 req.session.uid = uid; // set session uid
-                res.redirect('../../scheduler');
+                res.redirect('../../admin');
               }
             });
           }
@@ -152,7 +152,7 @@ exports.login = function(req, res) {
 // Logout
 exports.logout = function (req, res) {
   req.session = null; // Clear the session cookie
-  res.redirect('https://auth.berkeley.edu/cas/logout?url=https://degree-checker.herokuapp.com') // CAS logout
+  res.redirect('https://auth.berkeley.edu/cas/logout?url=https://degree-checker.herokuapp.com'); // CAS logout
 };
 
 // Get list of UIDs
