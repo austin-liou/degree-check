@@ -5,18 +5,30 @@ angular.module('degreeCheckApp')
     console.log('SchedulerScheduleCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
-    function allCoursesCallback (courses) {
+    $scope.majorService.initMajorService(function (courses) {
       $scope.allCourses = courses.map(function (elem) { return elem.name; });
-    };
-    $scope.majorService.initMajorService(allCoursesCallback);
+    });
     $scope.newClass = {};
 
+    $http.get('/authentication/uid')
+       .success(function (uidObj){
+         scheduleService.initSchedule(uidObj.uid);
+       });
+    //scheduleService.initSchedule('hi');
+    $scope.editPrevCoursework = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'scheduler.edit-prev-coursework.html',
+            controller: 'SchedulerEditPrevCourseworkCtrl',
+            size: 'sm'
+        });
 
-    $http.get('/api/uid')
-      .success(function (uidObj){
-        scheduleService.initSchedule(uidObj.uid);
-      });
-
+        modalInstance.result.then(function (schedule) {
+            scheduleService.addSchedule(schedule, function() {
+                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
+                $scope.changeSchedule(schedule._id);
+            });
+        });
+    };
     /*
         Modal Logic
     */
@@ -32,7 +44,10 @@ angular.module('degreeCheckApp')
             { name: String, major: majorId }
         */
         modalInstance.result.then(function (schedule) {
-            // Add scheduleService logic to create schedule here
+            scheduleService.addSchedule(schedule, function() {
+                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
+                $scope.changeSchedule(schedule._id);
+            });
         });
     };
 
@@ -58,10 +73,13 @@ angular.module('degreeCheckApp')
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
 
-    $scope.addYear = function () {
-    	scheduleService.addSemester('Fall', 2018);
-      scheduleService.addSemester('Spring', 2019);
-      scheduleService.addSemester('Summer', 2019);
+    $scope.addYear = function (years) {
+      var year = years[years.length-1];
+      scheduleService.addYear(year);
+    };
+
+    $scope.deleteYear = function () {
+      scheduleService.deleteYear();
     };
 
     $scope.checkInput = function (event, semesterId) {

@@ -1,3 +1,27 @@
+<script type="text/ng-template" id="scheduler.edit-prev-coursework.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Previous Coursework</h3>
+	</div>
+	<div class="modal-body">
+		<ul class="classes">
+			<li ng-repeat="class in semester.courses">
+				<span type="text">{{ class.name }}</span>
+				<button class="remove-class fa fa-times" ng-click="removeCourse(semester._id, class.name)"></button>
+			</li>
+		</ul>
+		<div class="add-class-container">
+			<input type="text"
+			placeholder="Add Class"
+			ng-model="newClass[semester._id]"
+			ng-keyup="checkInput($event, semester._id)">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="save()">Save</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+
 <script type="text/ng-template" id="scheduler.add-schedule.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Create a Schedule</h3>
@@ -12,7 +36,7 @@
 					<label for="schedule-major">Major</label>
 					<select name="schedule-major"
 					ng-model="newScheduleMajor">
-					<option ng-repeat="major in majorService.allMajors" value="{{major.id}}">{{major.name}}</option>
+					<option ng-repeat="major in majorService.allMajors" value="{{major._id}}">{{major.name}}</option>
 				</select>
 			</div>
 		</form>
@@ -35,6 +59,12 @@
 		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 	</div>
 </script>
+<span ng-show="{{scheduleService.currSchedule.blessed}}" class="verified">Blessed</span>
+<span ng-show="{{!scheduleService.currSchedule.blessed}}" class="not-verified">Not Blessed</span>
+<p class="comments">
+	{{scheduleService.currSchedule.comments}}
+</p>
+
 
 <div class="plan-header">
 	<ul class="schedules">
@@ -44,9 +74,13 @@
 		</li>
 	</ul>
 	<h1>{{ scheduleService.currSchedule.name }}</h1>
+	<div align="right">
+		<button class="fa fa-plus" ng-click="addYear(scheduleService.yearsProcessed)"> Add Year</button>
+		<button class="fa fa-minus" ng-click="deleteYear(scheduleService.yearsProcessed)"> Delete Year</button>
+	</div>
 	<div class="schedule-actions">
 		<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
-		<button class="fa fa-cog"></button>
+		<button class="fa fa-cog" ng-click="editPrevCoursework()"></button>
 		<button class="fa fa-trash" ng-click="deleteSchedule()"></button>
 		<button class="fa fa-plus" ng-click="addSchedule()"></button>
 	</div>

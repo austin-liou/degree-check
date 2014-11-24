@@ -35,7 +35,6 @@ angular.module('degreeCheckApp')
             service.emptyTracker[requirement._id] = [];
             for (var j = 0; j < requirement.courses.length; j++) {
                 var course = requirement.courses[j];
-                console.log(course);
                 if (!service.coursesMap[course._id]) {
                     service.coursesMap[course._id] = {'requirement': [], 'units': course.units};
                 }
@@ -58,18 +57,18 @@ angular.module('degreeCheckApp')
                         for (var l in service.requirementMap[req_id].exclusives) {
                             var exclusive = service.requirementMap[req_id].exclusives[l];
                             var exists = false;
-                            for(var x in exclusives){
-                                if(exclusives[x] == exclusive){
-                                    exists = true;
-                                    break;
-                                }
-                            }
-                            if(!exists){
-                                exclusives.push(exclusive);
-                            }
-                            for(x = reqTemp.length - 1; x>=0; x--){
+                            for(var x = reqTemp.length - 1; x>=0; x--){
                                 if(reqTemp[x] == exclusive){
                                     reqTemp.splice(x,1);
+                                    for(var y in exclusives){
+                                        if(exclusives[y] == exclusive){
+                                            exists = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!exists){
+                                        exclusives.push(exclusive);
+                                    }
                                 }
                             }
 
@@ -237,13 +236,13 @@ angular.module('degreeCheckApp')
       Sets all requirements to unsatisfied
     */
     function clearUserReq () {
-      var requirement;
+      /**var requirement;
       for (var i = 0, len = service.currSchedule.major[0].requirements.length; i < len; i++) {
            requirement = service.currSchedule.major[0].requirements[i];
            for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
               requirement.courses[j].satisfied = false;
            }
-      }
+      }**/
     };
 
     /*
@@ -263,18 +262,21 @@ angular.module('degreeCheckApp')
       aliou - assuming semesters are in correct order (first to last)
     */
     function processYears (scheduleObj) {
-      var id = 1; // TODO assign IDs corectly
-      var semesters = scheduleObj.semesters;
-      var startYear = semesters[0].year;
-      var endYear = semesters[semesters.length - 1].year;
-      return [
-        {
+      var years = [];
+      for(var i=0; i < scheduleObj.semesters.length; i+=3) {
+        var id = scheduleObj.semesters[i]._id;
+        var startYear = scheduleObj.semesters[i].year;
+        var endYear = scheduleObj.semesters[i+1].year;
+        var semesters = [scheduleObj.semesters[i],scheduleObj.semesters[i+1],scheduleObj.semesters[i+2]];
+        years.push({
           '_id': id,
           'startYear': startYear,
           'endYear': endYear,
           'semesters': semesters
-        }
-      ];
+        });
+      }
+      service.yearsProcessed = years;
+      return years;
     };
 
     /*
@@ -299,9 +301,22 @@ angular.module('degreeCheckApp')
         }
     };
 
-    service.addSemester = function (season, year) {
-        var newSemester = { season: season, year: year, courses: [] };
-        service.schedule.semesters.push(newSemester);
+    service.addYear = function (year) {
+        var fallSemester = { season: "Fall", year: year.endYear, courses: [] };
+        var springSemester = { season: "Spring", year: (parseInt(year.endYear)+1).toString(), courses: [] };
+        var summerSemester = { season: "Summer", year: (parseInt(year.endYear)+1).toString(), courses: [] };
+
+        service.currSchedule.semesters.push(fallSemester);
+        service.currSchedule.semesters.push(springSemester);
+        service.currSchedule.semesters.push(summerSemester);
+        processYears(service.currSchedule);
+    };
+
+    service.deleteYear = function () {
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        processYears(service.currSchedule);
     };
 
     /*
@@ -345,7 +360,7 @@ angular.module('degreeCheckApp')
         if (service.schedule.schedules[i]._id === scheduleId) {
           service.currSchedule = service.schedule.schedules[i];
           service.yearsProcessed = service.yearsProcessed2;
-          // service.yearsProcessed = processYears(service.currSchedule);
+          service.yearsProcessed = processYears(service.currSchedule);
           setupSchedule(service.currSchedule);
           return;
         }
@@ -354,20 +369,39 @@ angular.module('degreeCheckApp')
 
     /*
         Adds a new schedule
-        scheduleObj: { name : String,
-                       major: [ Major._id ],
-                       semesters: [ { season: String,
-                                      year: Number,
-                                      courses: [] } ]
-                      }
     */
-    service.addSchedule = function (scheduleObj) {
-        $http.put('/api/users/' + service.schedule.uid)
-            .success(function () {
-                createLocalSchedule(scheduleObj);
+    service.addSchedule = function (schedule, callback) {
+        $http.get('/api/majors/' + schedule.major)
+            .success(function (majorObj) {
+                var newSchedule = {};
+                newSchedule.name = schedule.name;
+                newSchedule.semesters = createSemesters();
+                newSchedule.major = [majorObj];
+                service.schedule.schedules.push(newSchedule);
+                service.saveSchedule()
+                callback();
             });
     };
 
+    function createSemesters () {
+        return [
+                 {
+                      "season": "Fall",
+                      "year": "2014",
+                      "courses": []
+                  },
+                  {
+                      "season": "Spring",
+                      "year": "2015",
+                      "courses": []
+                  },
+                  {
+                      "season": "Summer",
+                      "year": "2015",
+                      "courses": []
+                  }
+                ];
+    }
     /*
         Adds newly added/removed courses from years processed to the original service.schedule object
     */
@@ -399,7 +433,8 @@ angular.module('degreeCheckApp')
         for (var j = 0; j < serviceSchedule.schedules.length; j++) {
             var currentSchedule = serviceSchedule.schedules[j];
             for (var k = 0; k < currentSchedule.major.length; k++) {
-                currentSchedule.major[k] = currentSchedule.major[k]._id;
+                if (currentSchedule.major[k] !== null)
+                      currentSchedule.major[k] = currentSchedule.major[k]._id;
             }
             for (var l = 0; l < currentSchedule.semesters.length; l++) {
                 var currentSemester = currentSchedule.semesters[l];
@@ -411,10 +446,12 @@ angular.module('degreeCheckApp')
             serviceSchedule.schedules[j] = currentSchedule;
         }
 
+        delete service.schedule['__v'];
+
         // Put user
         $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
-          .success(function() {
-            // something in here after putting? don't know yet
+          .success(function(data) {
+            service.schedule.schedules = data.schedules;
           });
     };
 

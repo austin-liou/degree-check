@@ -50,7 +50,7 @@ angular.module('degreeCheckApp')
         }
       })
       .state('admin.view', {
-        url: '/view',
+        url: '/view/:uid',
         controller: 'AdminViewStudentsCtrl',
         templateUrl: 'app/admin/templates/admin.view.html',
         views: {
