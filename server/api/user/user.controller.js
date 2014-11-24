@@ -46,8 +46,18 @@ exports.update = function(req, res) {
         return b;
     });
     updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, user);
+        User.findOne({uid: req.params.uid}).populate('prev_coursework').exec(function (err, user) {
+            if(err) { return handleError(res, err); }
+            if(!user) { return res.send(404); }
+            var opts = [{path: 'schedules.major', model: 'Major'},
+                {path: 'schedules.semesters.courses', model: 'Course'}];
+            User.populate(user, opts, function (err, user) {
+                var opts = [{path: 'schedules.major.requirements.courses', model: 'Course'}];
+                User.populate(user, opts, function(err, user) {
+                    return res.json(user);
+                });
+            });
+        });
     });
   });
 };

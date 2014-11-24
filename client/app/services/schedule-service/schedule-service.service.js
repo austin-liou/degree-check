@@ -353,6 +353,7 @@ angular.module('degreeCheckApp')
                     service.currSchedule = service.schedule.schedules[0];
                     service.yearsProcessed = processYears(service.currSchedule);
                     setupSchedule(service.currSchedule);
+                    service.saveSchedule();
                     return;
                 }
             }
