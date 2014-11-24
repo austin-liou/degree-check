@@ -10,12 +10,14 @@ angular.module('degreeCheckApp')
         service.requirementMap = {};
         service.coursesMap = {};
         service.tracker = {};
+        service.currScheduleIndex = 0;
 
         service.initSchedule = function (uid) {
             $http.get('/api/users/' + "1")
                 .success(function (bigJson) {
                     service.schedule = bigJson;
                     service.currSchedule = service.schedule.schedules[0];
+                    service.currScheduleIndex = 0;
                     service.yearsProcessed = processYears(service.currSchedule);
                     setupSchedule(service.schedule.schedules[0]);
                 });
@@ -314,6 +316,10 @@ angular.module('degreeCheckApp')
             service.currSchedule.semesters.push(springSemester);
             service.currSchedule.semesters.push(summerSemester);
             processYears(service.currSchedule);
+            debugger
+            service.saveSchedule().then(function(){
+                processYears(service.currSchedule);
+            });
         };
 
         service.deleteYear = function () {
@@ -351,6 +357,7 @@ angular.module('degreeCheckApp')
                     service.schedule.schedules.splice(i, 1);
                     service.yearsProcessed = [];
                     service.currSchedule = service.schedule.schedules[0];
+                    service.currScheduleIndex = 0;
                     service.yearsProcessed = processYears(service.currSchedule);
                     setupSchedule(service.currSchedule);
                     service.saveSchedule();
@@ -363,6 +370,7 @@ angular.module('degreeCheckApp')
             // TODO: Process years function
             for (var i = 0, len = service.schedule.schedules.length; i < len; i++) {
                 if (service.schedule.schedules[i]._id === scheduleId) {
+                    service.currScheduleIndex = i;
                     service.currSchedule = service.schedule.schedules[i];
                     service.yearsProcessed = service.yearsProcessed2;
                     service.yearsProcessed = processYears(service.currSchedule);
@@ -418,6 +426,7 @@ angular.module('degreeCheckApp')
                 year = service.yearsProcessed[i];
                 service.currSchedule.semesters = service.currSchedule.semesters.concat(year.semesters);
             }
+            service.schedule.schedules[service.currScheduleIndex]=service.currSchedule;
         }
 
         /*
@@ -429,7 +438,6 @@ angular.module('degreeCheckApp')
             unprocessYears();
 
             var serviceSchedule = jQuery.extend(true, {}, service.schedule); // deep copy of service.schedule
-            debugger
             /*
              Replaces all course and major objects in the User object with the object IDs.
              This is in the deep copy, not the original
@@ -455,12 +463,14 @@ angular.module('degreeCheckApp')
 
             delete service.schedule['__v'];
 
-            debugger
 
             // Put user
-            $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
+            return $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
                 .success(function (data) {
                     service.schedule.schedules = data.schedules;
+                    service.currSchedule = service.schedule.schedules[service.currScheduleIndex];
+                    setupSchedule(service.currSchedule);
+
                 });
         };
 
