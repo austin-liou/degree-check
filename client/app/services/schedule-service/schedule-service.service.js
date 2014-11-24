@@ -16,314 +16,6 @@ angular.module('degreeCheckApp')
           service.yearsProcessed = processYears(service.currSchedule);
           setupSchedule(service.schedule.schedules[0]);
         });
-      // service.schedule = {
-      //     "uid": "996198",
-      //     "name": "Austin Liou",
-      //     "email": "austin.liou@berkeley.edu",
-      //     "_id": "5461ec02daf60a0b007b691e2daf60a0b007b691d",
-      //     "__v": 0,
-      //     "prev_coursework": [],
-      //     "schedules": [
-      //         {
-      //             "name": "My First Schedule",
-      //             "_id": "5461ec02daf60a0b007b691e",
-      //             "blessed": false,
-      //             "comments": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sem velit, dapibus in elit rhoncus, fringilla suscipit nibh. Donec quis ligula semper nulla ornare auctor. Sed ullamcorper in risus a mollis. Phasellus volutpat odio sed nulla auctor, et sagittis lectus iaculis.',
-      //             "semesters": [
-      //                 {
-      //                     "season": "Fall",
-      //                     "year": "2014",
-      //                     "_id": "5461ec02daf60a0b007b6921",
-      //                     "courses": []
-      //                 },
-      //                 {
-      //                     "season": "Spring",
-      //                     "year": "2015",
-      //                     "_id": "5461ec02daf60a0b007b6920",
-      //                     "courses": []
-      //                 },
-      //                 {
-      //                     "season": "Summer",
-      //                     "year": "2015",
-      //                     "_id": "5461ec02daf60a0b007b691f",
-      //                     "courses": []
-      //                 }
-      //             ],
-      //             "major": [
-      //                 {
-      //                     "name": "EECS",
-      //                     "_id": "5461ab37665fee02008eb976",
-      //                     "__v": 0,
-      //                     "requirements": [
-      //                         {
-      //                             "name": "Math 1A",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb985",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "MATH 1A",
-      //                                     "units": 4,
-      //                                     "_id": "5461a572665fee02008eb970",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Math 1B",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb984",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "MATH 1B",
-      //                                     "units": 4,
-      //                                     "_id": "5461a577665fee02008eb971",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Math 53",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb983",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "MATH 53",
-      //                                     "units": 4,
-      //                                     "_id": "5461a57c665fee02008eb972",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Math 54",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb982",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "MATH 54",
-      //                                     "units": 4,
-      //                                     "_id": "5461a57f665fee02008eb973",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "CS 70",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb981",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "CS 70",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1b5665fee02008eb958",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Physics 7A",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb980",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "PHYSICS 7A",
-      //                                     "units": 4,
-      //                                     "_id": "5461a608665fee02008eb974",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Physics 7B",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97f",
-      //                             "courses": []
-      //                         },
-      //                         {
-      //                             "name": "EE20",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97e",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "EE 20",
-      //                                     "units": 4,
-      //                                     "_id": "5461a2c8665fee02008eb966",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "EE40",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97d",
-      //                             "courses": []
-      //                         },
-      //                         {
-      //                             "name": "CS61A",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97c",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "CS 61A",
-      //                                     "units": 4,
-      //                                     "_id": "5461a194665fee02008eb955",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "CS61B",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97b",
-      //                             "courses": []
-      //                         },
-      //                         {
-      //                             "name": "CS61C",
-      //                             "division": "Lower Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb97a",
-      //                             "courses": []
-      //                         },
-      //                         {
-      //                             "name": "EECS",
-      //                             "division": "Upper Division",
-      //                             "type": "units",
-      //                             "_id": "5461ab37665fee02008eb979",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "CS 160",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1bc665fee02008eb959",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS 161",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1c0665fee02008eb95a",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS 174",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1db665fee02008eb960",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "EE 105",
-      //                                     "units": 4,
-      //                                     "_id": "5461a2d6665fee02008eb968",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Engineering Courses",
-      //                             "division": "Upper Division",
-      //                             "type": "units",
-      //                             "_id": "5461ab37665fee02008eb978",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "CS160",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1bc665fee02008eb959",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS161",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1c0665fee02008eb95a",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS174",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1db665fee02008eb960",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "EE105",
-      //                                     "units": 4,
-      //                                     "_id": "5461a2d6665fee02008eb968",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         },
-      //                         {
-      //                             "name": "Design Requirement",
-      //                             "division": "Upper Division",
-      //                             "type": "courses",
-      //                             "_id": "5461ab37665fee02008eb977",
-      //                             "courses": [
-      //                                 {
-      //                                     "name": "EE125",
-      //                                     "units": 4,
-      //                                     "_id": "5461a2e2665fee02008eb96a",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "EE140",
-      //                                     "units": 4,
-      //                                     "_id": "5461a2f0665fee02008eb96d",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS160",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1bc665fee02008eb959",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS162",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1c7665fee02008eb95b",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS164",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1cb665fee02008eb95c",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS169",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1cf665fee02008eb95d",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS184",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1e1665fee02008eb961",
-      //                                     "__v": 0
-      //                                 },
-      //                                 {
-      //                                     "name": "CS186",
-      //                                     "units": 4,
-      //                                     "_id": "5461a1e6665fee02008eb962",
-      //                                     "__v": 0
-      //                                 }
-      //                             ]
-      //                         }
-      //                     ]
-      //                 }
-      //             ]
-      //         }]
-      // };
-      // service.currSchedule = service.schedule.schedules[0];
-      // service.yearsProcessed = processYears(service.currSchedule);
-      // // TODO: service.requirementsProcessed = processRequirements(service.currSchedule.major[0].requirements);
-      // setupSchedule(service.schedule.schedules[0]);
     };
 
     /*
@@ -388,13 +80,13 @@ angular.module('degreeCheckApp')
       Sets all requirements to unsatisfied
     */
     function clearUserReq () {
-      var requirement;
+      /**var requirement;
       for (var i = 0, len = service.currSchedule.major[0].requirements.length; i < len; i++) {
            requirement = service.currSchedule.major[0].requirements[i];
            for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
               requirement.courses[j].satisfied = false;
            }
-      }
+      }**/
     };
 
     /*
@@ -414,18 +106,21 @@ angular.module('degreeCheckApp')
       aliou - assuming semesters are in correct order (first to last)
     */
     function processYears (scheduleObj) {
-      var id = 1; // TODO assign IDs corectly
-      var semesters = scheduleObj.semesters;
-      var startYear = semesters[0].year;
-      var endYear = semesters[semesters.length - 1].year;
-      return [
-        {
+      var years = [];
+      for(var i=0; i < scheduleObj.semesters.length; i+=3) {
+        var id = scheduleObj.semesters[i]._id;
+        var startYear = scheduleObj.semesters[i].year;
+        var endYear = scheduleObj.semesters[i+1].year;
+        var semesters = [scheduleObj.semesters[i],scheduleObj.semesters[i+1],scheduleObj.semesters[i+2]];
+        years.push({
           '_id': id,
           'startYear': startYear,
           'endYear': endYear,
           'semesters': semesters
-        }
-      ];
+        });
+      }
+      service.yearsProcessed = years;
+      return years;
     };
 
     /*
@@ -449,9 +144,22 @@ angular.module('degreeCheckApp')
         }
     };
 
-    service.addSemester = function (season, year) {
-        var newSemester = { season: season, year: year, courses: [] };
-        service.schedule.semesters.push(newSemester);
+    service.addYear = function (year) {
+        var fallSemester = { season: "Fall", year: year.endYear, courses: [] };
+        var springSemester = { season: "Spring", year: (parseInt(year.endYear)+1).toString(), courses: [] };
+        var summerSemester = { season: "Summer", year: (parseInt(year.endYear)+1).toString(), courses: [] };
+
+        service.currSchedule.semesters.push(fallSemester);
+        service.currSchedule.semesters.push(springSemester);
+        service.currSchedule.semesters.push(summerSemester);
+        processYears(service.currSchedule);
+    };
+
+    service.deleteYear = function () {
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        service.currSchedule.semesters.pop();
+        processYears(service.currSchedule);
     };
 
     /*
@@ -505,7 +213,7 @@ angular.module('degreeCheckApp')
     /*
         Adds a new schedule
     */
-    service.addSchedule = function (schedule) {
+    service.addSchedule = function (schedule, callback) {
         $http.get('/api/majors/' + schedule.major)
             .success(function (majorObj) {
                 var newSchedule = {};
@@ -513,278 +221,9 @@ angular.module('degreeCheckApp')
                 newSchedule.semesters = createSemesters();
                 newSchedule.major = [majorObj];
                 service.schedule.schedules.push(newSchedule);
+                service.saveSchedule()
+                callback();
             });
-        // var stubMajor = {
-        //                   "name": "EECS",
-        //                   "_id": "5461ab37665fee02008eb976",
-        //                   "__v": 0,
-        //                   "requirements": [
-        //                       {
-        //                           "name": "Math 1A",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb985",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "MATH1A",
-        //                                   "units": 4,
-        //                                   "_id": "5461a572665fee02008eb970",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Math 1B",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb984",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "MATH1B",
-        //                                   "units": 4,
-        //                                   "_id": "5461a577665fee02008eb971",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Math 53",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb983",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "MATH53",
-        //                                   "units": 4,
-        //                                   "_id": "5461a57c665fee02008eb972",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Math 54",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb982",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "MATH54",
-        //                                   "units": 4,
-        //                                   "_id": "5461a57f665fee02008eb973",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "CS 70",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb981",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "CS70",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1b5665fee02008eb958",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Physics 7A",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb980",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "PHYSICS 7A",
-        //                                   "units": 4,
-        //                                   "_id": "5461a608665fee02008eb974",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Physics 7B",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97f",
-        //                           "courses": []
-        //                       },
-        //                       {
-        //                           "name": "EE20",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97e",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "EE20",
-        //                                   "units": 4,
-        //                                   "_id": "5461a2c8665fee02008eb966",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "EE40",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97d",
-        //                           "courses": []
-        //                       },
-        //                       {
-        //                           "name": "CS61A",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97c",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "CS61A",
-        //                                   "units": 4,
-        //                                   "_id": "5461a194665fee02008eb955",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "CS61B",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97b",
-        //                           "courses": []
-        //                       },
-        //                       {
-        //                           "name": "CS61C",
-        //                           "division": "Lower Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb97a",
-        //                           "courses": []
-        //                       },
-        //                       {
-        //                           "name": "EECS",
-        //                           "division": "Upper Division",
-        //                           "type": "units",
-        //                           "_id": "5461ab37665fee02008eb979",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "CS160",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1bc665fee02008eb959",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS161",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1c0665fee02008eb95a",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS174",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1db665fee02008eb960",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "EE105",
-        //                                   "units": 4,
-        //                                   "_id": "5461a2d6665fee02008eb968",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Engineering Courses",
-        //                           "division": "Upper Division",
-        //                           "type": "units",
-        //                           "_id": "5461ab37665fee02008eb978",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "CS160",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1bc665fee02008eb959",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS161",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1c0665fee02008eb95a",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS174",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1db665fee02008eb960",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "EE105",
-        //                                   "units": 4,
-        //                                   "_id": "5461a2d6665fee02008eb968",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       },
-        //                       {
-        //                           "name": "Design Requirement",
-        //                           "division": "Upper Division",
-        //                           "type": "courses",
-        //                           "_id": "5461ab37665fee02008eb977",
-        //                           "courses": [
-        //                               {
-        //                                   "name": "EE125",
-        //                                   "units": 4,
-        //                                   "_id": "5461a2e2665fee02008eb96a",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "EE140",
-        //                                   "units": 4,
-        //                                   "_id": "5461a2f0665fee02008eb96d",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS160",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1bc665fee02008eb959",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS162",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1c7665fee02008eb95b",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS164",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1cb665fee02008eb95c",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS169",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1cf665fee02008eb95d",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS184",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1e1665fee02008eb961",
-        //                                   "__v": 0
-        //                               },
-        //                               {
-        //                                   "name": "CS186",
-        //                                   "units": 4,
-        //                                   "_id": "5461a1e6665fee02008eb962",
-        //                                   "__v": 0
-        //                               }
-        //                           ]
-        //                       }
-        //                   ]},
-        // newSchedule = {};
-        // newSchedule.name = schedule.name;
-        // newSchedule.semesters = createSemesters();
-        // newSchedule.major = [stubMajor];
-        // service.schedule.schedules.push(newSchedule);
     };
 
     function createSemesters () {
@@ -837,7 +276,8 @@ angular.module('degreeCheckApp')
         for (var j = 0; j < serviceSchedule.schedules.length; j++) {
             var currentSchedule = serviceSchedule.schedules[j];
             for (var k = 0; k < currentSchedule.major.length; k++) {
-                currentSchedule.major[k] = currentSchedule.major[k]._id;
+                if (currentSchedule.major[k] !== null)
+                      currentSchedule.major[k] = currentSchedule.major[k]._id;
             }
             for (var l = 0; l < currentSchedule.semesters.length; l++) {
                 var currentSemester = currentSchedule.semesters[l];
@@ -849,10 +289,12 @@ angular.module('degreeCheckApp')
             serviceSchedule.schedules[j] = currentSchedule;
         }
 
+        delete service.schedule['__v'];
+
         // Put user
         $http.put('/api/users/' + service.schedule.uid, serviceSchedule)
-          .success(function() {
-            // something in here after putting? don't know yet
+          .success(function(data) {
+            service.schedule.schedules = data.schedules;
           });
     };
 
