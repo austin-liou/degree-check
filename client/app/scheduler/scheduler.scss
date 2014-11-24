@@ -124,6 +124,18 @@
 				cursor: pointer;
 			}
 
+            header.sat {
+              background-color: green;
+            }
+
+            header.ip{
+              background-color: blue;
+            }
+
+            header.not-sat {
+              background-color: red;
+            }
+
 			.fa-caret-down, .fa-caret-up {
 				float: right;
 			}

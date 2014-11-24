@@ -9,7 +9,7 @@ angular.module('degreeCheckApp')
             });
         };
         $scope.majorService.initMajorService(allCoursesCallback);
-        $scope.requirement = {name: '', division: 'Lower Division', type: 'units', quantity: 0, courses: []};
+        $scope.requirement = {name: '', division: 'Lower Division', type: 'units', quantity: 0, courses: [], exclusives: []};
         $scope.newClass = '';
         $scope.courses = [];
 
@@ -44,6 +44,7 @@ angular.module('degreeCheckApp')
 
         $scope.addRequirement = function () {
             //$scope.requirement['courses']=$scope.courses;
+            console.log($scope.requirement);
             majorService.addRequirement($scope.requirement);
             $modalInstance.close();
         };

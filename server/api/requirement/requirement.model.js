@@ -9,7 +9,8 @@ var RequirementSchema = new Schema({
   type: String, // unit requirement or course requirement
   quantity: Number,
   division: String, // upper division or lower division
-  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
+  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+  exclusives: [{type: Schema.Types.ObjectId, ref: 'Requirement'}]
 });
 
 module.exports = mongoose.model('Requirement', RequirementSchema);
