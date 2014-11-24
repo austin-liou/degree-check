@@ -59,90 +59,49 @@
 		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 	</div>
 </script>
-<span ng-show="{{scheduleService.currSchedule.blessed}}" class="verified">Blessed</span>
-<span ng-show="{{!scheduleService.currSchedule.blessed}}" class="not-verified">Not Blessed</span>
-<p class="comments">
-	{{scheduleService.currSchedule.comments}}
-</p>
 
-
-<div class="plan-header">
-	<ul class="schedules">
-		<li ng-repeat="schedule in scheduleService.schedule.schedules"
-			ng-click="changeSchedule(schedule._id)">
-			{{ $index + 1 }}
+<nav class="schedules">
+	<ul class="pagination">
+		<li>
+			<a ng-repeat="schedule in scheduleService.schedule.schedules" ng-click="changeSchedule(schedule._id)">
+				{{ $index + 1 }}
+			</a>
 		</li>
 	</ul>
-	<h1>{{ scheduleService.currSchedule.name }}</h1>
-	<div align="right">
-		<button class="fa fa-plus" ng-click="addYear(scheduleService.yearsProcessed)"> Add Year</button>
-		<button class="fa fa-minus" ng-click="deleteYear(scheduleService.yearsProcessed)"> Delete Year</button>
+</nav>
+
+<div class="schedule-header">
+	<h3>{{ scheduleService.currSchedule.name }}</h3>
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Add Year</button>
+			<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Delete Year</button>
+		</div>
+		<div class="col-md-6">
+			<div class="pull-right">
+				<button class="btn btn-default" ng-click="saveSchedule()">Save</button>
+				<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-cog"></i></button>
+				<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
+				<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-plus"></i></button>
+			</div>
+		</div>
 	</div>
-	<div class="schedule-actions">
-		<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
-		<button class="fa fa-cog" ng-click="editPrevCoursework()"></button>
-		<button class="fa fa-trash" ng-click="deleteSchedule()"></button>
-		<button class="fa fa-plus" ng-click="addSchedule()"></button>
+	<div ng-show="{{scheduleService.currSchedule.blessed || scheduleService.currSchedule.comments}}" class="blessed">
+		<p ng-show="{{scheduleService.currSchedule.blessed}}" class="text-muted">This scheduled has been blessed by an advisor</p>
+		<p ng-show="{{scheduleService.currSchedule.comments}}">{{scheduleService.currSchedule.comments}}</p>
 	</div>
 </div>
 
-
-
 <div class="schedule-grid">
-	<div class="semester-labels">
-		<div class="semester">
-			<h1>
-				F
-				A
-				L
-				L
-			</h1>
-		</div>
-		<div class="semester">
-			<h1>
-				S
-				P
-				R
-				I
-				N
-				G
-			</h1>
-		</div>
-		<div class="semester">
-			<h1>
-				S
-				U
-				M
-				M
-				E
-				R
-			</h1>
-		</div>
-	</div>
-	<div class="grid-main">
-		<div class="year-col"
-		ng-repeat="year in scheduleService.yearsProcessed">
-				<div class="year">
-					<h1>{{year.startYear}} - {{year.endYear}}</h1>
-				</div>
-
-			<div class="semester"
-			   	ng-repeat="semester in year.semesters">
-					<ul class="classes">
-						<li ng-repeat="class in semester.courses">
-							<span type="text">{{ class.name }}</span>
-							<button class="remove-class fa fa-times"
-									ng-click="removeCourse(semester._id, class.name)">
-						</button>
-					</li>
-				</ul>
-				<div class="add-class-container">
-					<input type="text"
-					placeholder="Add Class"
-					ng-model="newClass[semester._id]"
-					ng-keyup="checkInput($event, semester._id)"
-					ui-items="allCourses" autocomplete>
-				</div>
+	<div class="year-col" ng-repeat="year in scheduleService.yearsProcessed">
+		<h3>{{year.startYear}} - {{year.endYear}}</h3>
+		<div class="semester" ng-repeat="semester in year.semesters">
+			<div class="course" ng-repeat="class in semester.courses">
+				<span type="text" class="pull-left">{{ class.name }}</span>
+				<button class="btn btn-default btn-sm pull-right" ng-click="removeCourse(semester._id, class.name)"><i class="fa fa-times"></button>
+			</div>
+			<div class="add-class">
+				<input type="text" placeholder="Add Class" ng-model="newClass[semester._id]" ng-keyup="checkInput($event, semester._id)" class="form-control" ui-items="allCourses" autocomplete>
 			</div>
 		</div>
 	</div>

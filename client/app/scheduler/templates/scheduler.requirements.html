@@ -1,25 +1,18 @@
 <header class="requirements-header">
-	<h1>{{ scheduleService.currSchedule.major[0].name }} Requirements</h1>
+	<h3>{{ scheduleService.currSchedule.major[0].name }} Requirements</h3>
 </header>
 
-<div ng-repeat="requirement in scheduleService.currSchedule.major[0].requirements"
-	 class="requirement-section">
-	 <header>{{ requirement.division }} <i class="fa fa-caret-down"></i></header>
+<div ng-repeat="requirement in scheduleService.currSchedule.major[0].requirements" class="requirement-section">
 	 <div class="requirement-subsection">
-	 	  <header class="requirement_name" ng-class="{ 'sat': requirement.satisfied,
-	 	                                                'ip': requirement.ip,
-	 	                                                 'not-sat': requirement.notStarted}">
-              {{ requirement.name }}</header>
-          <span>{{requirement.quantity}}</span><span> </span><span>{{requirement.type}}</span>
-	 	<ul class="requirements-list">
-		 	 <li ng-repeat="course in requirement.courses">
-		 	 	<a target="blank" custom-link="{{course.name}}">
-			 	 	<span class="badge"
-			 	 		  ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
+	 	  <header class="requirement-name" ng-class="{ 'sat': requirement.satisfied, 'ip': requirement.ip, 'not-sat': requirement.notStarted}">{{ requirement.name }} ({{requirement.quantity}} {{requirement.type}})</header>
+	 		<ul class="requirements-list">
+		 	 	<li ng-repeat="course in requirement.courses">
+		 	 		<a target="_blank" custom-link="{{course.name}}">
+			 	 		<span class="badge" ng-class="{ 'satisfied': course.satisfied, 'not-satisfied': !course.satisfied }">
 			 	 		  {{ course.name }}
-			 	 	</span>
-		 	 	</a>
-		 	 </li>
+			 	 		</span>
+		 	 		</a>
+		 	 	</li>
 		 </ul>
 	 </div>
 </div>

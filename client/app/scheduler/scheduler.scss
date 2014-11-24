@@ -1,198 +1,72 @@
 .scheduler-partial {
-
-	ul, li, h1 {
-		margin: 0;
-		padding: 0;
-	}
-
-	ul, li {
-		display: inline-block;
-		list-style: none;
-	}
-
-
-	.scheduler-main {
-		display: flex;
-		flex-flow: row;
-		min-height: 450px;
-	}
-
 	.schedule {
-		flex: 1;
-		padding: 0 15px 15px 15px;
-	}
-
-	.plan-header {
-		width: 100%;
-		position: relative;
-		font-size: 20px;
-
 		.schedules {
-			display: inline-block;
-
-			li {
-				cursor: pointer;
-				margin-right: 15px;
+			.pagination {
+				margin: 10px 0;
 			}
 		}
-
-		h1 {
-			display: block;
-			margin: 0 auto;
-			text-align: center;
+		.schedule-header {
+			h3 {
+				text-align: center;
+				font-size: 28px;
+				margin-bottom: 10px;
+			}
+			.blessed {
+				margin-top: 8px;
+				.text-muted {
+					text-align: center;
+				}
+			}
 		}
-
-		.schedule-actions {
-			position: absolute;
-			top: 0;
-			right: 0;
-
-			i {
-				margin-left: 15px;
+		.schedule-grid {
+			.semester {
+				margin-bottom: 30px;
+			}
+			.course {
+				margin-bottom: 5px;
 			}
 		}
 	}
-
-	.schedule-plan, .add-semester {
-		padding: 5px 15px;
-		margin: 10px 0;
-
-		header {
-			background-color: white;
-		}
-
-		h1 {
-			font-size: 18px;
-		}
-	}
-
-	.add-semester {
-		cursor: pointer;
-
-		h1 {
-			display: inline-block;
-		}
-
-		.fa-plus-circle {
-			float: right;
-		}
-	}
-
-	.classes {
-		display: block;
-
-		.remove-class {
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-
-		li {
-			position: relative;
-			width: 100%;
-			display: block;
-			min-height: 25px;
-			margin-bottom: 5px;
-		}
-
-		input {
-			width: 100%;
-		}
-	}
-
 
 	.requirements {
-		flex: 0 0 350px;
-		padding: 0 10px;
-
 		.requirements-header {
 			text-align: center;
 			margin-bottom: 15px;
-
-			h1 {
+			h3 {
 				font-size: 18px;
 			}
 		}
-
 		.requirement-section {
-			border-top: 1px solid black;
 			margin-bottom: 15px;
-
 			header {
 				font-size: 14px;
-				font-weight: bold;
-				cursor: pointer;
+				padding: 2px 5px 1px;
+				color: #fff;
 			}
+			header.sat {
+        background-color: #3c763d;
+      }
 
-            header.sat {
-              background-color: green;
-            }
+      header.ip {
+        background-color: #31708f;
+      }
 
-            header.ip{
-              background-color: blue;
-            }
-
-            header.not-sat {
-              background-color: red;
-            }
-
-			.fa-caret-down, .fa-caret-up {
-				float: right;
-			}
-
+      header.not-sat {
+        background-color: #a94442;
+      }
 			.requirements-list {
 				display: block;
 				margin-top: 5px;
 			}
-
 			.badge {
 				margin-right: 5px;
 			}
-
 			.badge.satisfied {
-				background-color: green;
+				background-color: #3c763d;
 			}
-
 			.badge.not-satisfied {
-				background-color: red;
+				background-color: #a94442;
 			}
 		}
 	}
-
-	.semester-labels {
-
-		.semester {
-			padding: 10px 0;
-			border-bottom: 1px solid black;
-		}
-		.semester h1 {
-			display: inline-block;
-			width: 25px;
-		}
-	}
-
-	.schedule-grid {
-		display: flex;
-		flex-flow: row;
-	}
-
-	.grid-main {
-		flex: 1;
-		overflow-x: auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.year-col {
-		min-width: 200px;
-		display: inline-block;
-		margin: 0 60px;
-
-		.semester {
-			margin-bottom: 50px;
-			min-height: 175px;
-		}
-	}
-
 }

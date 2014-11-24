@@ -1,8 +1,16 @@
 <div class="scheduler-partial">
-	<div ui-view="header" class="header"></div>
-	<div class="scheduler-main">
-		<div ui-view="schedule" class="schedule"></div>
-		<div ui-view="requirements" class="requirements"></div>
-	</div>
-	<div ui-view="footer" class="footer"></div>
+  <div ui-view="header" class="header"></div>
+  <div class="scheduler-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div ui-view="schedule" class="schedule"></div>
+        </div>
+        <div class="col-md-4">
+    	  <div ui-view="requirements" class="requirements"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ui-view="footer" class="footer"></div>
 </div>
