@@ -6,7 +6,11 @@
 	 class="requirement-section">
 	 <header>{{ requirement.division }} <i class="fa fa-caret-down"></i></header>
 	 <div class="requirement-subsection">
-	 	  <header>{{ requirement.name }}</header>
+	 	  <header class="requirement_name" ng-class="{ 'sat': requirement.satisfied,
+	 	                                                'ip': requirement.ip,
+	 	                                                 'not-sat': requirement.notStarted}">
+              {{ requirement.name }}</header>
+          <span>{{requirement.quantity}}</span><span> </span><span>{{requirement.type}}</span>
 	 	<ul class="requirements-list">
 		 	 <li ng-repeat="course in requirement.courses">
 		 	 	<span class="badge"

@@ -67,15 +67,43 @@ angular.module('degreeCheckApp')
         var url = '/api/majors/' + service.asdf._id;
         delete service.asdf['__v'];
 
-        for(var i = 0; i<service.asdf.requirements.length; i++){
-            if(service.asdf.requirements[i]._id === requirement._id){
-                service.asdf.requirements[i] = requirement;
-                break;
+        if(requirement._id) {
+            for(var i = 0; i<service.asdf.requirements.length; i++){
+                if(service.asdf.requirements[i]._id === requirement._id){
+                    service.asdf.requirements[i] = requirement;
+                    break;
+                }
             }
-        }
-        if(i>=service.asdf.requirements.length) {
+            for (var i = 0; i < service.asdf.requirements.length; i++) {
+                var found = false;
+                console.log(requirement.exclusives.length);
+                for (var j = 0; j<requirement.exclusives.length; j++){
+                    if(service.asdf.requirements[i]._id === requirement.exclusives[j]){
+                        found = true;
+                        for(var l = 0; l < service.asdf.requirements[i].exclusives.length; l++){
+                            if(service.asdf.requirements[i].exclusives[l] == requirement._id){
+                                break;
+                            }
+                        }
+                        if(l>=service.asdf.requirements[i].exclusives.length){
+                            service.asdf.requirements[i].exclusives.push(requirement._id);
+                        }
+                    }
+                }
+                console.log(found);
+                if(!found){
+                    for(var k=0; k<service.asdf.requirements[i].exclusives.length; k++){
+                        if(service.asdf.requirements[i].exclusives[k] == requirement._id){
+                            service.asdf.requirements[i].exclusives.splice(k,1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }else{
             service.asdf.requirements.push(requirement);
         }
+
         var majorCopy =  angular.copy(service.asdf);
         for(var i = 0; i<majorCopy.requirements.length; i++){
             for(var j=0; j<majorCopy.requirements[i].courses.length; j++){
@@ -84,15 +112,34 @@ angular.module('degreeCheckApp')
         }
         console.log(service.asdf);
         return $http.put(url,majorCopy).success(function(major){
-            for(var i = 0; i< service.fullAllMajors.length; i++){
-                if(service.fullAllMajors[i]._id == major._id) {
-                    (function (cntr) {
-                        var url = '/api/majors/' + major._id;
-                        $http.get(url).success(function (major) {
-                            service.fullAllMajors[cntr] = major;
-                        });
-                    })(i);
+            if(requirement._id) {
+                for (var i = 0; i < service.fullAllMajors.length; i++) {
+                    if (service.fullAllMajors[i]._id == major._id) {
+                        (function (cntr) {
+                            var url = '/api/majors/' + major._id;
+                            $http.get(url).success(function (major) {
+                                service.fullAllMajors[cntr] = major;
+                            });
+                        })(i);
+                    }
                 }
+            }else{
+                for(var i = 0; i<majorCopy.requirements.length - 1; i++){
+                    majorCopy.requirements[i].exclusives.push(major.requirements[major.requirements.length-1]._id);
+                }
+                majorCopy.requirements[i]._id = major.requirements[major.requirements.length-1]._id;
+                return $http.put(url,majorCopy).success(function(major){
+                    for (var i = 0; i < service.fullAllMajors.length; i++) {
+                        if (service.fullAllMajors[i]._id == major._id) {
+                            (function (cntr) {
+                                var url = '/api/majors/' + major._id;
+                                $http.get(url).success(function (major) {
+                                    service.fullAllMajors[cntr] = major;
+                                });
+                            })(i);
+                        }
+                    }
+                });
             }
         });
     };
@@ -111,7 +158,7 @@ angular.module('degreeCheckApp')
                     service.fullAllMajors.splice(i,1);
                 }
             }
-            for(var i = 0; i<service.AllMajors.length; i++){
+            for(var i = 0; i<service.allMajors.length; i++){
                 if(service.AllMajors[i]._id == major._id){
                     service.AllMajors.splice(i,1);
                 }

@@ -30,6 +30,12 @@
                             id="requirement_type">{{requirement.type}}</span></span>
                     <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
                 </div>
+                <div id="exclusive-div">
+                    <span class="exclusive_field">Courses cannot be shared with:</span><br>
+                    <select id="requirement_exclusives" ng-model="requirement.exclusives" multiple>
+                        <option ng-repeat="exc in majorService.asdf.requirements" value="{{exc._id}}">{{exc.name}}</option>
+                    </select>
+                </div>
 
                 <div id="courses-div">
                     <span class="requirement_field">Courses that fulfill this requirement</span><br>
