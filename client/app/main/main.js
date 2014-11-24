@@ -10,7 +10,7 @@ angular.module('degreeCheckApp')
         views: {
         	'': {
         		templateUrl: 'app/main/main.html',
-                controller: 'MainCtrl'
+            controller: 'MainCtrl'
         	},
         	'footer@main': {
         		templateUrl: 'components/footer/footer.html',
