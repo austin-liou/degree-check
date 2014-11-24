@@ -10,7 +10,6 @@ angular.module('degreeCheckApp')
     });
     $scope.newClass = {};
 
-
     $http.get('/authentication/uid')
        .success(function (uidObj){
          scheduleService.initSchedule(uidObj.uid);
