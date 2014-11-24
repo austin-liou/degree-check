@@ -228,7 +228,6 @@ angular.module('degreeCheckApp')
              for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
                 if (requirement.courses[j].name === courseName) {
                     requirement.courses[j].satisfied = satisfied;
-                    return;
                 }
              }
         }
