@@ -46,7 +46,6 @@ angular.module('degreeCheckApp')
 
     function updateReqs(){
         clearReqs()
-        console.log('CourseMap',service.coursesMap);
         var scheduleObj = service.currSchedule;
         for(var i=0; i< scheduleObj.semesters.length; i++){
             for(var j in  scheduleObj.semesters[i].courses){
@@ -122,7 +121,6 @@ angular.module('degreeCheckApp')
     }
 
     function checkReqs(scheduleObj){
-        console.log(service.tracker);
         for(i in service.currSchedule.major[0].requirements){
             var requirement = service.currSchedule.major[0].requirements[i];
             var req_id = requirement._id;
@@ -131,7 +129,6 @@ angular.module('degreeCheckApp')
             for(var j = 0; j<service.tracker[req_id].length; j++){
                 if(service.tracker[req_id][j].length < requirement.quantity){
                     met = false;
-                    console.log('not met', req_id);
                 }
                 if(service.tracker[req_id][j].length > 0){
                     started = true;
@@ -140,18 +137,18 @@ angular.module('degreeCheckApp')
             if(met){
                 requirement.satisfied = true;
                 requirement.ip = false;
-                requirement.notStared = false;
+                requirement.notStarted = false;
             }else if(started){
                 requirement.satisfied = false;
                 requirement.ip = true;
-                requirement.notStared = false;
+                requirement.notStarted = false;
             }else{
                 requirement.satisfied = false;
                 requirement.ip = false;
-                requirement.notStared = true;
+                requirement.notStarted = true;
             }
-            console.log(requirement.satisfied);
         }
+
         if(service.currSchedule.major[0].requirements.length == 0){
             return;
         }
@@ -164,7 +161,6 @@ angular.module('degreeCheckApp')
                     break;
                 }
             }
-            console.log('done', done);
             if(done){
                 for(j in service.currSchedule.major[0].requirements){
                     requirement = service.currSchedule.major[0].requirements[j];
