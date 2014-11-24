@@ -19,6 +19,10 @@ angular.module('degreeCheckApp')
           'footer@admin': {
             templateUrl: 'components/footer/footer.html',
             controller: 'FooterCtrl'
+          },
+          'content@admin': {
+            templateUrl: 'app/admin/templates/admin.search.html',
+            controller: 'AdminSearchStudentsCtrl'
           }
         }
       })
