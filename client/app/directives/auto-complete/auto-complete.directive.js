@@ -7,11 +7,11 @@ angular.module('degreeCheckApp')
       link: function (scope, element, attrs) {
 	            element.autocomplete({
                 	source: scope[attrs.uiItems],
-	                select: function() {
-	                    // element.trigger('input');
-	                    $timeout(function() {
-	                      element.trigger('input');
-	                    }, 0);
+	                change: function() {
+	                    element.trigger('input');
+	                    //$timeout(function() {
+	                    //  element.trigger('input');
+	                    //}, 0);
 	                }
            		});
             }

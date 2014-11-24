@@ -58,7 +58,7 @@ module.exports = function(app) {
     }
   });
 
-  app.use('/scheduler', function (req, res) {
+  app.use('/scheduler', function e(req, res) {
     if (!(req.session && req.session.uid)) {
       res.redirect('../authentication/login');
     }
