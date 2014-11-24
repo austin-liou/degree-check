@@ -10,11 +10,11 @@ angular.module('degreeCheckApp')
     });
     $scope.newClass = {};
 
-    // var init = (function () {
-    //   scheduleService.initSchedule($stateParams.uid);
-    // })();
+    var init = (function () {
+      scheduleService.initSchedule($stateParams.uid);
+      debugger
+    })();
 
-  scheduleService.initSchedule('hi');
     /*
         Modal Logic
     */
