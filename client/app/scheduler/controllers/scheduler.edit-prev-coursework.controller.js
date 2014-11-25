@@ -4,12 +4,8 @@ angular.module('degreeCheckApp')
   .controller('SchedulerEditPrevCourseworkCtrl', function ($scope, $modalInstance) {
     console.log('SchedulerEditPrevCourseworkCtrl');
 
-    $scope.save = function (courses) {
-        console.log(courses);
-        $modalInstance.close(courses);
+    $scope.done = function () {
+        $modalInstance.close();
     };
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
   });

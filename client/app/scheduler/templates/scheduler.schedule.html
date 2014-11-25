@@ -5,21 +5,20 @@
 	</div>
 	<div class="modal-body">
 		<ul class="classes">
-			<li ng-repeat="class in semester.courses">
+			<li ng-repeat="class in prev_coursework">
 				<span type="text">{{ class.name }}</span>
-				<button class="remove-class fa fa-times" ng-click="removeCourse(semester._id, class.name)"></button>
+				<button class="remove-class fa fa-times" ng-click="removeCourse(prev_coursework._id, class.name)"></button>
 			</li>
 		</ul>
 		<div class="add-class-container">
 			<input type="text"
 			placeholder="Add Class"
-			ng-model="newClass[semester._id]"
-			ng-keyup="checkInput($event, semester._id)">
+			ng-model="newClass"
+			ng-keyup="checkInput($event)">
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="save()">Save</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button class="btn btn-primary" ng-click="done()">Done</button>
 	</div>
 </script>
 
