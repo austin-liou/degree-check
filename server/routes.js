@@ -18,13 +18,15 @@ module.exports = function(app) {
   }
 
   function adminLoggedIn (req, res, next) {
-    var whitelist = app.get('admin-whitelist');
+    var whitelist = app.get('admin-whitelist'),
+        found = false;
     for (var i = 0; i < whitelist.length; i++) {
       if (whitelist[i] === req.session.uid) {
         next();
+        found = true;
       }
     }
-    res.sendfile(app.get('appPath') + '/index.html');
+    if (!found) { res.sendfile(app.get('appPath') + '/index.html'); }
   }
 
   // Insert routes below
@@ -47,13 +49,15 @@ module.exports = function(app) {
       res.redirect('../authentication/login');
     }
     else {
-      var whitelist = app.get('admin-whitelist');
+      var whitelist = app.get('admin-whitelist'),
+          found = false;
       for (var i = 0; i < whitelist.length; i++) {
         if (whitelist[i] ===  req.session.uid) {
           res.sendfile(app.get('appPath') + '/index.html');
+          found = true;
         }
       }
-      res.redirect('../scheduler');
+      if (!found) { res.redirect('../scheduler')};
     }
   });
 
