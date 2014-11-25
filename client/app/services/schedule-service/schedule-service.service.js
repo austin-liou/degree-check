@@ -507,17 +507,24 @@ angular.module('degreeCheckApp')
                 }
             }
 
+            //Update requirements to account for previous coursework
             for (var i = 0; i < service.schedule.prev_coursework.length; i++) {
                 updateUserReq(service.schedule.prev_coursework[i].name, true);
             }
         };
 
+        /*
+         Add a course to the user's previous coursework and save schedule.
+         */
         service.addToPrevCoursework = function(course) {
           service.schedule.prev_coursework.push(course);
           service.saveSchedule();
           setupSchedule(service.currSchedule);
         }
 
+        /*
+         Remove a course from the user's previous coursework and save schedule.a
+         */
         service.removeFromPrevCoursework = function(course) {
           var index = service.schedule.prev_coursework.indexOf(course);
           service.schedule.prev_coursework.splice(index, 1);
@@ -639,6 +646,9 @@ angular.module('degreeCheckApp')
             }
         };
 
+        /*
+         Creates, adds, and saves three new semesters to the user's current schedule.
+         */
         service.addYear = function (year) {
             var fallSemester = { season: "Fall", year: year.endYear, courses: [] };
             var springSemester = { season: "Spring", year: (parseInt(year.endYear) + 1).toString(), courses: [] };
@@ -653,6 +663,10 @@ angular.module('degreeCheckApp')
             });
         };
 
+        /*
+         Deletes the latest year from the schedule by removing three semesters and saves schedule.
+         Delete year will not delete a year when there is only one year in the schedule.
+         */
         service.deleteYear = function () {
             if(service.currSchedule.semesters.length > 3) {
               service.currSchedule.semesters.pop();
