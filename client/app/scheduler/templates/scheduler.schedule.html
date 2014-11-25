@@ -64,8 +64,8 @@
 <div class="schedule-header">
 	<nav class="schedules">
 		<ul class="pagination">
-			<li>
-				<a ng-repeat="schedule in scheduleService.schedule.schedules" ng-click="changeSchedule(schedule._id)">
+			<li ng-repeat="schedule in scheduleService.schedule.schedules">
+				<a ng-click="changeSchedule(schedule._id)">
 					{{ $index + 1 }}
 				</a>
 			</li>
