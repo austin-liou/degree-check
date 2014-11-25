@@ -41,7 +41,6 @@ module.exports = function(app) {
   app.use('/api/courses', require('./api/course'));
   app.use('/api/majors', require('./api/major'));
   app.use('/api/requirements', require('./api/requirement'));
-  app.use('/api/things', require('./api/thing'));
 
   app.use('/admin', function (req, res) {
     if (!(req.session && req.session.uid)) {
