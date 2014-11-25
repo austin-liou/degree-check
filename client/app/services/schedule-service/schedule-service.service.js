@@ -332,19 +332,22 @@ angular.module('degreeCheckApp')
         };
 
         function clearReqs() {
+            // reset tracking objects
             service.requirementMap = {};
-            service.requirementMap = {};
-            service.coursesMap = {};
-            service.tracker = {};
-            service.emptyTracker = {};
-
+            service.requirementMap = {}; // maps requirement._id to a list of mutex requirements and quantity required
+            service.coursesMap = {}; // maps course._id to a list of requirements the course can fulfill
+            service.tracker = {}; // list of possible assignments
+            service.emptyTracker = {}; // blank copy to be copied later
+            // populate requirement map
             for (var i = 0; i < service.currSchedule.major[0].requirements.length; i++) {
                 var requirement = service.currSchedule.major[0].requirements[i];
                 service.requirementMap[requirement._id] = {'exclusives': requirement.exclusives, 'quantity': requirement.quantity, 'type': requirement.type};
+                // create row in tracker and emptyTracker
                 service.tracker[requirement._id] = [
                     0
                 ];
                 service.emptyTracker[requirement._id] = [];
+                // add requirement to corresponding courses in courseMap
                 for (var j = 0; j < requirement.courses.length; j++) {
                     var course = requirement.courses[j];
                     if (!service.coursesMap[course._id]) {
@@ -356,9 +359,10 @@ angular.module('degreeCheckApp')
         }
 
         function updateReqWithNewCourse(course) {
-            if (service.coursesMap[course._id]) {
-                var exclusives = [];
-                var reqTemp = angular.copy(service.coursesMap[course._id].requirement);
+            if (service.coursesMap[course._id]) { // if the course fulfills a requirement
+                var exclusives = []; // course can only count towards one of these
+                var reqTemp = angular.copy(service.coursesMap[course._id].requirement); // can count toward all of these
+                // make the above definitions true
                 for (var k in service.coursesMap[course._id].requirement) {
                     var req_id = service.coursesMap[course._id].requirement[k];
                     for (var l in service.requirementMap[req_id].exclusives) {
@@ -381,6 +385,7 @@ angular.module('degreeCheckApp')
 
                     }
                 }
+                // update posibilities
                 for (k in reqTemp) {
                     req_id = reqTemp[k];
                     for (var j = 0; j < service.tracker[req_id].length; j++) {
@@ -431,6 +436,7 @@ angular.module('degreeCheckApp')
         }
 
         function checkReqs() {
+            // check if a requirement is fulfilled or not started in all possibilities
             for (i in service.currSchedule.major[0].requirements) {
                 var requirement = service.currSchedule.major[0].requirements[i];
                 var req_id = requirement._id;
@@ -462,6 +468,7 @@ angular.module('degreeCheckApp')
             if (service.currSchedule.major[0].requirements.length == 0) {
                 return;
             }
+            // check if there is a single possibility where all requirements are fulfilled
             for (var i = 0; i < service.tracker[req_id].length; i++) {
                 var done = true;
                 for (j in service.currSchedule.major[0].requirements) {
@@ -500,17 +507,24 @@ angular.module('degreeCheckApp')
                 }
             }
 
+            //Update requirements to account for previous coursework
             for (var i = 0; i < service.schedule.prev_coursework.length; i++) {
                 updateUserReq(service.schedule.prev_coursework[i].name, true);
             }
         };
 
+        /*
+         Add a course to the user's previous coursework and save schedule.
+         */
         service.addToPrevCoursework = function(course) {
           service.schedule.prev_coursework.push(course);
           service.saveSchedule();
           setupSchedule(service.currSchedule);
         }
 
+        /*
+         Remove a course from the user's previous coursework and save schedule.a
+         */
         service.removeFromPrevCoursework = function(course) {
           var index = service.schedule.prev_coursework.indexOf(course);
           service.schedule.prev_coursework.splice(index, 1);
@@ -632,6 +646,9 @@ angular.module('degreeCheckApp')
             }
         };
 
+        /*
+         Creates, adds, and saves three new semesters to the user's current schedule.
+         */
         service.addYear = function (year) {
             var fallSemester = { season: "Fall", year: year.endYear, courses: [] };
             var springSemester = { season: "Spring", year: (parseInt(year.endYear) + 1).toString(), courses: [] };
@@ -646,6 +663,10 @@ angular.module('degreeCheckApp')
             });
         };
 
+        /*
+         Deletes the latest year from the schedule by removing three semesters and saves schedule.
+         Delete year will not delete a year when there is only one year in the schedule.
+         */
         service.deleteYear = function () {
             if(service.currSchedule.semesters.length > 3) {
               service.currSchedule.semesters.pop();
