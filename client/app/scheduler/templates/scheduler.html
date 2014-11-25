@@ -1,6 +1,10 @@
 <div class="scheduler-partial">
   <div ui-view="header" class="header"></div>
   <div class="scheduler-main">
+  <div class="admin-comments">
+    <p class="text-muted">This schedule has been blessed by an advisor.</p>
+    <p>{{scheduleService.currSchedule.comments}}</p>
+  </div>
     <div class="container">
       <div class="row">
         <div class="col-md-9">
