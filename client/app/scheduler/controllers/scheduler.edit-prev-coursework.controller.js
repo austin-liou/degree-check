@@ -11,6 +11,7 @@ angular.module('degreeCheckApp')
     $scope.prev_coursework = $scope.scheduleService.schedule.prev_coursework;
     $scope.newClass = '';
     
+    //check if inputted course exists and if so, add course to prev coursework
     $scope.checkInput = function (event) {
       // Check if enter
       if (event.keyCode === 13) {
@@ -25,10 +26,12 @@ angular.module('degreeCheckApp')
       }
     };
 
+    //remove a course from prev coursework
     $scope.removeCourse = function(course) {
         $scope.scheduleService.removeFromPrevCoursework(course);
     }
 
+    //close the modal
     $scope.done = function () {
         $modalInstance.close();
     };
