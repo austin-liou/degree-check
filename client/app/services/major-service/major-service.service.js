@@ -358,7 +358,7 @@ angular.module('degreeCheckApp')
                 var newReq = major.requirements[major.requirements.length-1];
                 for(var i = 0; i<majorCopy.requirements.length - 1; i++){
                     for(var j = 0; j<newReq.exclusives.length; j++){
-                        if(newReq.exclusives[j]==majorCopy.requirements[i]){
+                        if(newReq.exclusives[j]==majorCopy.requirements[i]._id){
                             majorCopy.requirements[i].exclusives.push(newReq._id);
                         }
                     }

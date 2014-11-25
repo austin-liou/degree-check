@@ -13,7 +13,7 @@ angular.module('degreeCheckApp')
         service.currScheduleIndex = 0;
 
         service.initSchedule = function (uid) {
-            $http.get('/api/users/' + uid)
+            $http.get('/api/users/' + "123456")
                 .success(function (bigJson) {
                     service.schedule = bigJson;
                     service.currSchedule = service.schedule.schedules[0];
@@ -414,6 +414,7 @@ angular.module('degreeCheckApp')
 
                 }
             }
+
         }
 
         function initReqs() {
@@ -426,10 +427,10 @@ angular.module('degreeCheckApp')
                 }
             }
 
-            checkReqs(scheduleObj);
+            checkReqs();
         }
 
-        function checkReqs(scheduleObj) {
+        function checkReqs() {
             for (i in service.currSchedule.major[0].requirements) {
                 var requirement = service.currSchedule.major[0].requirements[i];
                 var req_id = requirement._id;
@@ -533,7 +534,8 @@ angular.module('degreeCheckApp')
                     semester = year.semesters[j];
                     if (semester._id === semesterId) {
                         semester.courses.push(course);
-                        updateReqWithNewCourse(course)
+                        updateReqWithNewCourse(course);
+                        checkReqs();
                         updateUserReq(course.name, true);
                         return;
                     }
