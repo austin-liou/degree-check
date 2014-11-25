@@ -156,9 +156,17 @@ exports.logout = function (req, res) {
 };
 
 // Get list of UIDs
-exports.uid = function(req, res) {
+exports.uid = function (req, res) {
   return res.json(200, {uid: req.session.uid});
 };
+
+// Fake login for development
+exports.testLogin = function (req, res) {
+  var uid = '123456';
+
+  req.session.uid = uid;
+  return res.json(200, {uid: req.session.uid});
+}
 
 function handleError(res, err) {
   return res.send(500, err);

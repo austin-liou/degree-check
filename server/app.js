@@ -37,7 +37,6 @@ var server = require('http').createServer(app);
 var sess = {
     name: 'degree-checker-cookie',
     secret: 'vF24(#0ag_a54$zh{41;S#0vyM?{V4',
-    domain: '.degree-checker.herokuapp.com',
     expires: new Date(Date.now() + 604800000),
 };
 app.use(cookieParser());
