@@ -91,6 +91,36 @@
 </div>
 
 <div class="schedule-grid">
+	<div class="semester-labels">
+		<div class="semester-label fall">
+			<h1>
+				F
+				A
+				L
+				L
+			</h1>
+		</div>
+		<div class="semester-label spring">
+			<h1>
+				S
+				P
+				R
+				I
+				N
+				G
+			</h1>
+		</div>
+		<div class="semester-label summer">
+			<h1>
+				S
+				U
+				M
+				M
+				E
+				R
+			</h1>
+		</div>
+	</div>
 	<div class="year-col" ng-repeat="year in scheduleService.yearsProcessed">
 		<h3>{{year.startYear}} - {{year.endYear}}</h3>
 		<div class="semester" ng-repeat="semester in year.semesters">

@@ -43,27 +43,27 @@ module.exports = function(app) {
   app.use('/api/requirements', require('./api/requirement'));
 
   app.use('/admin', function (req, res) {
-    if (!(req.session && req.session.uid)) {
-      res.redirect('../authentication/login');
-    }
-    else {
-      var whitelist = app.get('admin-whitelist');
-      for (var i = 0; i < whitelist.length; i++) {
-        if (whitelist[i] ===  req.session.uid) {
+    // if (!(req.session && req.session.uid)) {
+    //   res.redirect('../authentication/login');
+    // }
+    // else {
+    //   var whitelist = app.get('admin-whitelist');
+    //   for (var i = 0; i < whitelist.length; i++) {
+    //     if (whitelist[i] ===  req.session.uid) {
           res.sendfile(app.get('appPath') + '/index.html');
-        }
-      }
-      res.redirect('../scheduler');
-    }
+    //     }
+    //   }
+    //   res.redirect('../scheduler');
+    // }
   });
 
   app.use('/scheduler', function e(req, res) {
-    if (!(req.session && req.session.uid)) {
-      res.redirect('../authentication/login');
-    }
-    else {
+    // if (!(req.session && req.session.uid)) {
+    //   res.redirect('../authentication/login');
+    // }
+    // else {
       res.sendfile(app.get('appPath') + '/index.html');
-    }
+    // }
   });
 
   // All undefined asset or api routes should return a 404

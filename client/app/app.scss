@@ -21,6 +21,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+.vertical-text {
+  width: 2em;  
+  font-size: 35px;
+  /* grande abbastanza per sicurezza */
+  letter-spacing: 40px;
+  font-family: "Tahoma", Arial, sans-serif;
+}
+
 .rounded {
 	border-radius: 100px;
 }

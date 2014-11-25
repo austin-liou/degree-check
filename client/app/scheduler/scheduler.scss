@@ -4,6 +4,44 @@
 		padding-bottom: 50px;
 	}
 
+	.semester-labels {
+		width: 50px;
+		position: absolute;
+		left: -35px;
+		height: 816px;
+		background: #333;
+		top: 0;
+
+		.semester-label {
+			padding: 0;
+			position: absolute;
+			text-align: center;
+		}
+
+		.semester-label h1 {
+			display: inline-block;
+			width: 16px;
+			white-space: normal;
+			font-size: 20px;
+			color: white;
+		}
+
+		.semester-label.fall {
+			top: 204px;
+			right: 17px;
+		}
+
+		.semester-label.spring {
+			top: 400px;
+			right: 17px;
+		}
+
+		.semester-label.summer {
+			top: 605px;
+			right: 17px;
+		}
+	}
+
 	.schedule {
 		.schedules {
 			display: inline-block;
@@ -19,6 +57,7 @@
 
 			.pagination li a {
 				color: black;
+				margin-right: 5px;
 			}
 		}
 
