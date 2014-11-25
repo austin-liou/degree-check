@@ -23,10 +23,6 @@ angular.module('degreeCheckApp')
         });
 
         modalInstance.result.then(function (schedule) {
-            scheduleService.addSchedule(schedule, function() {
-                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
-                $scope.changeSchedule(schedule._id);
-            });
         });
     };
     /*
@@ -74,6 +70,7 @@ angular.module('degreeCheckApp')
     };
 
     $scope.addYear = function (years) {
+      console.log(years);
       var year = years[years.length-1];
       scheduleService.addYear(year);
     };

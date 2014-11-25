@@ -31,12 +31,7 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/authentication', require('./api/authentication'));
-  app.all('/api*', apiLoggedIn, function (req, res, next) {
-    next();
-  });
-  app.all('/api/users', adminLoggedIn, function (req, res, next) {
-    next();
-  });
+  
   app.use('/api/users', require('./api/user'));
   app.use('/api/schedules', require('./api/schedule'));
   app.use('/api/semesters', require('./api/semester'));
@@ -62,12 +57,13 @@ module.exports = function(app) {
   });
 
   app.use('/scheduler', function e(req, res) {
-    if (!(req.session && req.session.uid)) {
+    res.sendfile(app.get('appPath') + '/index.html');
+    /**if (!(req.session && req.session.uid)) {
       res.redirect('../authentication/login');
     }
     else {
       res.sendfile(app.get('appPath') + '/index.html');
-    }
+    }**/
   });
 
   // All undefined asset or api routes should return a 404

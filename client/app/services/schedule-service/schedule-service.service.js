@@ -414,7 +414,6 @@ angular.module('degreeCheckApp')
 
                 }
             }
-            console.log(service.tracker);
         }
 
         function initReqs() {
@@ -426,7 +425,6 @@ angular.module('degreeCheckApp')
                     updateReqWithNewCourse(course);
                 }
             }
-            console.log(service.tracker);
 
             checkReqs(scheduleObj);
         }
@@ -500,7 +498,24 @@ angular.module('degreeCheckApp')
                     updateUserReq(scheduleObj.semesters[i].courses[j].name, true);
                 }
             }
+
+            for (var i = 0; i < service.schedule.prev_coursework.length; i++) {
+                updateUserReq(service.schedule.prev_coursework[i].name, true);
+            }
         };
+
+        service.addToPrevCoursework = function(course) {
+          service.schedule.prev_coursework.push(course);
+          service.saveSchedule();
+          setupSchedule(service.currSchedule);
+        }
+
+        service.removeFromPrevCoursework = function(course) {
+          var index = service.schedule.prev_coursework.indexOf(course);
+          service.schedule.prev_coursework.splice(index, 1);
+          updateUserReq(course.name, false);
+          service.saveSchedule();
+        }
 
         /*
          Adds a course to a semester
@@ -630,10 +645,15 @@ angular.module('degreeCheckApp')
         };
 
         service.deleteYear = function () {
-            service.currSchedule.semesters.pop();
-            service.currSchedule.semesters.pop();
-            service.currSchedule.semesters.pop();
-            processYears(service.currSchedule);
+            if(service.currSchedule.semesters.length > 3) {
+              service.currSchedule.semesters.pop();
+              service.currSchedule.semesters.pop();
+              service.currSchedule.semesters.pop();
+              processYears(service.currSchedule);
+              service.saveSchedule().then(function(){
+                processYears(service.currSchedule);
+              });
+            }
         };
 
         /*
