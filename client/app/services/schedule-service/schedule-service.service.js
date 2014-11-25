@@ -13,7 +13,7 @@ angular.module('degreeCheckApp')
         service.currScheduleIndex = 0;
 
         service.initSchedule = function (uid) {
-            $http.get('/api/users/' + "123456")
+            $http.get('/api/users/' + uid)
                 .success(function (bigJson) {
                     service.schedule = bigJson;
                     service.currSchedule = service.schedule.schedules[0];
