@@ -11,21 +11,23 @@ angular.module('degreeCheckApp')
     $scope.prev_coursework = $scope.scheduleService.schedule.prev_coursework;
     $scope.newClass = '';
     
-    $scope.checkInput = function (event, id) {
+    $scope.checkInput = function (event) {
       // Check if enter
       if (event.keyCode === 13) {
           // Check if valid course
           var index = $scope.allCourses.indexOf($scope.newClass);
           if (index > -1) {
             var courseObj = majorService.allCourses[index];
-            scheduleService.addCourse(id, courseObj);
             $scope.newClass = '';
-            $scope.scheduleService.schedule.prev_coursework.push(courseObj);
+            $scope.scheduleService.addToPrevCoursework(courseObj);
             $scope.prev_coursework = $scope.scheduleService.schedule.prev_coursework;
-            $scope.scheduleService.saveSchedule();
           }
       }
     };
+
+    $scope.removeCourse = function(course) {
+        $scope.scheduleService.removeFromPrevCoursework(course);
+    }
 
     $scope.done = function () {
         $modalInstance.close();

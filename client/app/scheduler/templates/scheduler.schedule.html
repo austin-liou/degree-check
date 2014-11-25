@@ -7,7 +7,7 @@
 		<ul class="classes">
 			<li ng-repeat="class in prev_coursework">
 				<span type="text">{{ class.name }}</span>
-				<button class="remove-class fa fa-times" ng-click="removeCourse(prev_coursework._id, class.name)"></button>
+				<button class="remove-class fa fa-times" ng-click="removeCourse(class)"></button>
 			</li>
 		</ul>
 		<div class="add-class-container">
