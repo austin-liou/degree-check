@@ -57,13 +57,12 @@ module.exports = function(app) {
   });
 
   app.use('/scheduler', function e(req, res) {
-    res.sendfile(app.get('appPath') + '/index.html');
-    /**if (!(req.session && req.session.uid)) {
+    if (!(req.session && req.session.uid)) {
       res.redirect('../authentication/login');
     }
     else {
       res.sendfile(app.get('appPath') + '/index.html');
-    }**/
+    }
   });
 
   // All undefined asset or api routes should return a 404
