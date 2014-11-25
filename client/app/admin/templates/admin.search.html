@@ -1,5 +1,8 @@
 <div class="admin-search-partial">
-	<h1 class="admin-search-title">Search for Student Schedules</h1>
+	<div class="requirements">
+		<a href="/admin/edit">Edit Requirements</a>
+	</div>
+	<h1 class="admin-search-title">Student Search</h1>
 	<form class="search-fields">
 		<label for="name">Name</label>
 		<input name="name" type="text" placeholder="Student Name" ng-model="name">
@@ -17,7 +20,6 @@
 				<th width="22%" colspan="2"><h4>Name</h4></th>
 				<th width="30%"><h4>Email</h4></th>
 				<th width="18%"><h4>UID</h4></th>
-				<th width="30%"><h4>Schedules</h4></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,7 +27,6 @@
 				<td colspan="2"><a ng-href="/admin/view/{{student.uid}}">{{student.name}}</a></td>
 				<td>{{student.email}}</td>
 				<td>{{student.uid}}</td>
-				<td ng-repeat="schedule in student.schedules">{{schedule.name}}<br /></td>
 			</tr>
 		</tbody>
 	</table>

@@ -84,10 +84,6 @@
 			<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-calendar"></i></button>
 		</div>
 	</div>
-	<div ng-show="{{scheduleService.currSchedule.blessed || scheduleService.currSchedule.comments}}" class="blessed">
-		<p ng-show="{{scheduleService.currSchedule.blessed}}" class="text-muted">This scheduled has been blessed by an advisor</p>
-		<p ng-show="{{scheduleService.currSchedule.comments}}">{{scheduleService.currSchedule.comments}}</p>
-	</div>
 </div>
 
 <div class="schedule-grid">

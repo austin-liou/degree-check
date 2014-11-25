@@ -6,7 +6,11 @@
 	<input name="blessed" type="checkbox" ng-model="scheduleService.currSchedule.blessed">
 	<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
 </div>
-<div class="scheduler-main">
-	<div ui-view="schedule" class="schedule"></div>
-	<div ui-view="requirements" class="requirements"></div>
+<div class="admin-scheduler">
+	<div class="col-md-9">
+	  <div ui-view="schedule" class="schedule"></div>
+	</div>
+	<div class="col-md-3">
+	  <div ui-view="requirements" class="requirements"></div>
+	</div>
 </div>

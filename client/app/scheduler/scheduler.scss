@@ -1,5 +1,28 @@
 .scheduler-partial {
 
+	.admin-comments {
+		padding: 25px;
+	}
+
+	.year-col {
+		display: inline-block;
+		width: 200px;
+		margin-right: 10px;
+
+		h3 {
+			text-align: center;
+			font-weight: 600;
+			background: #FFB800;
+			margin: 0;
+			padding: 10px;
+		}
+
+		.semester {
+			margin-bottom: 50px;
+			min-height: 175px;
+		}
+	}
+
 	.scheduler-main {
 		padding-bottom: 50px;
 	}
@@ -135,13 +158,13 @@
 	}
 
 	.requirements {
-		background: #333;
 		padding: 0;
 		color: white;
 
 		.requirements-header {
 			text-align: center;
 			padding: 10px 0;
+			background: #333;
 
 			h3 {
 				font-size: 18px;
@@ -175,6 +198,10 @@
 			.requirements-list {
 				display: block;
 				padding: 0 5px 5px 5px;
+
+				li {
+					display: inline-block;
+				}
 			}
 			.badge {
 				font-weight: 400;

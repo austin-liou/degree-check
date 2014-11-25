@@ -29,12 +29,12 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/authentication', require('./api/authentication'));
-  app.all('/api*', apiLoggedIn, function (req, res, next) {
-    next();
-  });
-  app.all('/api/users', adminLoggedIn, function (req, res, next) {
-    next();
-  });
+  // app.all('/api*', apiLoggedIn, function (req, res, next) {
+  //   next();
+  // });
+  // app.all('/api/users', adminLoggedIn, function (req, res, next) {
+  //   next();
+  // });
   app.use('/api/users', require('./api/user'));
   app.use('/api/schedules', require('./api/schedule'));
   app.use('/api/semesters', require('./api/semester'));
