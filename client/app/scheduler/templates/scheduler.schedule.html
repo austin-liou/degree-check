@@ -1,6 +1,7 @@
 <script type="text/ng-template" id="scheduler.edit-prev-coursework.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Previous Coursework</h3>
+		<span>Add Berkeley equivalent classes you have taken before here.</span>
 	</div>
 	<div class="modal-body">
 		<ul class="classes">
@@ -60,30 +61,27 @@
 	</div>
 </script>
 
-<nav class="schedules">
-	<ul class="pagination">
-		<li>
-			<a ng-repeat="schedule in scheduleService.schedule.schedules" ng-click="changeSchedule(schedule._id)">
-				{{ $index + 1 }}
-			</a>
-		</li>
-	</ul>
-</nav>
-
 <div class="schedule-header">
+	<nav class="schedules">
+		<ul class="pagination">
+			<li>
+				<a ng-repeat="schedule in scheduleService.schedule.schedules" ng-click="changeSchedule(schedule._id)">
+					{{ $index + 1 }}
+				</a>
+			</li>
+		</ul>
+	</nav>
 	<h3>{{ scheduleService.currSchedule.name }}</h3>
-	<div class="row">
-		<div class="col-md-6">
-			<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Add Year</button>
-			<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Delete Year</button>
+	<div class="header-options">
+		<div class="pull-left">
+			<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Year</button>
+			<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Year</button>
 		</div>
-		<div class="col-md-6">
-			<div class="pull-right">
-				<button class="btn btn-default" ng-click="saveSchedule()">Save</button>
-				<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-cog"></i></button>
-				<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
-				<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-plus"></i></button>
-			</div>
+		<div class="pull-right">
+			<button class="btn btn-default" ng-click="saveSchedule()"><i class="fa fa-floppy-o"></i></button>
+			<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-cog"></i></button>
+			<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
+			<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-calendar"></i></button>
 		</div>
 	</div>
 	<div ng-show="{{scheduleService.currSchedule.blessed || scheduleService.currSchedule.comments}}" class="blessed">
@@ -97,8 +95,11 @@
 		<h3>{{year.startYear}} - {{year.endYear}}</h3>
 		<div class="semester" ng-repeat="semester in year.semesters">
 			<div class="course" ng-repeat="class in semester.courses">
-				<span type="text" class="pull-left">{{ class.name }}</span>
-				<button class="btn btn-default btn-sm pull-right" ng-click="removeCourse(semester._id, class.name)"><i class="fa fa-times"></button>
+				<span type="text" class="pull-left class-name">{{ class.name }}</span>
+				<button class="btn btn-default btn-sm pull-right remove-course"
+						ng-click="removeCourse(semester._id, class.name)">
+						<i class="fa fa-times">
+				</button>
 			</div>
 			<div class="add-class">
 				<input type="text" placeholder="Add Class" ng-model="newClass[semester._id]" ng-keyup="checkInput($event, semester._id)" class="form-control" ui-items="allCourses" autocomplete>
