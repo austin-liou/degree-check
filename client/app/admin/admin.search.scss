@@ -1,0 +1,19 @@
+.admin-search-partial {
+
+	.admin-search-title {
+		text-align: center;
+		font-weight: 600;
+	}
+
+	.search-fields {
+		text-align: center;
+
+		input {
+			margin-right: 20px;
+			padding: 6px 6px;
+			border: none;
+			box-shadow: none;
+			outline: none;
+		}
+	}
+}

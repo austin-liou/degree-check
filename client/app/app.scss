@@ -33,8 +33,12 @@ h1, h2, h3, h4, h5, h6 {
 	border-radius: 100px;
 }
 
-input:focus {
-    box-shadow: none !important;
+input {
+	outline: none;
+
+	&:focus {
+		box-shadow: none !important;
+	}
 }
 
 .btn {
@@ -91,6 +95,7 @@ input:focus {
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
+@import 'admin/admin.search.scss';
 @import 'admin/admin.view.scss';
 @import 'main/main.scss';
 @import 'scheduler/scheduler.scss';
