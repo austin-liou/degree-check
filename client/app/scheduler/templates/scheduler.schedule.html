@@ -52,11 +52,13 @@
 		<h3 class="modal-title">Delete a Schedule</h3>
 	</div>
 	<div class="modal-body">
-		<span>Are you sure you want to delete <strong>{{scheduleService.currSchedule.name}}</strong> ?</span>
+		<span ng-show="deletable">Are you sure you want to delete <strong>{{scheduleService.currSchedule.name}}</strong> ?</span>
+		<span ng-hide="deletable">You cannot delete <strong>{{scheduleService.currSchedule.name}}</strong>, because it is your only schedule.<br />You must create a new schedule first.</span>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="deleteSchedule()">Delete</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button ng-show="deletable" class="btn btn-primary" ng-click="deleteSchedule()">Delete</button>
+		<button ng-show="deletable" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button ng-hide="deletable" class="btn btn-primary" ng-click="cancel()">Ok</button>
 	</div>
 </script>
 

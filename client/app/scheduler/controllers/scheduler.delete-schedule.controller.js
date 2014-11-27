@@ -5,6 +5,7 @@ angular.module('degreeCheckApp')
     console.log('SchedulerDeleteScheduleCtrl');
     $scope.majorService = majorService;
     $scope.scheduleService = scheduleService;
+    $scope.deletable = $scope.scheduleService.schedule.schedules.length > 1;
 
     $scope.deleteSchedule = function () {
     	scheduleService.deleteSchedule(scheduleService.currSchedule._id);

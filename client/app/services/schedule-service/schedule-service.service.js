@@ -98,12 +98,9 @@ angular.module('degreeCheckApp')
                         for (var m in service.currSchedule.major[0].requirements) {
                             var requirement = service.currSchedule.major[0].requirements[m];
                             tempTracker[requirement._id] = tempTracker[requirement._id].concat(temp[requirement._id]);
-
-
                         }
                     }
                     service.tracker = angular.copy(tempTracker);
-
                 }
             }
 
@@ -118,7 +115,6 @@ angular.module('degreeCheckApp')
                     updateReqWithNewCourse(course);
                 }
             }
-
             checkReqs();
         }
 
@@ -183,15 +179,12 @@ angular.module('degreeCheckApp')
         function setupSchedule(scheduleObj) {
             // Clear all reqs first
             initReqs();
-
             clearUserReq();
-
             for (var i = 0, len = scheduleObj.semesters.length; i < len; i++) {
                 for (var j = 0, jLen = scheduleObj.semesters[i].courses.length; j < jLen; j++) {
                     updateUserReq(scheduleObj.semesters[i].courses[j].name, true);
                 }
             }
-
             for (var i = 0; i < service.schedule.prev_coursework.length; i++) {
                 updateUserReq(service.schedule.prev_coursework[i].name, true);
             }
@@ -199,7 +192,9 @@ angular.module('degreeCheckApp')
 
         service.addToPrevCoursework = function(course) {
           service.schedule.prev_coursework.push(course);
-          service.saveSchedule();
+          updateReqWithNewCourse(course);
+          checkReqs();
+          updateUserReq(course.name, true);
           setupSchedule(service.currSchedule);
         }
 
@@ -371,18 +366,20 @@ angular.module('degreeCheckApp')
          Clears yearProcessed and deletes a schedule with scheduleId
          */
         service.deleteSchedule = function (scheduleId) {
-            var schedule;
-            for (var i = 0, len = service.schedule.schedules.length; i < len; i++) {
-                schedule = service.schedule.schedules[i];
-                if (schedule._id === scheduleId) {
-                    service.schedule.schedules.splice(i, 1);
-                    service.yearsProcessed = [];
-                    service.currSchedule = service.schedule.schedules[0];
-                    service.currScheduleIndex = 0;
-                    service.yearsProcessed = processYears(service.currSchedule);
-                    setupSchedule(service.currSchedule);
-                    service.saveSchedule();
-                    return;
+            if (service.schedule.schedules.length > 1) {
+                var schedule;
+                for (var i = 0, len = service.schedule.schedules.length; i < len; i++) {
+                    schedule = service.schedule.schedules[i];
+                    if (schedule._id === scheduleId) {
+                        service.schedule.schedules.splice(i, 1);
+                        service.yearsProcessed = [];
+                        service.currSchedule = service.schedule.schedules[0];
+                        service.currScheduleIndex = 0;
+                        service.yearsProcessed = processYears(service.currSchedule);
+                        setupSchedule(service.currSchedule);
+                        service.saveSchedule();
+                        return;
+                    }
                 }
             }
         };
@@ -419,66 +416,18 @@ angular.module('degreeCheckApp')
 
         function createSemesters() {
             return [
-                {
-                    "season": "Fall",
-                    "year": "2014",
-                    "courses": []
-                },
-                {
-                    "season": "Spring",
-                    "year": "2015",
-                    "courses": []
-                },
-                {
-                    "season": "Summer",
-                    "year": "2015",
-                    "courses": []
-                },
-                {
-                    "season": "Fall",
-                    "year": "2015",
-                    "courses": []
-                },
-                {
-                    "season": "Spring",
-                    "year": "2016",
-                    "courses": []
-                },
-                {
-                    "season": "Summer",
-                    "year": "2016",
-                    "courses": []
-                },
-                {
-                    "season": "Fall",
-                    "year": "2016",
-                    "courses": []
-                },
-                {
-                    "season": "Spring",
-                    "year": "2017",
-                    "courses": []
-                },
-                {
-                    "season": "Summer",
-                    "year": "2017",
-                    "courses": []
-                },
-                {
-                    "season": "Fall",
-                    "year": "2017",
-                    "courses": []
-                },
-                {
-                    "season": "Spring",
-                    "year": "2018",
-                    "courses": []
-                },
-                {
-                    "season": "Summer",
-                    "year": "2018",
-                    "courses": []
-                }
+                { "season": "Fall", "year": "2014", "courses": [] },
+                { "season": "Spring", "year": "2015", "courses": [] },
+                { "season": "Summer", "year": "2015", "courses": [] },
+                { "season": "Fall", "year": "2015", "courses": [] },
+                { "season": "Spring", "year": "2016", "courses": [] },
+                { "season": "Summer", "year": "2016", "courses": [] },
+                { "season": "Fall", "year": "2016", "courses": [] },
+                { "season": "Spring", "year": "2017", "courses": [] },
+                { "season": "Summer", "year": "2017", "courses": [] },
+                { "season": "Fall", "year": "2017", "courses": [] },
+                { "season": "Spring", "year": "2018", "courses": [] },
+                { "season": "Summer", "year": "2018", "courses": [] }
             ];
         }
 
