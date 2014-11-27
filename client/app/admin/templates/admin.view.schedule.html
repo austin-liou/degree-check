@@ -5,59 +5,13 @@
 	</div>
 	<div class="modal-body">
 		<ul class="classes">
-			<li ng-repeat="class in semester.courses">
+			<li ng-repeat="class in prev_coursework">
 				<span type="text">{{ class.name }}</span>
-				<button class="remove-class fa fa-times" ng-click="removeCourse(semester._id, class.name)"></button>
 			</li>
 		</ul>
-		<div class="add-class-container">
-			<input type="text"
-			placeholder="Add Class"
-			ng-model="newClass[semester._id]"
-			ng-keyup="checkInput($event, semester._id)">
-		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="save()">Save</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-	</div>
-</script>
-
-<script type="text/ng-template" id="scheduler.add-schedule.html">
-	<div class="modal-header">
-		<h3 class="modal-title">Create a Schedule</h3>
-	</div>
-	<div class="modal-body">
-		<form class="create-schedule-form">
-				<div class="question">
-					<label for="schedule-name">Name</label>
-					<input name="schedule-name" type="text" ng-model="newScheduleName">
-				</div>
-				<div class="question">
-					<label for="schedule-major">Major</label>
-					<select name="schedule-major"
-					ng-model="newScheduleMajor">
-					<option ng-repeat="major in majorService.allMajors" value="{{major._id}}">{{major.name}}</option>
-				</select>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="createSchedule(newScheduleName, newScheduleMajor)">Create</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-	</div>
-</script>
-
-<script type="text/ng-template" id="scheduler.delete-schedule.html">
-	<div class="modal-header">
-		<h3 class="modal-title">Delete a Schedule</h3>
-	</div>
-	<div class="modal-body">
-		<span>Are you sure you want to delete <strong>{{scheduleService.currSchedule.name}}</strong> ?</span>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="deleteSchedule()">Delete</button>
-		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button class="btn btn-primary" ng-click="done()">Done</button>
 	</div>
 </script>
 
@@ -73,15 +27,8 @@
 	</nav>
 	<h3>{{ scheduleService.currSchedule.name }}</h3>
 	<div class="header-options">
-		<div class="pull-left">
-			<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Year</button>
-			<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Year</button>
-		</div>
 		<div class="pull-right">
-			<!-- <button class="btn btn-default" ng-click="saveSchedule()"><i class="fa fa-floppy-o"></i></button> -->
 			<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-cog"></i></button>
-			<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
-			<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-calendar"></i></button>
 		</div>
 	</div>
 </div>
@@ -122,13 +69,6 @@
 		<div class="semester" ng-repeat="semester in year.semesters">
 			<div class="course" ng-repeat="class in semester.courses">
 				<span type="text" class="pull-left class-name">{{ class.name }}</span>
-				<button class="btn btn-default btn-sm pull-right remove-course"
-						ng-click="removeCourse(semester._id, class.name)">
-						<i class="fa fa-times">
-				</button>
-			</div>
-			<div class="add-class">
-				<input type="text" placeholder="Add Class" ng-model="newClass[semester._id]" ng-keyup="checkInput($event, semester._id)" class="form-control" ui-items="allCourses" autocomplete>
 			</div>
 		</div>
 	</div>
