@@ -15,6 +15,8 @@ angular.module('degreeCheckApp')
          scheduleService.initSchedule(uidObj.uid);
        });
     //scheduleService.initSchedule('hi');
+    
+    //setup modal for editing prev coursework
     $scope.editPrevCoursework = function() {
         var modalInstance = $modal.open({
             templateUrl: 'scheduler.edit-prev-coursework.html',
@@ -41,6 +43,7 @@ angular.module('degreeCheckApp')
         */
         modalInstance.result.then(function (schedule) {
             scheduleService.addSchedule(schedule, function() {
+                //switch focus to new schedule on creation
                 schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
                 $scope.changeSchedule(schedule._id);
             });
@@ -69,12 +72,13 @@ angular.module('degreeCheckApp')
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
 
+    //add a new year to schedule
     $scope.addYear = function (years) {
-      console.log(years);
       var year = years[years.length-1];
       scheduleService.addYear(year);
     };
 
+    //delete a year from schedule
     $scope.deleteYear = function () {
       scheduleService.deleteYear();
     };
