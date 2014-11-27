@@ -1,10 +1,34 @@
+<script type="text/ng-template" id="about.html">
+	<div class="modal-header">
+		<h3 class="modal-title">About</h3>
+	</div>
+	<div class="modal-body">
+	</div>
+</script>
+
+<script type="text/ng-template" id="contact.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Contact</h3>
+	</div>
+	<div class="modal-body">
+	</div>
+</script>
+
+<script type="text/ng-template" id="team.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Team</h3>
+	</div>
+	<div class="modal-body">
+	</div>
+</script>
+
 <div class="footer-partial">
 	<footer class="footer">
 		<div class="container">
 	    <ul class="links">
-	      <li><a href="#"><span>About</span></li>
-	      <li><a href="#"><span>Contact</span></li>
-	      <li><a href="#"><span>Team</span></li>
+	      <li><a ng-click="about()"><span>About</span></li>
+	      <li><a ng-click="contact()"><span>Contact</span></li>
+	      <li><a ng-click="team()"><span>Team</span></li>
 	    </ul>
 		</div>
 	</footer>
