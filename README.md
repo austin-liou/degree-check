@@ -1,58 +1,80 @@
-Installation Instructions
-=====================
-- 'sudo npm install' on root project directory
-- 'bower install' on root project directory
-- 'mongod' on a separate tab
-- 'grunt serve' to run dev. version
-- 'grunt serve:dist' to run deployment version
+# Degree Check
 
-Deployment Instructions
-=====================
-- 'grunt build' on root project directory
-- 'grunt buildcontrol:heroku' on root project directory
-- 'cd dist && heroku open'
+## Installation
 
-Testing Instructions
-=====================
-- 'grunt mochaTest' on root project directory to run backend tests
-- open coverage.html in the coverage directory to view code coverage information
+Install the Node packages from the `package.json` file. These will be placed in `node_modules/`.
 
-Front-end Conventions
-=====================
-HTML/CSS
----------------------
-- Use classes, only use IDs for JS hooks
-- Classes must be delimited by '-'
-```
-<div class="custom-container"></div>
-```
+    sudo npm install
 
-- Always wrap a partial with a div with class suffix '-partial'
-```
-<div class="footer-partial"></div>
-```
-- Nest all CSS declarations within that external class
+Install all Bower packages from the `bower.json` file. These will be placed in `client/bower_components/`.
+
+    bower install
+
+If you don't have MongoDB, [install](http://docs.mongodb.org/manual/installation/) it first. Then start up your database in a separate tab.
+
+    mongod
+
+To run the development server, run
+
+    grunt serve
+
+To run the deployment server, run
+
+    grunt serve:dist
+
+## Deployment
+
+First, use grunt to execute a build.
+
+    grunt build
+
+Commit and push the resulting build.
+
+    grunt buildcontrol:heroku
+
+To open the app, run
+
+    cd dist && heroku open
+
+## Testing
+
+Run all backend mocha tests
+
+    grunt mochaTest
+
+Open up `coverage/code_coverage.html` to view code coverage information.
+
+
+## Conventions
+
+### HTML/CSS
+
+Use classes, only use IDs for JS hooks. Classes must be delimited by '-'.
+
+    <div class="custom-container"></div>
+
+Always wrap a partialwith class suffix '-partial'.
+
+    <div class="footer-partial"></div>
+
+
+Nest all CSS declarations within that external class.
+
 ```
 .my-partial {
-	.custom-container {}
-	.other-element {}
+  .custom-container {}
+  .other-element {}
 }
 ```
 
-- Only go as far as three levels deep for SCSS Nesting
-- Be semantic
+Only go as far as three levels deep for SCSS Nesting. Be semantic.
 
-JS
----------------------
-- Use snake case for variables
-```
-var myObj = {};
-```
-- Use single quotes for strings
-```
-var myString = 'string';
-```
+### JavaScript
 
+Use snake case for variables.
 
-Backend Conventions
-=====================
+    var myObj = {};
+
+Use single quotes for strings.
+
+    var myString = 'string';
