@@ -1,7 +1,7 @@
 .scheduler-partial {
 
 	.admin-comments {
-		padding: 25px;
+		padding-bottom: 10px;
 	}
 
 	.year-col {
@@ -30,15 +30,15 @@
 	.semester-labels {
 		width: 50px;
 		position: absolute;
-		left: -35px;
-		height: 816px;
+		left: 15px;
+		height: 601px;
 		background: #333;
-		top: 0;
 
 		.semester-label {
 			padding: 0;
 			position: absolute;
 			text-align: center;
+			right: 17px;
 		}
 
 		.semester-label h1 {
@@ -50,18 +50,15 @@
 		}
 
 		.semester-label.fall {
-			top: 204px;
-			right: 17px;
+			top: 43px;
 		}
 
 		.semester-label.spring {
-			top: 400px;
-			right: 17px;
+			top: 227px;
 		}
 
 		.semester-label.summer {
-			top: 605px;
-			right: 17px;
+			top: 412px;
 		}
 	}
 
@@ -109,14 +106,15 @@
 		}
 		.schedule-grid {
 			background: white;
-			padding: 10px;
+			padding: 10px 0 0 10px;
 			overflow-x: scroll;
 			overflow-y: hidden;
 			width: auto;
 			white-space: nowrap;
+			margin-left: 50px;
 
 			.semester {
-				margin-bottom: 30px;
+				margin-bottom: 10px;
 				background: #eee;
 				padding: 10px;
 				border-radius: 2px;
@@ -163,7 +161,7 @@
 
 		.requirements-header {
 			text-align: center;
-			padding: 10px 0;
+			padding: 10px 5px;
 			background: #333;
 
 			h3 {
@@ -178,7 +176,6 @@
 		}
 
 		.requirement-section {
-
 			header {
 				font-size: 14px;
 				color: #fff;
@@ -187,17 +184,15 @@
 			header.sat {
 				background-color: #128C00;
 			}
-
 			header.ip {
 				background-color: #2B5A8A;
 			}
-
 			header.not-sat {
 				background-color: #CE343F;
 			}
 			.requirements-list {
 				display: block;
-				padding: 0 5px 5px 5px;
+				padding: 5px;
 
 				li {
 					display: inline-block;
@@ -206,6 +201,7 @@
 			.badge {
 				font-weight: 400;
 				margin-right: 5px;
+				margin-bottom: 2px;
 			}
 			.badge.satisfied {
 				background-color: #3DAF2C;

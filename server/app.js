@@ -32,7 +32,7 @@ if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
-app.set('admin-whitelist', ['975241', '945961', '996198', '950596', '942706', '953545']);
+app.set('admin-whitelist', ['975241', '945961', '996198', '950596', '942706', '953545', '123456']);
 var server = require('http').createServer(app);
 var sess = {
     name: 'degree-checker-cookie',

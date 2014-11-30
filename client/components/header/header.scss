@@ -3,14 +3,32 @@
     background-color: #333;
 		border-bottom: 0;
 	}
+  .navbar-header {
+    float: left;
+  }
   .navbar-brand {
     color: #fff;
   }
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
   .navbar-nav > li > a {
     color: #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   .navbar-nav > li > a:hover {
     color: #fff;
     background-color: #4d4d4d;
+  }
+  .navbar-right {
+    float: right !important;
+  }
+  .navbar-right:last-child {
+    margin-right: -15px;
   }
 }

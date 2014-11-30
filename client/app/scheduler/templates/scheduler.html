@@ -1,16 +1,18 @@
 <div class="scheduler-partial">
   <div ui-view="header" class="header"></div>
   <div class="scheduler-main">
-  <div class="admin-comments">
-    <p class="text-muted" ng-show="scheduleService.currSchedule.blessed">This schedule has been blessed by an advisor.</p>
-    <p ng-show="scheduleService.currSchedule.comments">{{scheduleService.currSchedule.comments}}</p>
-  </div>
-    <div class="container">
+    <div class="container-fluid">
+      <div class="admin-comments">
+        <p class="text-success" ng-show="scheduleService.currSchedule.blessed">This schedule has been blessed by an advisor.</p>
+        <p ng-show="scheduleService.currSchedule.comments">Advisor Comments: {{scheduleService.currSchedule.comments}}</p>
+      </div>
+    </div>
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-xs-9">
           <div ui-view="schedule" class="schedule"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-xs-3">
     	  <div ui-view="requirements" class="requirements"></div>
         </div>
       </div>
