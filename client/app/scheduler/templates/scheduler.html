@@ -4,7 +4,8 @@
     <div class="container-fluid">
       <div class="admin-comments">
         <p class="text-success" ng-show="scheduleService.currSchedule.blessed">This schedule has been blessed by an advisor.</p>
-        <p ng-show="scheduleService.currSchedule.comments">Advisor Comments: {{scheduleService.currSchedule.comments}}</p>
+        <h4>Advisor Comments</h4>
+        <p ng-show="scheduleService.currSchedule.comments">{{scheduleService.currSchedule.comments}}</p>
       </div>
     </div>
     <div class="container-fluid">
