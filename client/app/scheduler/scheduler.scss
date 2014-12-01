@@ -130,10 +130,33 @@
 				border: none;
 			}
 
+			.courses {
+				margin: 0;
+				padding: 0;
+				height: 125px;
+				overflow: auto;
+
+				li {
+					list-style: none;
+					background: #F4F4F4;
+					border-radius: 2px;
+					padding: 0 10px;
+					border: 1px solid #ABA7A7;
+				}
+			}
+
 			.course {
 				margin-bottom: 5px;
 				position: relative;
 				height: 28px;
+				transition-duration: .20s;
+    			transition-timing-function: linear;
+
+				&.deleting {
+					background: #CE343F;
+					color: white;
+					border-color: white;
+				}
 			}
 
 			.class-name {
@@ -146,9 +169,10 @@
     			transition-timing-function: linear;
     			position: absolute;
 				right: 0;
+				padding: 4px 10px;
+				background: transparent;
 
 				&:hover {
-					background: #CE343F;
 					color: white;
 				}
 			}

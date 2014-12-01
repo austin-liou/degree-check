@@ -7,7 +7,8 @@
 
 	.admin-section {
 		margin-bottom: 20px;
-		padding: 0 35px;
+		padding: 15px 35px;
+		background: #FFE7A8;
 	}
 
 	.admin-section textarea {
@@ -17,8 +18,8 @@
 	}
 
 	.admin-main {
-		padding: 25px;
-		min-height: 500px;
+		padding: 0 25px 25px 25px;
+		min-height: 800px;
 		overflow: auto;
 	}
 }

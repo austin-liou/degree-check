@@ -121,13 +121,20 @@
 	<div class="year-col" ng-repeat="year in scheduleService.yearsProcessed">
 		<h3>{{year.startYear}} - {{year.endYear}}</h3>
 		<div class="semester" ng-repeat="semester in year.semesters">
-			<div class="course" ng-repeat="class in semester.courses">
-				<span type="text" class="pull-left class-name">{{ class.name }}</span>
-				<button class="btn btn-default btn-sm pull-right remove-course"
-						ng-click="removeCourse(semester._id, class.name)">
-						<i class="fa fa-times"></i>
-				</button>
-			</div>
+			<ul class="courses">
+				<li class="course"
+					ng-repeat="class in semester.courses"
+					ng-class="{ deleting: class.deleting }">
+					<span type="text" class="pull-left class-name">{{ class.name }}</span>
+					<button class="btn btn-default btn-sm pull-right remove-course"
+							ng-click="removeCourse(semester._id, class.name)"
+							ng-mouseover="class.deleting = true"
+							ng-mouseleave="class.deleting = false">
+							<i class="fa fa-times"></i>
+					</button>
+				</li>
+			</ul>
+
 			<div class="add-class">
 				<input type="text" placeholder="Add Class" ng-model="newClass[semester._id]" ng-keyup="checkInput($event, semester._id)" class="form-control" ui-items="allCourses" autocomplete>
 			</div>

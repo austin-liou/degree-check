@@ -1,14 +1,15 @@
 <div class="admin-section">
 	<a href="/admin">Back to Student Search</a>
 	<br /><br />
-	<h4>Leave a comment for this schedule:</h4>
+	<h4>Comments</h4>
 	<textarea class="comments" ng-model="scheduleService.currSchedule.comments">
 		{{scheduleService.currSchedule.comments}}
 	</textarea>
-	<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
-	<br />
-	<input name="blessed" type="checkbox" ng-model="scheduleService.currSchedule.blessed">
-	<label for="blessed">Bless Schedule?</label>
+	<div>
+		<input name="blessed" type="checkbox" ng-model="scheduleService.currSchedule.blessed">
+		<label for="blessed">Bless Schedule</label>
+		<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
+	</div>
 </div>
 <div class="admin-scheduler">
 	<div class="col-xs-9">
