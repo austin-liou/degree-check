@@ -9,7 +9,7 @@ angular.module('degreeCheckApp')
       		courseArr = courseName.split(' '),
       		berkeleyTime = 'http://www.berkeleytime.com/catalog/';
 
-        element.attr('href', berkeleyTime + courseArr[0] + '/' + courseArr[1]);
+        element.attr('href', berkeleyTime + courseArr.slice(0, courseArr.length-1).join(' ') + '/' + courseArr[courseArr.length-1]);
       }
     };
   });
