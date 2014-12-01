@@ -10,12 +10,13 @@ angular.module('degreeCheckApp')
     });
     $scope.newClass = {};
 
-    $http.get('/authentication/uid')
-       .success(function (uidObj){
-         scheduleService.initSchedule(uidObj.uid);
-       });
-    //scheduleService.initSchedule('hi');
-    
+    var init = (function () {
+      $http.get('/authentication/uid')
+        .success(function (uidObj){
+          scheduleService.initSchedule(uidObj.uid);
+        });
+    })();
+
     //setup modal for editing prev coursework
     $scope.editPrevCoursework = function() {
         var modalInstance = $modal.open({
@@ -67,6 +68,7 @@ angular.module('degreeCheckApp')
     */
     $scope.removeCourse = function (semesterId, courseName) {
     	scheduleService.removeCourse(semesterId, courseName);
+      scheduleService.saveSchedule();
     };
 
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
@@ -91,7 +93,9 @@ angular.module('degreeCheckApp')
           if (index > -1) {
             var courseObj = majorService.allCourses[index];
             scheduleService.addCourse(semesterId, courseObj);
-            $scope.newClass[semesterId] = '';
+            scheduleService.saveSchedule().then(function () {
+              $scope.newClass[semesterId] = '';
+            });
           }
       }
     };
