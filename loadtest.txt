@@ -1,0 +1,79 @@
+loadtest -n 10000 http://localhost:9000/api/users/123456
+
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Target URL:          http://localhost:9000/api/users/123456
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Max requests:        10000
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Concurrency level:   1
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Agent:               none
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Completed requests:  10000
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Total errors:        0
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Total time:          63.085637711000004 s
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Requests per second: 159
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Total time:          63.085637711000004 s
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO Percentage of the requests served within a certain time
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO   50%      5 ms
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO   90%      8 ms
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO   95%      10 ms
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO   99%      16 ms
+[Sun Nov 30 2014 22:18:46 GMT-0800 (PST)] INFO  100%      38 ms (longest request)
+
+
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Target URL:          http://localhost:9000/api/users/123456
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Max requests:        10000
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Concurrency level:   1
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Agent:               none
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Completed requests:  10000
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Total errors:        0
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Total time:          28.518905977 s
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Requests per second: 351
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Total time:          28.518905977 s
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO Percentage of the requests served within a certain time
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO   50%      2 ms
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO   90%      3 ms
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO   95%      4 ms
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO   99%      6 ms
+[Sun Nov 30 2014 22:20:04 GMT-0800 (PST)] INFO  100%      92 ms (longest request)
+
+
+loadtest -n 10000 http://localhost:9000/api/majors/5473e01984c2ac721685177b
+
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Target URL:          http://localhost:9000/api/majors/5473e01984c2ac721685177b
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Max requests:        10000
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Concurrency level:   1
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Agent:               none
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Completed requests:  10000
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Total errors:        0
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Total time:          52.000517584 s
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Requests per second: 192
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Total time:          52.000517584 s
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO Percentage of the requests served within a certain time
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO   50%      4 ms
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO   90%      6 ms
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO   95%      8 ms
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO   99%      14 ms
+[Sun Nov 30 2014 22:46:37 GMT-0800 (PST)] INFO  100%      180 ms (longest request
+
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Target URL:          http://localhost:9000/api/majors/5473e01984c2ac721685177b
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Max requests:        10000
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Concurrency level:   1
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Agent:               none
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Completed requests:  10000
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Total errors:        0
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Total time:          27.647324892 s
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Requests per second: 362
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Total time:          27.647324892 s
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO 
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO Percentage of the requests served within a certain time
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO   50%      2 ms
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO   90%      3 ms
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO   95%      4 ms
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO   99%      6 ms
+[Sun Nov 30 2014 22:47:40 GMT-0800 (PST)] INFO  100%      81 ms (longest request)
