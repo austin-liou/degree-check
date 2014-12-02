@@ -1,0 +1,86 @@
+.administrator-major-partial {
+	.section-header {
+		padding: 1%;
+		background: #FFD96B;
+
+		.section-title {
+			font-size: 22px;
+			font-weight: 800;
+		}
+
+		.create-major {
+			float: right;
+		}
+	}
+
+	.major-header {
+		background: white;
+		padding: 1%;
+
+		.btn-default {
+			background: #e3e3e3;
+		}
+	}
+
+	.major-name {
+		font-size: 20px;
+		font-weight: 600;
+	}
+
+	.major-div {
+		border-radius: 2px;
+		border: 1px solid #333;
+		margin-bottom: 30px;
+	}
+
+	.major-options {
+		float: right;
+	}
+
+	.requirement-header {
+		display: block;
+		padding: .25% 1%;
+		background: #F5F5F5;
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	.requirements {
+		padding: 1%;
+		margin: 0;
+
+		.requirement {
+			list-style: none;
+			display: inline-block;
+			list-style: none;
+			width: 150px;
+			text-overflow: ellipsis;
+			background: #f4f4f4;
+			padding: 3px 5px;
+			margin: 3px;
+			border: 1px solid #ABA7A7;
+			border-radius: 2px;
+		}
+
+		.requirement-options {
+			float: right;
+			position: relative;
+			top: 3px;
+		}
+
+		.requirement-name {
+			max-width: 95px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			display: inline-block;
+		}
+
+		.fa {
+			background: transparent;
+			border: none;
+			padding: 0px 0px;
+			font-size: 17px;
+		}
+	}
+}
