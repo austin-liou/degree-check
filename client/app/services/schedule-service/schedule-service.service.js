@@ -429,8 +429,9 @@ angular.module('degreeCheckApp')
                     newSchedule.semesters = createSemesters();
                     newSchedule.major = [majorObj];
                     service.schedule.schedules.push(newSchedule);
-                    service.saveSchedule()
-                    callback();
+                    service.saveSchedule().then(function(){
+                        callback();
+                    });
                 });
         };
 
