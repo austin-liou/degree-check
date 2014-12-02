@@ -120,6 +120,9 @@ angular.module('degreeCheckApp')
                     updateReqWithNewCourse(course);
                 }
             }
+            for (var k = 0; k < service.schedule.prev_coursework.length; k++) {
+                updateReqWithNewCourse(service.schedule.prev_coursework[k]);
+            }
             checkReqs();
         }
 
