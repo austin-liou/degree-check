@@ -39,8 +39,8 @@ h1, h2, h3, h4, h5, h6 {
 	border-radius: 100px;
 }
 
-input {
-	outline: none;
+* {
+	outline: none !important;
 
 	&:focus {
 		box-shadow: none !important;
@@ -76,10 +76,52 @@ input {
 		margin-bottom: 15px;
 	}
 
-	input {
+	input, select {
 		width: 100%;
 		padding: 5px;
 		box-shadow: none;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		display: inline-block;
+		list-style: none;
+		width: 100%;
+		text-overflow: ellipsis;
+		background: #f4f4f4;
+		padding: 1.5% 2%;
+		margin: 3px 0;
+		border: 1px solid #ABA7A7;
+		border-radius: 2px;
+
+		.name {
+			max-width: 95px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			display: inline-block;
+		}
+
+		.options {
+			float: right;
+			position: relative;
+			top: 2px;
+		}
+
+		.fa {
+			background: transparent;
+			border: none;
+			padding: 0px 0px;
+			font-size: 17px;
+		}
+	}
+
+	input[type="radio"] {
+		width: 12px;
 	}
 
 	.modal-header {
@@ -103,6 +145,8 @@ input {
 @import 'admin/admin.scss';
 @import 'admin/admin.search.scss';
 @import 'admin/admin.view.scss';
+@import 'administrator/administrator.course.scss';
+@import 'administrator/administrator.major.scss';
 @import 'main/main.scss';
 @import 'scheduler/scheduler.scss';
 @import 'footer/footer.scss';

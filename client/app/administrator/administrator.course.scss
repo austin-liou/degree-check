@@ -1,0 +1,74 @@
+.administrator-course-partial {
+
+	.section-header {
+		background: #569DC0;
+		padding: 1%;
+
+		.section-title {
+			font-size: 22px;
+			font-weight: 800;
+		}
+
+		.create-course {
+			float: right;
+		}
+	}
+
+	.course-header {
+		background: white;
+		padding: 1%;
+
+		.course-name {
+			font-size: 20px;
+			font-weight: 600;
+		}
+	}
+
+
+	.course-div {
+		border-radius: 2px;
+		border: 1px solid #333;
+		margin-bottom: 30px;
+	}
+
+	.course-options {
+		float: right;
+	}
+
+	.courses {
+		padding: 1%;
+		margin: 0;
+
+		.course {
+			list-style: none;
+			display: inline-block;
+			list-style: none;
+			width: 150px;
+			text-overflow: ellipsis;
+			background: #f4f4f4;
+			padding: 3px 5px;
+			margin: 3px;
+			border: 1px solid #ABA7A7;
+			border-radius: 2px;
+		}
+
+		.course-options {
+			float: right;
+		}
+
+		.course-name {
+			max-width: 95px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			display: inline-block;
+		}
+
+		.fa {
+			background: transparent;
+			border: none;
+			padding: 0px 0px;
+			font-size: 17px;
+		}
+	}
+}

@@ -6,8 +6,10 @@
 	<div class="modal-body">
 		<ul class="classes">
 			<li ng-repeat="class in prev_coursework">
-				<span type="text">{{ class.name }}</span>
-				<button class="remove-class fa fa-times" ng-click="removeCourse(class)"></button>
+				<span class="name">{{ class.name }}</span>
+				<div class="options">
+					<button class="remove-class fa fa-times" ng-click="removeCourse(class)"></button>
+				</div>
 			</li>
 		</ul>
 		<div class="add-class-container">

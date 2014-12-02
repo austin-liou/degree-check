@@ -1,108 +1,123 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script type="text/ng-template" id="administrator.major.edit-requirement.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Create a Requirement</h3>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div id="name-div">
-                    <span class="requirement_field">Requirement Name</span>
-                    <input ng-model="requirement.name" id="requirement_name" type="text">
-                </div>
-                <div id="division-div">
-                    <span class="division_field">Division</span>
-                    <select id="requirement_division" ng-model="requirement.division">
-                        <option value="Lower Division">Lower Division</option>
-                        <option value="Upper Division">Upper Division</option>
-                    </select>
-                </div>
-                <div id="type-div">
-                    <span class="requirement_field">Type</span>
-                    <input type="radio" ng-model="requirement.type" name="requirement_type" value="units" checked>units
-                    <input type="radio" ng-model="requirement.type" name="requirement_type" value="courses">courses
-                </div>
-                <div id="quantity-div">
-                    <span class="requirement_field">Number of <span
-                            id="requirement_type">{{requirement.type}}</span></span>
-                    <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
-                </div>
-                <div id="exclusive-div">
-                    <span class="exclusive_field">Courses cannot be shared with:</span><br>
-                    <select id="requirement_exclusives" ng-model="requirement.exclusives" multiple>
-                        <option ng-repeat="exc in majorService.asdf.requirements" value="{{exc._id}}">{{exc.name}}</option>
-                    </select>
-                </div>
+<script type="text/ng-template" id="administrator.major.edit-requirement.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Create a Requirement</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="name-div" class="question">
+                <span class="requirement_field">Requirement Name</span>
+                <input ng-model="requirement.name" id="requirement_name" type="text">
+            </div>
+            <div id="division-div" class="question">
+                <span class="division_field">Division</span>
+                <select id="requirement_division" ng-model="requirement.division">
+                    <option value="Lower Division">Lower Division</option>
+                    <option value="Upper Division">Upper Division</option>
+                </select>
+            </div>
+            <div id="type-div" class="question">
+                <span class="requirement_field">Type</span>
+                <input type="radio" ng-model="requirement.type" name="requirement_type" value="units" checked>
+                <label>Units</label>
+                <input type="radio" ng-model="requirement.type" name="requirement_type" value="courses">
+                <label>Courses</label>
+            </div>
+            <div id="quantity-div" class="question">
+                <span class="requirement_field">Number of <span
+                        id="requirement_type">{{requirement.type}}</span></span>
+                <input ng-model="requirement.quantity" id="requirement_quantity" type="number">
+            </div>
+            <div id="exclusive-div" class="question">
+                <span class="exclusive_field">Courses cannot be shared with:</span><br>
+                <select id="requirement_exclusives" ng-model="requirement.exclusives" multiple>
+                    <option ng-repeat="exc in majorService.asdf.requirements" value="{{exc._id}}">{{exc.name}}</option>
+                </select>
+            </div>
 
-                <div id="courses-div">
-                    <span class="requirement_field">Courses that fulfill this requirement</span><br>
-                    <ul class="classes">
-                        <li ng-repeat="course in requirement.courses">
-                            <span type="text">{{ course.name }}</span>
-
-                            <button type="button" class="remove-class fa fa-times"
+            <div id="courses-div" class="question">
+                <span class="requirement_field">Courses that fulfill this requirement</span><br>
+                <ul class="classes">
+                    <li ng-repeat="course in requirement.courses">
+                        <span class="name">{{ course.name }}</span>
+                        <div class="options">
+                            <button type="button"
+                                    class="remove-class fa fa-times"
                                     ng-click="rmCourse(course)">
                             </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="add-class-container">
-                    <input type="text"
-                           placeholder="Add Class"
-                           ng-model="newClass"
-                           ng-keyup="check($event)">
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="addRequirement()">Save</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-    <script type="text/ng-template" id="administrator.major.create.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Create a Major</h3>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div id="majorname-div">
-                    <span class="requirement_field">Major Name</span>
-                    <input ng-model="major.name" id="major_name" type="text">
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="addMajor()">Save</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-</head>
-<body>
-Major
-<br>
-<button class="create-major" ng-click="createMajor()">
-    Create Major
-</button>
-<div class="major-div" ng-repeat="major in majorService.fullAllMajors">
-    <span type="text">{{ major.name }}</span>
-    <button class="remove-major fa fa-times" ng-click="deleteMajor(major)">
-    </button>
-    <br>
-    <div class="requirement-div" ng-repeat="requirement in major.requirements">
-        <span type="text">{{ requirement.name }}</span>
-        <button class="edit-requirement" ng-click="editRequirement(major,requirement)">
-            Edit
-        </button>
-        <button class="remove-requirement fa fa-times" ng-click="deleteRequirement(major,requirement._id)">
-        </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="add-class-container">
+                <input type="text"
+                       placeholder="Add Class"
+                       ng-model="newClass"
+                       ng-keyup="check($event)">
+            </div>
+        </form>
     </div>
-    <button class="add-requirement" ng-click="addRequirement(major)">
-        Add Requirement
-    </button>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="addRequirement()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="administrator.major.create.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Create a Major</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="majorname-div">
+                <span class="requirement_field">Major Name</span>
+                <input ng-model="major.name" id="major_name" type="text">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="addMajor()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<div class="administrator-major-partial">
+    <div class="section-header">
+        <span class="section-title">Majors</span>
+        <button class="btn btn-default create-major" ng-click="createMajor()">Create Major</button>
+    </div>
+
+    <div class="major-div" ng-repeat="major in majorService.fullAllMajors">
+        <div class="major-header">
+            <span class="major-name">{{ major.name }}</span>
+            <div class="major-options">
+                <button class="btn btn-default remove-major" ng-click="deleteMajor(major)">
+                    Delete Major
+                </button>
+                <button class="btn btn-default add-requirement" ng-click="addRequirement(major)">
+                    Add Requirement
+                </button>
+            </div>
+        </div>
+
+        <ul class="requirements">
+            <li class="requirement"
+                ng-repeat="requirement in major.requirements">
+                <span class="requirement-name">{{ requirement.name }}</span>
+                <div class="requirement-options">
+                    <button class="edit-requirement fa fa-edit"
+                            ng-click="editRequirement(major,requirement)">
+                    </button>
+                    <button class="remove-requirement fa fa-times"
+                            ng-click="deleteRequirement(major,requirement._id)">
+                    </button>
+                </div>
+            </li>
+        </ul>
+<!--         <div class="requirement-div" ng-repeat="requirement in major.requirements">
+            <span type="text">{{ requirement.name }}</span>
+            <button class="edit-requirement" ng-click="editRequirement(major,requirement)">
+                Edit
+            </button>
+            <button class="remove-requirement fa fa-times" ng-click="deleteRequirement(major,requirement._id)">
+            </button>
+        </div> -->
+    </div>
 </div>
-</body>
-</html>
