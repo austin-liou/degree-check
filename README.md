@@ -42,7 +42,7 @@ If you were not the last person to deploy, you will receive a conflict when you 
 
     git push heroku master --force
 
-Make sure to be careful with this. Make sure your app is up to date with the latest version (pull from Github).
+Make sure to be careful with this. Make sure your app is up to date with the latest version (pull from GitHub).
 
 ## Testing
 
