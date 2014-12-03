@@ -28,13 +28,21 @@ First, use grunt to execute a build.
 
     grunt build
 
-Commit and push the resulting build.
+Change directories to the `dist/` folder, add the Heroku remote, then commit and push the build to Heroku.
 
-    grunt buildcontrol:heroku
+```
+cd dist
+git add remote heroku git@heroku.com:degree-checker.git
+git add -A
+git commit
+git push heroku master
+```
 
-To open the app, run
+If you were not the last person to deploy, you will receive a conflict when you try to push to Heroku. Therefore, you should instead run
 
-    cd dist && heroku open
+    git push heroku master --force
+
+Make sure to be careful with this. Make sure your app is up to date with the latest version (pull from Github).
 
 ## Testing
 
