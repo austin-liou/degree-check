@@ -12,7 +12,7 @@ angular.module('degreeCheckApp')
         service.tracker = {};
         service.currScheduleIndex = 0;
 
-        service.initSchedule = function (uid) {
+        service.initSchedule = function (uid, callback) {
             $http.get('/api/users/' + uid)
                 .success(function (bigJson) {
                     service.schedule = bigJson;
@@ -20,6 +20,7 @@ angular.module('degreeCheckApp')
                     service.currScheduleIndex = 0;
                     service.yearsProcessed = processYears(service.currSchedule);
                     setupSchedule(service.schedule.schedules[0]);
+                    if(callback !== undefined) callback();
                 });
         };
 

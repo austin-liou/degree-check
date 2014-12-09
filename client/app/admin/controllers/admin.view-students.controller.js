@@ -2,7 +2,7 @@
 
 angular.module('degreeCheckApp')
   .controller('AdminViewStudentsCtrl', function ($scope, scheduleService, majorService, $modal, $http, $stateParams) {
-    console.log('In AdminViewStudentsCtrl');
+    console.log('AdminViewStudentsCtrl');
     $scope.scheduleService = scheduleService;
     $scope.majorService = majorService;
     $scope.majorService.initMajorService(function (courses) {
@@ -11,10 +11,11 @@ angular.module('degreeCheckApp')
     $scope.newClass = {};
 
     var init = (function () {
-      scheduleService.initSchedule($stateParams.uid);
+      $scope.scheduleService.initSchedule($stateParams.uid, function() {
+        $scope.scheduleService.schedule.name = '';
+      });
     })();
 
-    //scheduleService.initSchedule('hi');
     $scope.editPrevCoursework = function() {
         var modalInstance = $modal.open({
             templateUrl: 'scheduler.edit-prev-coursework.html',
@@ -29,58 +30,10 @@ angular.module('degreeCheckApp')
             });
         });
     };
-    /*
-        Modal Logic
-    */
-    $scope.addSchedule = function () {
-        var modalInstance = $modal.open({
-            templateUrl: 'scheduler.add-schedule.html',
-            controller: 'SchedulerAddScheduleCtrl',
-            size: 'sm'
-        });
-
-        /*
-            schedule - an object containing the name and major of the new schedule
-            { name: String, major: majorId }
-        */
-        modalInstance.result.then(function (schedule) {
-            scheduleService.addSchedule(schedule, function() {
-                schedule = scheduleService.schedule.schedules[scheduleService.schedule.schedules.length-1];
-                $scope.changeSchedule(schedule._id);
-            });
-        });
-    };
-
-    $scope.deleteSchedule = function () {
-        var modalInstance = $modal.open({
-            templateUrl: 'scheduler.delete-schedule.html',
-            controller: 'SchedulerDeleteScheduleCtrl',
-            size: 'sm'
-        });
-    };
 
     $scope.changeSchedule = function (scheduleId) {
       scheduleService.changeSchedule(scheduleId);
     }
-
-    /*
-        Schedule Logic
-    */
-    $scope.removeCourse = function (semesterId, courseName) {
-      scheduleService.removeCourse(semesterId, courseName);
-    };
-
-    $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
-    };
-
-    $scope.addYear = function (years) {
-      var year = years[years.length-1];
-      scheduleService.addYear(year);
-    };
-
-    $scope.deleteYear = function () {
-      scheduleService.deleteYear();
-    };
 
     $scope.checkInput = function (event, semesterId) {
       // Check if enter
@@ -94,9 +47,4 @@ angular.module('degreeCheckApp')
           }
       }
     };
-
-    $scope.saveSchedule = function () {
-      scheduleService.saveSchedule();
-    };
-
   });
