@@ -13,7 +13,7 @@ var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var fs = require('fs');
-var models = ['course', 'semester', 'major', 'schedule', 'user'];
+var models = ['course', 'major', 'user'];
 models.forEach(function (entry){
     var model_path = __dirname + '/api/' + entry;
     fs.readdirSync(model_path).forEach(function (file){

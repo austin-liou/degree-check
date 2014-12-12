@@ -40,8 +40,6 @@ module.exports = function(app) {
   });
   
   app.use('/api/users', require('./api/user'));
-  app.use('/api/schedules', require('./api/schedule'));
-  app.use('/api/semesters', require('./api/semester'));
   app.use('/api/courses', require('./api/course'));
   app.use('/api/majors', require('./api/major'));
 
