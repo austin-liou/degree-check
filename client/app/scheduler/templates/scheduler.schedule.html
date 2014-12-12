@@ -65,26 +65,37 @@
 </script>
 
 <div class="schedule-header">
-	<nav class="schedules">
-		<ul class="pagination">
-			<li ng-repeat="schedule in scheduleService.schedule.schedules">
-				<a ng-click="changeSchedule(schedule._id)">
-					{{ $index + 1 }}
-				</a>
-			</li>
-		</ul>
-	</nav>
-	<h3>{{ scheduleService.currSchedule.name }}</h3>
-	<div class="header-options">
-		<div class="pull-left">
-			<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Year</button>
-			<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Year</button>
+	<div class="settings clearfix">
+		<div class="col-xs-6">
+			<ul class="pagination pull-left">
+				<li ng-repeat="schedule in scheduleService.schedule.schedules">
+					<a ng-click="changeSchedule(schedule._id)">
+						{{ $index + 1 }}
+					</a>
+				</li>
+			</ul>
 		</div>
-		<div class="pull-right">
-			<!-- <button class="btn btn-default" ng-click="saveSchedule()"><i class="fa fa-floppy-o"></i></button> -->
-			<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-inbox"></i></button>
-			<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
-			<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-calendar"></i></button>
+		<div class="col-xs-6">
+			<div class="pull-right">
+				<button class="btn btn-default" ng-click="editPrevCoursework()"><i class="fa fa-edit"></i> Edit Previous Coursework</button>
+				<button class="btn btn-default" ng-click="addSchedule()"><i class="fa fa-plus"></i> New Schedule</button>
+			</div>
+		</div>
+	</div>
+	<div class="options clearfix">
+		<div class="col-xs-3">
+			<div class="pull-left">
+				<button class="btn btn-default" ng-click="addYear(scheduleService.yearsProcessed)"><i class="fa fa-plus"></i> Year</button>
+				<button class="btn btn-default" ng-click="deleteYear(scheduleService.yearsProcessed)"><i class="fa fa-minus"></i> Year</button>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<h3>{{ scheduleService.currSchedule.name }}</h3>
+		</div>
+		<div class="col-xs-3">
+			<div class="pull-right">
+				<button class="btn btn-default" ng-click="deleteSchedule()"><i class="fa fa-trash"></i></button>
+			</div>
 		</div>
 	</div>
 </div>

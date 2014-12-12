@@ -85,13 +85,24 @@
 		}
 
 		.schedule-header {
-			padding: 15px;
-			background: #1590CB;
-
+			.settings {
+				.pagination {
+					margin: 0;
+				}
+				padding: 10px 0;
+				background-color: #3498DB;
+				.pull-right {
+					margin-top: 1px;
+				}
+			}
+			.options {
+				padding: 25px 0 20px;
+				background-color: #2980B9;
+			}
 			h3 {
 				text-align: center;
 				font-size: 28px;
-				margin: 0 0 10px 0;
+				margin: 0;
 				color: white;
 				font-weight: bold;
 			}
@@ -100,11 +111,6 @@
 				.text-muted {
 					text-align: center;
 				}
-			}
-
-			.header-options {
-				overflow: auto;
-				margin-top: 25px;
 			}
 		}
 		.schedule-grid {
