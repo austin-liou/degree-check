@@ -5,7 +5,6 @@ var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
 var mongoose = require('mongoose');
-var Requirement = require('../requirement/requirement.model');
 
 describe('Functional Tests for /api/majors', function() {
   var majorid;
