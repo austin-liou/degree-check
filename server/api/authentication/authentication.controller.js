@@ -155,7 +155,7 @@ exports.login = function(req, res) {
       var uid = '123456';
 
       req.session.uid = uid;
-      return res.json(200, {uid: req.session.uid});
+      res.redirect('../../admin');
     }
   }
 };
