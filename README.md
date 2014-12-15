@@ -28,11 +28,17 @@ First, use grunt to execute a build.
 
     grunt build
 
-Change directories to the `dist/` folder, add the Heroku remote, then commit and push the build to Heroku.
+Change directories to the `dist/` folder.
+
+    cd dist
+
+If you have not deployed before, you must add the Heroku remote.
+
+    git remote add heroku git@heroku.com:degree-checker.git
+
+Now commit your changes and push the build to Heroku.
 
 ```
-cd dist
-git add remote heroku git@heroku.com:degree-checker.git
 git add -A
 git commit
 git push heroku master
