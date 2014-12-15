@@ -16,14 +16,16 @@ angular.module('degreeCheckApp')
       // Check if enter
       if (event.keyCode === 13) {
           // Check if valid course
-          var index = $scope.allCourses.indexOf($scope.newClass);
+          var index = $scope.allCourses.indexOf($scope.newClass[semesterId]);
           if (index > -1) {
             var courseObj = majorService.allCourses[index];
-            $scope.scheduleService.addToPrevCoursework(courseObj);
-            scheduleService.saveSchedule().then(function () {
-              $scope.newClass = '';
-              $scope.prev_coursework = $scope.scheduleService.schedule.prev_coursework;
-            });
+            // Check if course is already in current schedule
+            if (!scheduleService.classInSchedule(courseObj.name)) {
+              scheduleService.addCourse(semesterId, courseObj);
+              scheduleService.saveSchedule().then(function () {
+                $scope.newClass[semesterId] = '';
+              });
+            }
           }
       }
     };
