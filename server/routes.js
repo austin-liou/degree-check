@@ -9,24 +9,32 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   function apiLoggedIn (req, res, next) {
-    if (req.session && req.session.uid) {
+    if (process.env.NODE_ENV == 'production') {
+      if (req.session && req.session.uid) {
+        next();
+      }
+      else {
+        res.sendfile(app.get('appPath') + '/index.html');
+      }
+    } else {
       next();
-    }
-    else {
-      res.sendfile(app.get('appPath') + '/index.html');
     }
   }
 
   function adminLoggedIn (req, res, next) {
-    var whitelist = app.get('admin-whitelist'),
-        found = false;
-    for (var i = 0; i < whitelist.length; i++) {
-      if (whitelist[i] === req.session.uid) {
-        next();
-        found = true;
+    if (process.env.NODE_ENV == 'production') {
+      var whitelist = app.get('admin-whitelist'),
+          found = false;
+      for (var i = 0; i < whitelist.length; i++) {
+        if (whitelist[i] === req.session.uid) {
+          next();
+          found = true;
+        }
       }
+      if (!found) { res.sendfile(app.get('appPath') + '/index.html'); }
+    } else {
+      next();
     }
-    if (!found) { res.sendfile(app.get('appPath') + '/index.html'); }
   }
 
   // Insert routes below
