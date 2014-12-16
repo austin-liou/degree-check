@@ -12,6 +12,21 @@ angular.module('degreeCheckApp')
         service.tracker = {};
         service.currScheduleIndex = 0;
 
+        /*
+            Searches the current schedule and returns true if the class exists in it
+        */
+        service.classInSchedule = function (className) {
+            var currSched = service.currSchedule;
+            for (var i = 0, iLen = currSched.semesters.length; i < iLen; i++) {
+                for (var j = 0, jLen = currSched.semesters[i].courses.length; j < jLen; j++) {
+                    if (currSched.semesters[i].courses[j].name === className) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         service.initSchedule = function (uid, callback) {
             $http.get('/api/users/' + uid)
                 .success(function (bigJson) {
@@ -260,6 +275,7 @@ angular.module('degreeCheckApp')
                 for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
                     if (requirement.courses[j].name === courseName) {
                         requirement.courses[j].satisfied = satisfied;
+                        if(!satisfied) service.currSchedule.blessed = false;
                     }
                 }
             }
@@ -362,6 +378,7 @@ angular.module('degreeCheckApp')
               service.currSchedule.semesters.pop();
               service.currSchedule.semesters.pop();
               service.currSchedule.semesters.pop();
+              service.currSchedule.blessed = false;
               processYears(service.currSchedule);
               service.saveSchedule().then(function(){
                 processYears(service.currSchedule);

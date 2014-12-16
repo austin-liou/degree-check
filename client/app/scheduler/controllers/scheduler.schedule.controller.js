@@ -66,10 +66,11 @@ angular.module('degreeCheckApp')
     /*
         Schedule Logic
     */
-    $scope.removeCourse = function (semesterId, courseName) {
+    $scope.removeCourse = function (semesterId, courseName, course) {
+      if(course) course.deleting = false;
     	scheduleService.removeCourse(semesterId, courseName);
       scheduleService.saveSchedule();
-    };
+      };
 
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
@@ -92,10 +93,13 @@ angular.module('degreeCheckApp')
           var index = $scope.allCourses.indexOf($scope.newClass[semesterId]);
           if (index > -1) {
             var courseObj = majorService.allCourses[index];
-            scheduleService.addCourse(semesterId, courseObj);
-            scheduleService.saveSchedule().then(function () {
-              $scope.newClass[semesterId] = '';
-            });
+            // Check if course is already in current schedule
+            if (!scheduleService.classInSchedule(courseObj.name)) {
+              scheduleService.addCourse(semesterId, courseObj);
+              scheduleService.saveSchedule().then(function () {
+                $scope.newClass[semesterId] = '';
+              });
+            }
           }
       }
     };

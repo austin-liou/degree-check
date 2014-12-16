@@ -28,11 +28,17 @@ First, use grunt to execute a build.
 
     grunt build
 
-Change directories to the `dist/` folder, add the Heroku remote, then commit and push the build to Heroku.
+Change directories to the `dist/` folder.
+
+    cd dist
+
+If you have not deployed before, you must add the Heroku remote.
+
+    git remote add heroku git@heroku.com:degree-checker.git
+
+Now commit your changes and push the build to Heroku.
 
 ```
-cd dist
-git add remote heroku git@heroku.com:degree-checker.git
 git add -A
 git commit
 git push heroku master
@@ -55,6 +61,12 @@ Open up `coverage/code_coverage.html` to view code coverage information.
 ## Environment Variables
 
 To have grunt launch your app with specific environment variables, add them to the git ignored environment config file `server/config/local.env.js`. A sample version of this file is provided at `server/config/local.env.sample.js`.
+
+    cp server/config/local.env.sample.js server/config/local.env.js
+
+Variables set in this file can be accessed throughout the app. For example, to access the session secret, use `process.env.SESSION_SECRET`. If a new environment variable is added to this file, it must be [set on Heroku](https://devcenter.heroku.com/articles/config-vars). For example, run the following command in the `dist/` folder to set the session secret.
+
+    heroku config:set SESSION_SECRET='degreecheck-secret'
 
 ## Conventions
 
