@@ -2,13 +2,17 @@
 	<a href="/admin">Back to Student Search</a>
 	<br /><br />
 	<h4>Comments</h4>
-	<textarea class="comments" ng-model="scheduleService.currSchedule.comments">
+	<textarea class="comments"
+			  ng-model="scheduleService.currSchedule.comments"
+			  ng-blur="scheduleService.saveSchedule()">
 		{{scheduleService.currSchedule.comments}}
 	</textarea>
 	<div>
-		<input name="blessed" type="checkbox" ng-model="scheduleService.currSchedule.blessed">
+		<input name="blessed"
+			   type="checkbox"
+			   ng-model="scheduleService.currSchedule.blessed"
+			   ng-click="saveSchedule()">
 		<label for="blessed">Bless Schedule</label>
-		<button class="btn btn-primary" ng-click="saveSchedule()">Save</button>
 	</div>
 </div>
 <div class="admin-scheduler">
