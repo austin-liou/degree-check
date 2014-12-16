@@ -275,6 +275,7 @@ angular.module('degreeCheckApp')
                 for (var j = 0, jLen = requirement.courses.length; j < jLen; j++) {
                     if (requirement.courses[j].name === courseName) {
                         requirement.courses[j].satisfied = satisfied;
+                        if(!satisfied) service.currSchedule.blessed = false;
                     }
                 }
             }
@@ -377,6 +378,7 @@ angular.module('degreeCheckApp')
               service.currSchedule.semesters.pop();
               service.currSchedule.semesters.pop();
               service.currSchedule.semesters.pop();
+              service.currSchedule.blessed = false;
               processYears(service.currSchedule);
               service.saveSchedule().then(function(){
                 processYears(service.currSchedule);

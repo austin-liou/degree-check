@@ -140,7 +140,7 @@
 					ng-class="{ deleting: class.deleting }">
 					<span type="text" class="pull-left class-name">{{ class.name }}</span>
 					<button class="btn btn-default btn-sm pull-right remove-course"
-							ng-click="removeCourse(semester._id, class.name)"
+							ng-click="removeCourse(semester._id, class.name, class)"
 							ng-mouseover="class.deleting = true"
 							ng-mouseleave="class.deleting = false">
 							<i class="fa fa-times"></i>

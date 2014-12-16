@@ -43,4 +43,8 @@ angular.module('degreeCheckApp')
           }
       }
     };
+    
+    $scope.saveSchedule = function () {
+      scheduleService.saveSchedule();
+    };
   });

@@ -66,10 +66,11 @@ angular.module('degreeCheckApp')
     /*
         Schedule Logic
     */
-    $scope.removeCourse = function (semesterId, courseName) {
+    $scope.removeCourse = function (semesterId, courseName, course) {
+      if(course) course.deleting = false;
     	scheduleService.removeCourse(semesterId, courseName);
       scheduleService.saveSchedule();
-    };
+      };
 
     $scope.updateCourse = function (semesterId, courseId, updatedCourse) {
     };
