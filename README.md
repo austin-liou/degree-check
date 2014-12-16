@@ -62,6 +62,8 @@ Open up `coverage/code_coverage.html` to view code coverage information.
 
 To have grunt launch your app with specific environment variables, add them to the git ignored environment config file `server/config/local.env.js`. A sample version of this file is provided at `server/config/local.env.sample.js`.
 
+    cp server/config/local.env.sample.js server/config/local.env.js
+
 ## Conventions
 
 ### HTML/CSS
