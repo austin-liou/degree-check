@@ -16,6 +16,10 @@ angular.module('degreeCheckApp')
       });
     })();
 
+    $scope.saveSchedule = function () {
+      scheduleService.saveSchedule();
+    };
+
     $scope.editPrevCoursework = function() {
         var modalInstance = $modal.open({
             templateUrl: 'scheduler.edit-prev-coursework.html',

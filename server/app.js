@@ -36,7 +36,7 @@ app.set('admin-whitelist', ['975241', '945961', '996198', '950596', '942706', '9
 var server = require('http').createServer(app);
 var sess = {
     name: 'degree-checker-cookie',
-    secret: 'vF24(#0ag_a54$zh{41;S#0vyM?{V4',
+    secret: process.env.SESSION_SECRET,
     expires: new Date(Date.now() + 604800000),
 };
 app.use(cookieParser());
