@@ -14,7 +14,6 @@ angular.module('degreeCheckApp')
             });
             response(a);
           },
-          autoFocus: true,
           delay: 250,
           change: function(event, ui) {
             element.trigger('input');
