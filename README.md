@@ -64,6 +64,10 @@ To have grunt launch your app with specific environment variables, add them to t
 
     cp server/config/local.env.sample.js server/config/local.env.js
 
+Variables set in this file can be accessed throughout the app. For example, to access the session secret, use `process.env.SESSION_SECRET`. If a new environment variable is added to this file, it must be [set on Heroku](https://devcenter.heroku.com/articles/config-vars). For example, run the following command in the `dist/` folder to set the session secret.
+
+    heroku config:set SESSION_SECRET='degreecheck-secret'
+
 ## Conventions
 
 ### HTML/CSS
