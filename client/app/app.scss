@@ -146,6 +146,81 @@ h1, h2, h3, h4, h5, h6 {
 	.modal-footer {
 		border: none;
 	}
+
+	.team-body {
+		.team-member {
+			width: 186px;
+			padding: 0;
+			height: 315px;
+			overflow: auto;
+			position: relative;
+
+			.name {
+				max-width: none;
+			}
+		}
+
+		.contact {
+			position: absolute;
+			bottom: 0;
+
+			li {
+				margin: 0;
+				padding: 5px;
+				border: none;
+				cursor: pointer;
+
+				&:hover {
+					color: #4393b9;
+				}
+			}
+		}
+
+		.profile-picture {
+			width: 100%;
+			height: 150px;
+			background: white;
+
+			&.mari {
+				background: url('../assets/images/mari.jpg');
+			}
+
+			&.austin {
+				background: url('../assets/images/austin.jpg');
+			}
+
+			&.michael {
+				background: url('../assets/images/michael.jpg');
+			}
+
+			&.josh {
+				background: url('../assets/images/josh.jpg');
+			}
+
+			&.lawrence {
+				background: url('../assets/images/lawrence.jpg');
+			}
+		}
+
+		.profile-information {
+			padding: 3%;
+		}
+
+		.name {
+			display: block;
+			font-size: 18px;
+			font-weight: 200;
+		}
+
+		.title {
+			font-weight: 800;
+		}
+
+		.description {
+			margin-top: 5px;
+			font-size: 13px;
+		}
+	}
 }
 
 span[role="status"] {
